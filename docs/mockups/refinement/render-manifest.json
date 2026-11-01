@@ -1,0 +1,6375 @@
+{
+  "purpose": "Nonfunctional design artifacts only; no website, backend, audience or accessibility results.",
+  "caption": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+  "rendering": "Windows System.Drawing; pixel-unit fonts; Source static TTF files; local-only raster rendering.",
+  "fontRoles": {
+    "body": "Source Sans 3",
+    "emphasis": "Source Sans 3 Semibold",
+    "headings": "Source Serif 4 Semibold"
+  },
+  "refinement": true,
+  "originalHeadline": "Exploring change through evidence, experience, and emerging technology.",
+  "workingHeadline": "Explore change: evidence, lived insight, new tools.",
+  "headlineAlternatives": [
+    "Explore change: evidence, lived insight, new tools.",
+    "Explore change with evidence, lived insight, and new tools.",
+    "Change over time: evidence, lived insight, new tools."
+  ],
+  "headlineWordWidthsAt200": [
+    {
+      "word": "Explore",
+      "widthAt64": 227.71199
+    },
+    {
+      "word": "change:",
+      "widthAt64": 229.37599
+    },
+    {
+      "word": "evidence,",
+      "widthAt64": 278.912
+    },
+    {
+      "word": "lived",
+      "widthAt64": 142.528
+    },
+    {
+      "word": "insight,",
+      "widthAt64": 220.736
+    },
+    {
+      "word": "new",
+      "widthAt64": 121.728
+    },
+    {
+      "word": "tools.",
+      "widthAt64": 160.57599
+    }
+  ],
+  "unmodifiedBaselineManifestSha256": "5f6ea7c100028ab1849ba9b13ef50caa74a860f18db55dd4f6b322bb1abe069c",
+  "sourcePrototypeSha256": "3af136cea6fe36866f719f6c56755419a6a73f61e5e925f4e382c270877835c3",
+  "sourceSpecificationSha256": "9a641b2bff6fb6a2b6f49a3a315ac0e9f34ef1b25f1c6bbec91c134c7183c716",
+  "fonts": [
+    {
+      "file": "SourceSans3-Regular.ttf",
+      "sha256": "4644c81b86ec9caaa76b634889968ed3c4f4f52f054855933acc7c2b21e53b0f"
+    },
+    {
+      "file": "SourceSans3-Semibold.ttf",
+      "sha256": "a3f4f8dcf343a8f24dc61951de93f3ba1558b15cd250ba24af8a40e957081b7d"
+    },
+    {
+      "file": "SourceSerif4-Semibold.ttf",
+      "sha256": "36db62940cb5728b12b1802476dc7fcf4c6c519a7bdd476ba23a4e555fc4655f"
+    }
+  ],
+  "placeholders": [
+    {
+      "id": "PH-01",
+      "text": "[DEDICATED EMAIL ADDRESS \u2014 UNASSIGNED; MOCKUP CONTACT IS INACTIVE]",
+      "frames": [
+        "landing-390",
+        "landing-320"
+      ]
+    },
+    {
+      "id": "PH-02",
+      "text": "[CONTACT ROLE AND RESPONSE EXPECTATION \u2014 FOUNDER APPROVAL PENDING]",
+      "frames": [
+        "landing-390",
+        "landing-320"
+      ]
+    },
+    {
+      "id": "PH-03",
+      "text": "[PUBLICATION RESPONSIBILITY \u2014 APPROVED PUBLIC NAME OR ROLE PENDING]",
+      "frames": [
+        "landing-390",
+        "landing-320"
+      ]
+    },
+    {
+      "id": "PH-04",
+      "text": "[PUBLIC CONTENT REVIEW DATE \u2014 NOT YET SET]",
+      "frames": [
+        "landing-390",
+        "landing-320"
+      ]
+    },
+    {
+      "id": "PH-05",
+      "text": "[MATERIAL RELATIONSHIP DISCLOSURE \u2014 CONFIRM WHETHER APPLICABLE]",
+      "frames": [
+        "landing-390",
+        "landing-320"
+      ]
+    },
+    {
+      "id": "PH-06",
+      "text": "[RESPONSIBLE OPERATOR IDENTITY AND REQUIRED CONTACT DETAILS \u2014 PENDING]",
+      "frames": []
+    },
+    {
+      "id": "PH-07",
+      "text": "[AUTHORIZED EMAIL RECIPIENT OR ROLE \u2014 PENDING]",
+      "frames": []
+    },
+    {
+      "id": "PH-08",
+      "text": "[CONFIRMED CORRESPONDENCE PURPOSES \u2014 PENDING]",
+      "frames": []
+    },
+    {
+      "id": "PH-09",
+      "text": "[MAIL SERVICE, RECIPIENTS, RELEVANT PROCESSING LOCATIONS, RETENTION, BACKUP AND DELETION LIMITS \u2014 PENDING]",
+      "frames": []
+    },
+    {
+      "id": "PH-10",
+      "text": "[ACTUAL DELIVERY/SECURITY LOG FIELDS, PURPOSES, RECIPIENTS, STORAGE/COOKIES AND RETENTION \u2014 PENDING]",
+      "frames": []
+    },
+    {
+      "id": "PH-11",
+      "text": "[THIRD-PARTY AND APPLICABLE INTERNATIONAL-PROCESSING DISCLOSURES \u2014 PENDING]",
+      "frames": []
+    },
+    {
+      "id": "PH-12",
+      "text": "[REQUEST PROCESS, RESPONSE EXPECTATION, APPLICABLE RIGHTS/COMPLAINT ROUTE AND DELETION LIMITS \u2014 PENDING]",
+      "frames": []
+    },
+    {
+      "id": "PH-13",
+      "text": "[PRIVACY NOTICE EFFECTIVE DATE \u2014 NOT YET SET]",
+      "frames": []
+    },
+    {
+      "id": "PH-14",
+      "text": "[PRIVACY NOTICE REVIEW DATE \u2014 NOT YET SET]",
+      "frames": []
+    },
+    {
+      "id": "PH-15",
+      "text": "[HEADLINE IS PROVISIONAL \u2014 FINAL COPY APPROVAL PENDING]",
+      "frames": [
+        "landing-390",
+        "landing-320",
+        "text-200-intro-390",
+        "text-200-intro-320",
+        "hero-1440"
+      ]
+    },
+    {
+      "id": "PH-16",
+      "text": "[PUBLIC ORIGIN WORDING/PERMISSIONS \u2014 APPROVAL PENDING]",
+      "frames": [
+        "landing-390",
+        "landing-320"
+      ]
+    },
+    {
+      "id": "PH-17",
+      "text": "[FUTURE SOFTWARE IMPLEMENTATION STATUS \u2014 UNVERIFIED; IDEAS ARE NOT AVAILABLE SERVICES]",
+      "frames": [
+        "landing-390",
+        "landing-320"
+      ]
+    },
+    {
+      "id": "PH-18",
+      "text": "[FONT PAIR, EXACT FILES, LICENSING AND DELIVERY REVIEW \u2014 PENDING]",
+      "frames": []
+    },
+    {
+      "id": "PH-19",
+      "text": "[PALETTE AND INTERACTION-STATE CONTRAST REVIEW \u2014 NOT YET COMPLETED]",
+      "frames": []
+    },
+    {
+      "id": "PH-20",
+      "text": "[OPTIONAL ABSTRACT ILLUSTRATION \u2014 ARTWORK AND RIGHTS REVIEW PENDING]",
+      "frames": [
+        "hero-1440"
+      ]
+    }
+  ],
+  "pdfViews": [
+    {
+      "name": "nav-768-stacked",
+      "firstPage": 1,
+      "lastPage": 1
+    },
+    {
+      "name": "nav-768-wrapping",
+      "firstPage": 2,
+      "lastPage": 2
+    },
+    {
+      "name": "nav-390-stacked",
+      "firstPage": 3,
+      "lastPage": 3
+    },
+    {
+      "name": "nav-390-wrapping",
+      "firstPage": 4,
+      "lastPage": 4
+    },
+    {
+      "name": "nav-320-stacked",
+      "firstPage": 5,
+      "lastPage": 5
+    },
+    {
+      "name": "nav-320-wrapping",
+      "firstPage": 6,
+      "lastPage": 6
+    },
+    {
+      "name": "landing-390",
+      "firstPage": 7,
+      "lastPage": 13
+    },
+    {
+      "name": "landing-320",
+      "firstPage": 14,
+      "lastPage": 21
+    },
+    {
+      "name": "text-200-intro-390",
+      "firstPage": 22,
+      "lastPage": 24
+    },
+    {
+      "name": "text-200-intro-320",
+      "firstPage": 25,
+      "lastPage": 27
+    },
+    {
+      "name": "hero-1440",
+      "firstPage": 28,
+      "lastPage": 28
+    }
+  ],
+  "frames": [
+    {
+      "name": "nav-768-stacked",
+      "file": "nav-768-stacked.png",
+      "width": 768,
+      "height": 638,
+      "textScale": 1,
+      "sections": [
+        "P0"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 32,
+          "Y": 211,
+          "Width": 109.192,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 32,
+          "Y": 263,
+          "Width": 157.07999,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        },
+        {
+          "Label": "Current work",
+          "X": 32,
+          "Y": 315,
+          "Width": 104.888,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 3
+        },
+        {
+          "Label": "Collaborate",
+          "X": 32,
+          "Y": 367,
+          "Width": 95.51199,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 4
+        }
+      ],
+      "navigationRows": 4,
+      "navigationHeight": 200,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 736,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results ",
+            "claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "nav 768 stacked  |  768 px  |  Default text",
+          "X": 16,
+          "Y": 90,
+          "Width": 736,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "nav 768 stacked  |  768 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 32,
+          "Y": 167,
+          "Width": 608.32794,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 40,
+          "Y": 221,
+          "Width": 93.192,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 40,
+          "Y": 273,
+          "Width": 141.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 40,
+          "Y": 325,
+          "Width": 88.888,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 40,
+          "Y": 377,
+          "Width": 79.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 44,
+          "Y": 487,
+          "Width": 584.32794,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation",
+          "Text": "Navigation comparison only; the same four labels, text sizes, target padding, and focus specimen are used in both treatments. Page content continues below.",
+          "X": 44,
+          "Y": 520,
+          "Width": 584.32794,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Navigation comparison only; the same four labels, text sizes, target padding, and focus ",
+            "specimen are used in both treatments. Page content continues below."
+          ]
+        }
+      ],
+      "sha256": "4894c4301922000005a1925d426f0b0373ce3a05351eddf336899808e7beb18f"
+    },
+    {
+      "name": "nav-768-wrapping",
+      "file": "nav-768-wrapping.png",
+      "width": 768,
+      "height": 482,
+      "textScale": 1,
+      "sections": [
+        "P0"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 32,
+          "Y": 211,
+          "Width": 109.192,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 149.192,
+          "Y": 211,
+          "Width": 157.07999,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Current work",
+          "X": 314.27197,
+          "Y": 211,
+          "Width": 104.888,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Collaborate",
+          "X": 427.15997,
+          "Y": 211,
+          "Width": 95.51199,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        }
+      ],
+      "navigationRows": 1,
+      "navigationHeight": 44,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 736,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results ",
+            "claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "nav 768 wrapping  |  768 px  |  Default text",
+          "X": 16,
+          "Y": 90,
+          "Width": 736,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "nav 768 wrapping  |  768 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 32,
+          "Y": 167,
+          "Width": 608.32794,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 40,
+          "Y": 221,
+          "Width": 93.192,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 157.192,
+          "Y": 221,
+          "Width": 141.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 322.27197,
+          "Y": 221,
+          "Width": 88.888,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 435.15997,
+          "Y": 221,
+          "Width": 79.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 44,
+          "Y": 331,
+          "Width": 584.32794,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation",
+          "Text": "Navigation comparison only; the same four labels, text sizes, target padding, and focus specimen are used in both treatments. Page content continues below.",
+          "X": 44,
+          "Y": 364,
+          "Width": 584.32794,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Navigation comparison only; the same four labels, text sizes, target padding, and focus ",
+            "specimen are used in both treatments. Page content continues below."
+          ]
+        }
+      ],
+      "sha256": "f1cbeead5fe39ccd749f674d3b6b518ce55b073a2d31931ea80cd4c954814cf7"
+    },
+    {
+      "name": "nav-390-stacked",
+      "file": "nav-390-stacked.png",
+      "width": 390,
+      "height": 705,
+      "textScale": 1,
+      "sections": [
+        "P0"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 24,
+          "Y": 236,
+          "Width": 109.192,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 24,
+          "Y": 288,
+          "Width": 157.07999,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        },
+        {
+          "Label": "Current work",
+          "X": 24,
+          "Y": 340,
+          "Width": 104.888,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 3
+        },
+        {
+          "Label": "Collaborate",
+          "X": 24,
+          "Y": 392,
+          "Width": 95.51199,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 4
+        }
+      ],
+      "navigationRows": 4,
+      "navigationHeight": 200,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 358,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved ",
+            "content marked; no audience or accessibility results ",
+            "claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "nav 390 stacked  |  390 px  |  Default text",
+          "X": 16,
+          "Y": 115,
+          "Width": 358,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "nav 390 stacked  |  390 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 24,
+          "Y": 192,
+          "Width": 342,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 32,
+          "Y": 246,
+          "Width": 93.192,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 32,
+          "Y": 298,
+          "Width": 141.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 32,
+          "Y": 350,
+          "Width": 88.888,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 32,
+          "Y": 402,
+          "Width": 79.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 36,
+          "Y": 504,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation",
+          "Text": "Navigation comparison only; the same four labels, text sizes, target padding, and focus specimen are used in both treatments. Page content continues below.",
+          "X": 36,
+          "Y": 537,
+          "Width": 318,
+          "Height": 100,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Navigation comparison only; the same four ",
+            "labels, text sizes, target padding, and focus ",
+            "specimen are used in both treatments. Page ",
+            "content continues below."
+          ]
+        }
+      ],
+      "sha256": "963907b1adc1623d68000e5c3c0f6b92166f294f39e8f082e7a4ef11927f501f"
+    },
+    {
+      "name": "nav-390-wrapping",
+      "file": "nav-390-wrapping.png",
+      "width": 390,
+      "height": 601,
+      "textScale": 1,
+      "sections": [
+        "P0"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 24,
+          "Y": 236,
+          "Width": 109.192,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 141.192,
+          "Y": 236,
+          "Width": 157.07999,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Current work",
+          "X": 24,
+          "Y": 288,
+          "Width": 104.888,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        },
+        {
+          "Label": "Collaborate",
+          "X": 136.888,
+          "Y": 288,
+          "Width": 95.51199,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        }
+      ],
+      "navigationRows": 2,
+      "navigationHeight": 96,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 358,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved ",
+            "content marked; no audience or accessibility results ",
+            "claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "nav 390 wrapping  |  390 px  |  Default text",
+          "X": 16,
+          "Y": 115,
+          "Width": 358,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "nav 390 wrapping  |  390 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 24,
+          "Y": 192,
+          "Width": 342,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 32,
+          "Y": 246,
+          "Width": 93.192,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 149.192,
+          "Y": 246,
+          "Width": 141.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 32,
+          "Y": 298,
+          "Width": 88.888,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 144.888,
+          "Y": 298,
+          "Width": 79.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 36,
+          "Y": 400,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation",
+          "Text": "Navigation comparison only; the same four labels, text sizes, target padding, and focus specimen are used in both treatments. Page content continues below.",
+          "X": 36,
+          "Y": 433,
+          "Width": 318,
+          "Height": 100,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Navigation comparison only; the same four ",
+            "labels, text sizes, target padding, and focus ",
+            "specimen are used in both treatments. Page ",
+            "content continues below."
+          ]
+        }
+      ],
+      "sha256": "849726b6584b664b96f2c2d6c65c3b3dd92fc20c2eada0f35a0318d92231a79a"
+    },
+    {
+      "name": "nav-320-stacked",
+      "file": "nav-320-stacked.png",
+      "width": 320,
+      "height": 755,
+      "textScale": 1,
+      "sections": [
+        "P0"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 16,
+          "Y": 236,
+          "Width": 109.192,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 16,
+          "Y": 288,
+          "Width": 157.07999,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        },
+        {
+          "Label": "Current work",
+          "X": 16,
+          "Y": 340,
+          "Width": 104.888,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 3
+        },
+        {
+          "Label": "Collaborate",
+          "X": 16,
+          "Y": 392,
+          "Width": 95.51199,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 4
+        }
+      ],
+      "navigationRows": 4,
+      "navigationHeight": 200,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 288,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 ",
+            "unresolved content marked; no audience ",
+            "or accessibility results claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "nav 320 stacked  |  320 px  |  Default text",
+          "X": 16,
+          "Y": 115,
+          "Width": 288,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "nav 320 stacked  |  320 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 16,
+          "Y": 192,
+          "Width": 288,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 24,
+          "Y": 246,
+          "Width": 93.192,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 24,
+          "Y": 298,
+          "Width": 141.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 24,
+          "Y": 350,
+          "Width": 88.888,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 24,
+          "Y": 402,
+          "Width": 79.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 28,
+          "Y": 504,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE",
+            "COPY"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation",
+          "Text": "Navigation comparison only; the same four labels, text sizes, target padding, and focus specimen are used in both treatments. Page content continues below.",
+          "X": 28,
+          "Y": 562,
+          "Width": 264,
+          "Height": 125,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Navigation comparison only; the same ",
+            "four labels, text sizes, target padding, ",
+            "and focus specimen are used in both ",
+            "treatments. Page content continues ",
+            "below."
+          ]
+        }
+      ],
+      "sha256": "eee0a7884cadcfe69c9954e5f2e88c5855f23a717e4bbaf6c0647f4e7628f80e"
+    },
+    {
+      "name": "nav-320-wrapping",
+      "file": "nav-320-wrapping.png",
+      "width": 320,
+      "height": 651,
+      "textScale": 1,
+      "sections": [
+        "P0"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 16,
+          "Y": 236,
+          "Width": 109.192,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 133.192,
+          "Y": 236,
+          "Width": 157.07999,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Current work",
+          "X": 16,
+          "Y": 288,
+          "Width": 104.888,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        },
+        {
+          "Label": "Collaborate",
+          "X": 128.888,
+          "Y": 288,
+          "Width": 95.51199,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        }
+      ],
+      "navigationRows": 2,
+      "navigationHeight": 96,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 288,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 ",
+            "unresolved content marked; no audience ",
+            "or accessibility results claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "nav 320 wrapping  |  320 px  |  Default text",
+          "X": 16,
+          "Y": 115,
+          "Width": 288,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "nav 320 wrapping  |  320 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 16,
+          "Y": 192,
+          "Width": 288,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 24,
+          "Y": 246,
+          "Width": 93.192,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 141.192,
+          "Y": 246,
+          "Width": 141.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 24,
+          "Y": 298,
+          "Width": 88.888,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 136.888,
+          "Y": 298,
+          "Width": 79.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 28,
+          "Y": 400,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE",
+            "COPY"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Review annotation",
+          "Text": "Navigation comparison only; the same four labels, text sizes, target padding, and focus specimen are used in both treatments. Page content continues below.",
+          "X": 28,
+          "Y": 458,
+          "Width": 264,
+          "Height": 125,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Navigation comparison only; the same ",
+            "four labels, text sizes, target padding, ",
+            "and focus specimen are used in both ",
+            "treatments. Page content continues ",
+            "below."
+          ]
+        }
+      ],
+      "sha256": "2b43f8da7f8d4fc741d37f46f95793891d3f67b11f9b73b0e8a5a778e774f8ea"
+    },
+    {
+      "name": "landing-390",
+      "file": "landing-390.png",
+      "width": 390,
+      "height": 10282,
+      "textScale": 1,
+      "sections": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5",
+        "P6",
+        "P7",
+        "P8",
+        "P9"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 24,
+          "Y": 236,
+          "Width": 109.192,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 141.192,
+          "Y": 236,
+          "Width": 157.07999,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Current work",
+          "X": 24,
+          "Y": 288,
+          "Width": 104.888,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        },
+        {
+          "Label": "Collaborate",
+          "X": 136.888,
+          "Y": 288,
+          "Width": 95.51199,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        }
+      ],
+      "navigationRows": 2,
+      "navigationHeight": 96,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 358,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved ",
+            "content marked; no audience or accessibility results ",
+            "claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "landing 390  |  390 px  |  Default text",
+          "X": 16,
+          "Y": 115,
+          "Width": 358,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "landing 390  |  390 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 24,
+          "Y": 192,
+          "Width": 342,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 32,
+          "Y": 246,
+          "Width": 93.192,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 149.192,
+          "Y": 246,
+          "Width": 141.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 32,
+          "Y": 298,
+          "Width": 88.888,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 144.888,
+          "Y": 298,
+          "Width": 79.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Initiative maturity",
+          "Text": "Early-stage initiative",
+          "X": 24,
+          "Y": 388,
+          "Width": 342,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Early-stage initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Heading 1",
+          "Text": "Explore change: evidence, lived insight, new tools.",
+          "X": 24,
+          "Y": 429,
+          "Width": 342,
+          "Height": 120,
+          "FontSize": 32,
+          "LineHeight": 40,
+          "Lines": [
+            "Explore change: ",
+            "evidence, lived insight,",
+            "new tools."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative explores how scientific evidence, lived experience over time, and emerging technology might help people ask better questions about health.",
+          "X": 24,
+          "Y": 565,
+          "Width": 342,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The Emergent Collaborative explores how ",
+            "scientific evidence, lived experience over ",
+            "time, and emerging technology might help ",
+            "people ask better questions about health."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Emphasized message",
+          "Text": "Parkinson\u0027s: our first initiative.",
+          "X": 24,
+          "Y": 697,
+          "Width": 342,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Parkinson\u0027s: our first initiative."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "This is an informational and collaboration project, not a clinical service. We do not diagnose or provide treatment advice.",
+          "X": 24,
+          "Y": 742,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This is an informational and collaboration ",
+            "project, not a clinical service. We do not ",
+            "diagnose or provide treatment advice."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Action-shaped section link",
+          "Text": "Explore ways to contribute",
+          "X": 44,
+          "Y": 857,
+          "Width": 207.66599,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Explore ways to contribute"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section link",
+          "Text": "Read about our approach",
+          "X": 24,
+          "Y": 920,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Read about our approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section map label",
+          "Text": "On this page",
+          "X": 24,
+          "Y": 971,
+          "Width": 342,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "On this page"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Why change over time",
+          "X": 24,
+          "Y": 1013,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Why change over time"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Our approach",
+          "X": 24,
+          "Y": 1065,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 24,
+          "Y": 1117,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Origin",
+          "X": 24,
+          "Y": 1169,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Origin"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Current work",
+          "X": 24,
+          "Y": 1221,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Collaborate",
+          "X": 24,
+          "Y": 1273,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Sources",
+          "X": 24,
+          "Y": 1325,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Sources"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-15",
+          "X": 36,
+          "Y": 1380,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Review annotation / PH-15"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Placeholder PH-15",
+          "Text": "[HEADLINE IS PROVISIONAL \u2014 FINAL COPY APPROVAL PENDING]",
+          "X": 36,
+          "Y": 1409,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[HEADLINE IS PROVISIONAL \u2014 FINAL COPY ",
+            "APPROVAL PENDING]"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 36,
+          "Y": 1499,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Decorative illustration omitted in this composition.",
+          "X": 36,
+          "Y": 1532,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Decorative illustration omitted in this ",
+            "composition."
+          ]
+        },
+        {
+          "Section": "P2",
+          "Role": "Heading 2",
+          "Text": "Why look at change over time?",
+          "X": 24,
+          "Y": 1658,
+          "Width": 342,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Why look at change over ",
+            "time?"
+          ]
+        },
+        {
+          "Section": "P2",
+          "Role": "Body",
+          "Text": "A research paper, a measurement, and a personal observation can each prompt a question. What do they mean in context? What happened before or after? What remains uncertain?",
+          "X": 24,
+          "Y": 1746,
+          "Width": 342,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "A research paper, a measurement, and a ",
+            "personal observation can each prompt a ",
+            "question. What do they mean in context? ",
+            "What happened before or after? What ",
+            "remains uncertain?"
+          ]
+        },
+        {
+          "Section": "P2",
+          "Role": "Body",
+          "Text": "We want to explore whether looking at research and experience over time can help people formulate clearer questions. Collecting more information is not the goal in itself.",
+          "X": 24,
+          "Y": 1907,
+          "Width": 342,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "We want to explore whether looking at ",
+            "research and experience over time can help ",
+            "people formulate clearer questions. ",
+            "Collecting more information is not the goal in",
+            "itself."
+          ]
+        },
+        {
+          "Section": "P2",
+          "Role": "Body",
+          "Text": "For us, longitudinal means paying attention to change over time rather than treating each observation as an isolated snapshot. It does not mean assuming that one event caused another.",
+          "X": 24,
+          "Y": 2068,
+          "Width": 342,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "For us, longitudinal means paying attention ",
+            "to change over time rather than treating each",
+            "observation as an isolated snapshot. It does ",
+            "not mean assuming that one event caused ",
+            "another."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Heading 2",
+          "Text": "Evidence. Experience. Exploration.",
+          "X": 24,
+          "Y": 2277,
+          "Width": 342,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Evidence. Experience. ",
+            "Exploration."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "Three connected ideas guide the project. Keeping their differences visible matters as much as exploring them together.",
+          "X": 24,
+          "Y": 2365,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Three connected ideas guide the project. ",
+            "Keeping their differences visible matters as ",
+            "much as exploring them together."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Heading 3",
+          "Text": "Evidence",
+          "X": 24,
+          "Y": 2492,
+          "Width": 342,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Evidence"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Question",
+          "Text": "What does published research report, and how strong is its support?",
+          "X": 24,
+          "Y": 2538,
+          "Width": 342,
+          "Height": 60,
+          "FontSize": 20,
+          "LineHeight": 30,
+          "Lines": [
+            "What does published research report, ",
+            "and how strong is its support?"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "We intend to make research claims traceable to their sources and explain relevant limitations. A citation is a starting point for checking a claim, not a reason to stop asking questions.",
+          "X": 24,
+          "Y": 2614,
+          "Width": 342,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "We intend to make research claims traceable ",
+            "to their sources and explain relevant ",
+            "limitations. A citation is a starting point for ",
+            "checking a claim, not a reason to stop asking ",
+            "questions."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Heading 3",
+          "Text": "Experience",
+          "X": 24,
+          "Y": 2799,
+          "Width": 342,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Experience"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Question",
+          "Text": "What does a person notice over time?",
+          "X": 24,
+          "Y": 2845,
+          "Width": 342,
+          "Height": 30,
+          "FontSize": 20,
+          "LineHeight": 30,
+          "Lines": [
+            "What does a person notice over time?"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "Lived experience helps shape the questions worth asking. We will not treat one person\u0027s observation as proof of a treatment effect or a cause.",
+          "X": 24,
+          "Y": 2891,
+          "Width": 342,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Lived experience helps shape the questions ",
+            "worth asking. We will not treat one person\u0027s ",
+            "observation as proof of a treatment effect or ",
+            "a cause."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "That does not dismiss lived experience. When personal reports are used in research, we will ask how they were collected and what the study can reasonably conclude.",
+          "X": 24,
+          "Y": 3023,
+          "Width": 342,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "That does not dismiss lived experience. When",
+            "personal reports are used in research, we will",
+            "ask how they were collected and what the ",
+            "study can reasonably conclude."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Heading 3",
+          "Text": "Exploration",
+          "X": 24,
+          "Y": 3179,
+          "Width": 342,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Exploration"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Question",
+          "Text": "What could emerging technology help us investigate?",
+          "X": 24,
+          "Y": 3225,
+          "Width": 342,
+          "Height": 60,
+          "FontSize": 20,
+          "LineHeight": 30,
+          "Lines": [
+            "What could emerging technology help ",
+            "us investigate?"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "AI, sensing, and other tools are possibilities to examine, not answers in themselves. We intend to judge experiments by what they can demonstrate and to state what remains unknown.",
+          "X": 24,
+          "Y": 3301,
+          "Width": 342,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "AI, sensing, and other tools are possibilities ",
+            "to examine, not answers in themselves. We ",
+            "intend to judge experiments by what they ",
+            "can demonstrate and to state what remains ",
+            "unknown."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "An experimental tool is not established medical treatment. People remain responsible for interpretation and decisions.",
+          "X": 24,
+          "Y": 3462,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "An experimental tool is not established ",
+            "medical treatment. People remain ",
+            "responsible for interpretation and decisions."
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Heading 2",
+          "Text": "Parkinson\u0027s: our first initiative",
+          "X": 24,
+          "Y": 3613,
+          "Width": 342,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Parkinson\u0027s: our first ",
+            "initiative"
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "Parkinson\u0027s is where this work begins. It is personally meaningful to the founder and gives the initiative a focused place to start asking questions about research, experience, and change over time.",
+          "X": 24,
+          "Y": 3701,
+          "Width": 342,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Parkinson\u0027s is where this work begins. It is ",
+            "personally meaningful to the founder and ",
+            "gives the initiative a focused place to start ",
+            "asking questions about research, experience, ",
+            "and change over time."
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "One question we want to refine is:",
+          "X": 24,
+          "Y": 3862,
+          "Width": 342,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "One question we want to refine is:"
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Question",
+          "Text": "What would help people make sense of research and day-to-day observations well enough to ask a clearer question?",
+          "X": 24,
+          "Y": 3907,
+          "Width": 342,
+          "Height": 90,
+          "FontSize": 20,
+          "LineHeight": 30,
+          "Lines": [
+            "What would help people make sense of ",
+            "research and day-to-day observations ",
+            "well enough to ask a clearer question?"
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "The first step is to understand the question, not to build a system that interprets someone\u0027s condition.",
+          "X": 24,
+          "Y": 4013,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The first step is to understand the question, ",
+            "not to build a system that interprets ",
+            "someone\u0027s condition."
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "Parkinson\u0027s is the first initiative, not the limit of the organization\u0027s interests. Any future expansion would need its own purpose and justification.",
+          "X": 24,
+          "Y": 4116,
+          "Width": 342,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Parkinson\u0027s is the first initiative, not the limit ",
+            "of the organization\u0027s interests. Any future ",
+            "expansion would need its own purpose and ",
+            "justification."
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "This website is not enrolling a study or collecting health records.",
+          "X": 24,
+          "Y": 4248,
+          "Width": 342,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This website is not enrolling a study or ",
+            "collecting health records."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Heading 2",
+          "Text": "How the question began",
+          "X": 24,
+          "Y": 4370,
+          "Width": 342,
+          "Height": 36,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "How the question began"
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "The founder\u0027s interest in emerging technology took shape early in his software career at Rebar Foundry, a dot-com-era incubator exploring new technologies. It encouraged a lasting habit: turn an intriguing possibility into something practical, then examine what it can actually do.",
+          "X": 24,
+          "Y": 4422,
+          "Width": 342,
+          "Height": 203,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The founder\u0027s interest in emerging ",
+            "technology took shape early in his software ",
+            "career at Rebar Foundry, a dot-com-era ",
+            "incubator exploring new technologies. It ",
+            "encouraged a lasting habit: turn an intriguing",
+            "possibility into something practical, then ",
+            "examine what it can actually do."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "After decades building software, a Parkinson\u0027s diagnosis brought a different set of questions into that work. Cycling and a long-distance ride to raise Parkinson\u0027s awareness became part of the connection between technology and everyday experience.",
+          "X": 24,
+          "Y": 4641,
+          "Width": 342,
+          "Height": 203,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "After decades building software, a ",
+            "Parkinson\u0027s diagnosis brought a different set ",
+            "of questions into that work. Cycling and a ",
+            "long-distance ride to raise Parkinson\u0027s ",
+            "awareness became part of the connection ",
+            "between technology and everyday ",
+            "experience."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "Technology experiments around the ride collected information about the journey. They were an opportunity to investigate measurement, not evidence of a treatment effect.",
+          "X": 24,
+          "Y": 4860,
+          "Width": 342,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Technology experiments around the ride ",
+            "collected information about the journey. ",
+            "They were an opportunity to investigate ",
+            "measurement, not evidence of a treatment ",
+            "effect."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "That work prompted a broader question: what might become possible if published research, experience over time, and emerging technology were considered together, without confusing their different roles?",
+          "X": 24,
+          "Y": 5021,
+          "Width": 342,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "That work prompted a broader question: ",
+            "what might become possible if published ",
+            "research, experience over time, and ",
+            "emerging technology were considered ",
+            "together, without confusing their different ",
+            "roles?"
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative begins with that question. The aim is not to make one person\u0027s story stand for everyone else\u0027s, but to invite other perspectives into a careful exploration.",
+          "X": 24,
+          "Y": 5211,
+          "Width": 342,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The Emergent Collaborative begins with that ",
+            "question. The aim is not to make one ",
+            "person\u0027s story stand for everyone else\u0027s, but ",
+            "to invite other perspectives into a careful ",
+            "exploration."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-16",
+          "X": 36,
+          "Y": 5384,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Review annotation / PH-16"
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Placeholder PH-16",
+          "Text": "[PUBLIC ORIGIN WORDING/PERMISSIONS \u2014 APPROVAL PENDING]",
+          "X": 36,
+          "Y": 5413,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[PUBLIC ORIGIN WORDING/PERMISSIONS \u2014 ",
+            "APPROVAL PENDING]"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Heading 2",
+          "Text": "What exists today",
+          "X": 24,
+          "Y": 5539,
+          "Width": 342,
+          "Height": 36,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "What exists today"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "The work is at the definition and content-prototype stage. The founding product brief and website requirements have been approved as the basis for this website.",
+          "X": 24,
+          "Y": 5591,
+          "Width": 342,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The work is at the definition and ",
+            "content-prototype stage. The founding ",
+            "product brief and website requirements have",
+            "been approved as the basis for this website."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Heading 3",
+          "Text": "Website content and structure",
+          "X": 24,
+          "Y": 5739,
+          "Width": 342,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Website content and structure"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Neutral project status",
+          "Text": "Status: Prototype \u2014 internal written draft",
+          "X": 32,
+          "Y": 5789,
+          "Width": 276.224,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Status: Prototype \u2014 internal written draft"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "This draft explores how to explain the initiative, distinguish its ideas, and invite useful collaboration. It is a content prototype, not a working website, research tool, or medical service. Audience review will help refine it.",
+          "X": 24,
+          "Y": 5834,
+          "Width": 342,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This draft explores how to explain the ",
+            "initiative, distinguish its ideas, and invite ",
+            "useful collaboration. It is a content ",
+            "prototype, not a working website, research ",
+            "tool, or medical service. Audience review will ",
+            "help refine it."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "Documentation status checked: 18 October 2026.",
+          "X": 24,
+          "Y": 6024,
+          "Width": 342,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Documentation status checked: 18 October ",
+            "2026."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Heading 3",
+          "Text": "Possible later directions",
+          "X": 24,
+          "Y": 6114,
+          "Width": 342,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Possible later directions"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Neutral project status",
+          "Text": "Status: Idea",
+          "X": 32,
+          "Y": 6164,
+          "Width": 79.104,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Status: Idea"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "Future work could explore organizing research sources, source-linked research assistance, or ways of examining change over time. These are proposals, not services offered by this website or commitments to delivery dates.",
+          "X": 24,
+          "Y": 6209,
+          "Width": 342,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Future work could explore organizing ",
+            "research sources, source-linked research ",
+            "assistance, or ways of examining change over",
+            "time. These are proposals, not services ",
+            "offered by this website or commitments to ",
+            "delivery dates."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "Any future work involving personal records, sensing, or analysis would need separate requirements, privacy safeguards, and evaluation. Public research information and private personal information would remain separate.",
+          "X": 24,
+          "Y": 6399,
+          "Width": 342,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Any future work involving personal records, ",
+            "sensing, or analysis would need separate ",
+            "requirements, privacy safeguards, and ",
+            "evaluation. Public research information and ",
+            "private personal information would remain ",
+            "separate."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "This first website will not offer accounts, health logging, device connections, AI chat, or personalized medical interpretation.",
+          "X": 24,
+          "Y": 6589,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This first website will not offer accounts, ",
+            "health logging, device connections, AI chat, ",
+            "or personalized medical interpretation."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Section link",
+          "Text": "Help shape the next step",
+          "X": 24,
+          "Y": 6701,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Help shape the next step"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-17",
+          "X": 36,
+          "Y": 6756,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Review annotation / PH-17"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Placeholder PH-17",
+          "Text": "[FUTURE SOFTWARE IMPLEMENTATION STATUS \u2014 UNVERIFIED; IDEAS ARE NOT AVAILABLE SERVICES]",
+          "X": 36,
+          "Y": 6785,
+          "Width": 318,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[FUTURE SOFTWARE IMPLEMENTATION ",
+            "STATUS \u2014 UNVERIFIED; IDEAS ARE NOT ",
+            "AVAILABLE SERVICES]"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Heading 2",
+          "Text": "Help shape the next questions",
+          "X": 24,
+          "Y": 6960,
+          "Width": 342,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Help shape the next ",
+            "questions"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "You do not need to be a researcher or developer to offer a useful perspective.",
+          "X": 24,
+          "Y": 7048,
+          "Width": 342,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "You do not need to be a researcher or ",
+            "developer to offer a useful perspective."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "Ways to contribute could include:",
+          "X": 24,
+          "Y": 7122,
+          "Width": 342,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Ways to contribute could include:"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution bullet",
+          "Text": "\u2022",
+          "X": 24,
+          "Y": 7167,
+          "Width": 16,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "\u2022"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution example",
+          "Text": "Pointing out unclear language or a question the project has overlooked.",
+          "X": 48,
+          "Y": 7167,
+          "Width": 318,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Pointing out unclear language or a ",
+            "question the project has overlooked."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution bullet",
+          "Text": "\u2022",
+          "X": 24,
+          "Y": 7237,
+          "Width": 16,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "\u2022"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution example",
+          "Text": "Challenging an assumption or suggesting a more careful research approach.",
+          "X": 48,
+          "Y": 7237,
+          "Width": 318,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Challenging an assumption or suggesting ",
+            "a more careful research approach."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution bullet",
+          "Text": "\u2022",
+          "X": 24,
+          "Y": 7307,
+          "Width": 16,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "\u2022"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution example",
+          "Text": "Helping make information easier to read and navigate.",
+          "X": 48,
+          "Y": 7307,
+          "Width": 318,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Helping make information easier to read ",
+            "and navigate."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution bullet",
+          "Text": "\u2022",
+          "X": 24,
+          "Y": 7377,
+          "Width": 16,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "\u2022"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution example",
+          "Text": "Discussing a small, well-defined technical investigation.",
+          "X": 48,
+          "Y": 7377,
+          "Width": 318,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Discussing a small, well-defined technical ",
+            "investigation."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "These are starting points for a conversation, not staffed openings or promises of a project role.",
+          "X": 24,
+          "Y": 7451,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "These are starting points for a conversation, ",
+            "not staffed openings or promises of a project ",
+            "role."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Heading 3",
+          "Text": "Before you email",
+          "X": 24,
+          "Y": 7570,
+          "Width": 342,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Before you email"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Sensitive-information warning",
+          "Text": "Please keep your message about the project. Do not send medical records, symptom histories, medication details, location traces, or other sensitive health information. Do not attach files.",
+          "X": 40,
+          "Y": 7632,
+          "Width": 310,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Please keep your message about the ",
+            "project. Do not send medical records, ",
+            "symptom histories, medication details, ",
+            "location traces, or other sensitive ",
+            "health information. Do not attach files."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "No clinical or urgent service",
+          "Text": "This channel does not provide medical advice and is not monitored for urgent help. Contacting us does not enroll you in research or authorize publication of your message.",
+          "X": 40,
+          "Y": 7793,
+          "Width": 310,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This channel does not provide medical ",
+            "advice and is not monitored for urgent ",
+            "help. Contacting us does not enroll you ",
+            "in research or authorize publication of ",
+            "your message."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "Email shares your address and message with the email services involved. Read Privacy and contact information before deciding what to send.",
+          "X": 24,
+          "Y": 7970,
+          "Width": 342,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Email shares your address and message with ",
+            "the email services involved. Read Privacy ",
+            "and contact information before deciding ",
+            "what to send."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Heading 3",
+          "Text": "Email about the project",
+          "X": 24,
+          "Y": 8118,
+          "Width": 342,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Email about the project"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-01",
+          "X": 36,
+          "Y": 8176,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-01"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Placeholder PH-01",
+          "Text": "[DEDICATED EMAIL ADDRESS \u2014 UNASSIGNED; MOCKUP CONTACT IS INACTIVE]",
+          "X": 36,
+          "Y": 8205,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[DEDICATED EMAIL ADDRESS \u2014 UNASSIGNED; ",
+            "MOCKUP CONTACT IS INACTIVE]"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 36,
+          "Y": 8295,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Review annotation",
+          "Text": "Nonfunctional email-action placement: Email about collaboration. No address or delivery.",
+          "X": 36,
+          "Y": 8328,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Nonfunctional email-action placement: Email ",
+            "about collaboration. No address or delivery."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "You can use your own email service. If an email application does not open, copy the address into a new message.",
+          "X": 24,
+          "Y": 8406,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "You can use your own email service. If an ",
+            "email application does not open, copy the ",
+            "address into a new message."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "A short note about the question or contribution you have in mind is enough. You do not need to disclose a diagnosis or personal health history. Your name, organization, and professional background are optional.",
+          "X": 24,
+          "Y": 8509,
+          "Width": 342,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "A short note about the question or ",
+            "contribution you have in mind is enough. You",
+            "do not need to disclose a diagnosis or ",
+            "personal health history. Your name, ",
+            "organization, and professional background ",
+            "are optional."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "You can use the same address to flag a correction or ask about information handling.",
+          "X": 24,
+          "Y": 8699,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "You can use the same address to flag a ",
+            "correction or ask about information ",
+            "handling."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-02",
+          "X": 36,
+          "Y": 8814,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-02"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Placeholder PH-02",
+          "Text": "[CONTACT ROLE AND RESPONSE EXPECTATION \u2014 FOUNDER APPROVAL PENDING]",
+          "X": 36,
+          "Y": 8843,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[CONTACT ROLE AND RESPONSE EXPECTATION",
+            "\u2014 FOUNDER APPROVAL PENDING]"
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Heading 2",
+          "Text": "Sources and context",
+          "X": 24,
+          "Y": 8993,
+          "Width": 342,
+          "Height": 36,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Sources and context"
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Body",
+          "Text": "When we make a research claim, we intend to show where it comes from and explain the limits that matter to its interpretation.",
+          "X": 24,
+          "Y": 9045,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "When we make a research claim, we intend to",
+            "show where it comes from and explain the ",
+            "limits that matter to its interpretation."
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Body",
+          "Text": "Personal accounts and project proposals are identified as such. They are not presented as scientific findings.",
+          "X": 24,
+          "Y": 9148,
+          "Width": 342,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Personal accounts and project proposals are ",
+            "identified as such. They are not presented as ",
+            "scientific findings."
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 36,
+          "Y": 9263,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY"
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Review annotation",
+          "Text": "No scientific source entries in this concept.",
+          "X": 36,
+          "Y": 9296,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "No scientific source entries in this concept."
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Heading 2",
+          "Text": "Responsibility and corrections",
+          "X": 24,
+          "Y": 9397,
+          "Width": 342,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Responsibility and ",
+            "corrections"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative is an early-stage, founder-led initiative. This website explains its direction and invites project collaboration; it is not a clinical service.",
+          "X": 24,
+          "Y": 9485,
+          "Width": 342,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The Emergent Collaborative is an early-stage,",
+            "founder-led initiative. This website explains ",
+            "its direction and invites project ",
+            "collaboration; it is not a clinical service."
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Body",
+          "Text": "Publication responsibility:",
+          "X": 24,
+          "Y": 9617,
+          "Width": 342,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Publication responsibility:"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-03",
+          "X": 36,
+          "Y": 9674,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-03"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Placeholder PH-03",
+          "Text": "[PUBLICATION RESPONSIBILITY \u2014 APPROVED PUBLIC NAME OR ROLE PENDING]",
+          "X": 36,
+          "Y": 9703,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[PUBLICATION RESPONSIBILITY \u2014 APPROVED ",
+            "PUBLIC NAME OR ROLE PENDING]"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Body",
+          "Text": "Content last reviewed:",
+          "X": 24,
+          "Y": 9781,
+          "Width": 342,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Content last reviewed:"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-04",
+          "X": 36,
+          "Y": 9838,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-04"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Placeholder PH-04",
+          "Text": "[PUBLIC CONTENT REVIEW DATE \u2014 NOT YET SET]",
+          "X": 36,
+          "Y": 9867,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[PUBLIC CONTENT REVIEW DATE \u2014 NOT YET ",
+            "SET]"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Body",
+          "Text": "See something unclear or inaccurate? Contact us about a correction.",
+          "X": 24,
+          "Y": 9945,
+          "Width": 342,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "See something unclear or inaccurate? ",
+            "Contact us about a correction."
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Utility link",
+          "Text": "Privacy and contact information",
+          "X": 24,
+          "Y": 10028,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Privacy and contact information"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Section link",
+          "Text": "Back to the introduction",
+          "X": 24,
+          "Y": 10080,
+          "Width": 342,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Back to the introduction"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-05",
+          "X": 36,
+          "Y": 10135,
+          "Width": 318,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-05"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Placeholder PH-05",
+          "Text": "[MATERIAL RELATIONSHIP DISCLOSURE \u2014 CONFIRM WHETHER APPLICABLE]",
+          "X": 36,
+          "Y": 10164,
+          "Width": 318,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[MATERIAL RELATIONSHIP DISCLOSURE \u2014 ",
+            "CONFIRM WHETHER APPLICABLE]"
+          ]
+        }
+      ],
+      "sha256": "a2eccfebd30d0bbe96968be2843d5cd26614fe22038893fde6e227bbb221ef68"
+    },
+    {
+      "name": "landing-320",
+      "file": "landing-320.png",
+      "width": 320,
+      "height": 11461,
+      "textScale": 1,
+      "sections": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5",
+        "P6",
+        "P7",
+        "P8",
+        "P9"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 16,
+          "Y": 236,
+          "Width": 109.192,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 133.192,
+          "Y": 236,
+          "Width": 157.07999,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 1
+        },
+        {
+          "Label": "Current work",
+          "X": 16,
+          "Y": 288,
+          "Width": 104.888,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        },
+        {
+          "Label": "Collaborate",
+          "X": 128.888,
+          "Y": 288,
+          "Width": 95.51199,
+          "Height": 44,
+          "FontSize": 16,
+          "Row": 2
+        }
+      ],
+      "navigationRows": 2,
+      "navigationHeight": 96,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 288,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 ",
+            "unresolved content marked; no audience ",
+            "or accessibility results claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "landing 320  |  320 px  |  Default text",
+          "X": 16,
+          "Y": 115,
+          "Width": 288,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "landing 320  |  320 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 16,
+          "Y": 192,
+          "Width": 288,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 24,
+          "Y": 246,
+          "Width": 93.192,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 141.192,
+          "Y": 246,
+          "Width": 141.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 24,
+          "Y": 298,
+          "Width": 88.888,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 136.888,
+          "Y": 298,
+          "Width": 79.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Initiative maturity",
+          "Text": "Early-stage initiative",
+          "X": 16,
+          "Y": 388,
+          "Width": 288,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Early-stage initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Heading 1",
+          "Text": "Explore change: evidence, lived insight, new tools.",
+          "X": 16,
+          "Y": 429,
+          "Width": 288,
+          "Height": 120,
+          "FontSize": 32,
+          "LineHeight": 40,
+          "Lines": [
+            "Explore change: ",
+            "evidence, lived ",
+            "insight, new tools."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative explores how scientific evidence, lived experience over time, and emerging technology might help people ask better questions about health.",
+          "X": 16,
+          "Y": 565,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The Emergent Collaborative explores ",
+            "how scientific evidence, lived ",
+            "experience over time, and emerging ",
+            "technology might help people ask ",
+            "better questions about health."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Emphasized message",
+          "Text": "Parkinson\u0027s: our first initiative.",
+          "X": 16,
+          "Y": 726,
+          "Width": 288,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Parkinson\u0027s: our first initiative."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "This is an informational and collaboration project, not a clinical service. We do not diagnose or provide treatment advice.",
+          "X": 16,
+          "Y": 771,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This is an informational and ",
+            "collaboration project, not a clinical ",
+            "service. We do not diagnose or ",
+            "provide treatment advice."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Action-shaped section link",
+          "Text": "Explore ways to contribute",
+          "X": 36,
+          "Y": 915,
+          "Width": 207.66599,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Explore ways to contribute"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section link",
+          "Text": "Read about our approach",
+          "X": 16,
+          "Y": 978,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Read about our approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section map label",
+          "Text": "On this page",
+          "X": 16,
+          "Y": 1029,
+          "Width": 288,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "On this page"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Why change over time",
+          "X": 16,
+          "Y": 1071,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Why change over time"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Our approach",
+          "X": 16,
+          "Y": 1123,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 16,
+          "Y": 1175,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Origin",
+          "X": 16,
+          "Y": 1227,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Origin"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Current work",
+          "X": 16,
+          "Y": 1279,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Collaborate",
+          "X": 16,
+          "Y": 1331,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Sources",
+          "X": 16,
+          "Y": 1383,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Sources"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-15",
+          "X": 28,
+          "Y": 1438,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Review annotation / PH-15"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Placeholder PH-15",
+          "Text": "[HEADLINE IS PROVISIONAL \u2014 FINAL COPY APPROVAL PENDING]",
+          "X": 28,
+          "Y": 1467,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[HEADLINE IS PROVISIONAL \u2014 FINAL ",
+            "COPY APPROVAL PENDING]"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 28,
+          "Y": 1557,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE",
+            "COPY"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Decorative illustration omitted in this composition.",
+          "X": 28,
+          "Y": 1615,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Decorative illustration omitted in this ",
+            "composition."
+          ]
+        },
+        {
+          "Section": "P2",
+          "Role": "Heading 2",
+          "Text": "Why look at change over time?",
+          "X": 16,
+          "Y": 1733,
+          "Width": 288,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Why look at change ",
+            "over time?"
+          ]
+        },
+        {
+          "Section": "P2",
+          "Role": "Body",
+          "Text": "A research paper, a measurement, and a personal observation can each prompt a question. What do they mean in context? What happened before or after? What remains uncertain?",
+          "X": 16,
+          "Y": 1821,
+          "Width": 288,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "A research paper, a measurement, ",
+            "and a personal observation can each ",
+            "prompt a question. What do they ",
+            "mean in context? What happened ",
+            "before or after? What remains ",
+            "uncertain?"
+          ]
+        },
+        {
+          "Section": "P2",
+          "Role": "Body",
+          "Text": "We want to explore whether looking at research and experience over time can help people formulate clearer questions. Collecting more information is not the goal in itself.",
+          "X": 16,
+          "Y": 2011,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "We want to explore whether looking ",
+            "at research and experience over time ",
+            "can help people formulate clearer ",
+            "questions. Collecting more ",
+            "information is not the goal in itself."
+          ]
+        },
+        {
+          "Section": "P2",
+          "Role": "Body",
+          "Text": "For us, longitudinal means paying attention to change over time rather than treating each observation as an isolated snapshot. It does not mean assuming that one event caused another.",
+          "X": 16,
+          "Y": 2172,
+          "Width": 288,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "For us, longitudinal means paying ",
+            "attention to change over time rather ",
+            "than treating each observation as an ",
+            "isolated snapshot. It does not mean ",
+            "assuming that one event caused ",
+            "another."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Heading 2",
+          "Text": "Evidence. Experience. Exploration.",
+          "X": 16,
+          "Y": 2402,
+          "Width": 288,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Evidence. Experience.",
+            "Exploration."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "Three connected ideas guide the project. Keeping their differences visible matters as much as exploring them together.",
+          "X": 16,
+          "Y": 2490,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Three connected ideas guide the ",
+            "project. Keeping their differences ",
+            "visible matters as much as exploring ",
+            "them together."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Heading 3",
+          "Text": "Evidence",
+          "X": 16,
+          "Y": 2646,
+          "Width": 288,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Evidence"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Question",
+          "Text": "What does published research report, and how strong is its support?",
+          "X": 16,
+          "Y": 2692,
+          "Width": 288,
+          "Height": 90,
+          "FontSize": 20,
+          "LineHeight": 30,
+          "Lines": [
+            "What does published research ",
+            "report, and how strong is its ",
+            "support?"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "We intend to make research claims traceable to their sources and explain relevant limitations. A citation is a starting point for checking a claim, not a reason to stop asking questions.",
+          "X": 16,
+          "Y": 2798,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "We intend to make research claims ",
+            "traceable to their sources and explain ",
+            "relevant limitations. A citation is a ",
+            "starting point for checking a claim, ",
+            "not a reason to stop asking questions."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Heading 3",
+          "Text": "Experience",
+          "X": 16,
+          "Y": 2983,
+          "Width": 288,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Experience"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Question",
+          "Text": "What does a person notice over time?",
+          "X": 16,
+          "Y": 3029,
+          "Width": 288,
+          "Height": 60,
+          "FontSize": 20,
+          "LineHeight": 30,
+          "Lines": [
+            "What does a person notice over ",
+            "time?"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "Lived experience helps shape the questions worth asking. We will not treat one person\u0027s observation as proof of a treatment effect or a cause.",
+          "X": 16,
+          "Y": 3105,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Lived experience helps shape the ",
+            "questions worth asking. We will not ",
+            "treat one person\u0027s observation as ",
+            "proof of a treatment effect or a cause."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "That does not dismiss lived experience. When personal reports are used in research, we will ask how they were collected and what the study can reasonably conclude.",
+          "X": 16,
+          "Y": 3237,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "That does not dismiss lived ",
+            "experience. When personal reports ",
+            "are used in research, we will ask how ",
+            "they were collected and what the ",
+            "study can reasonably conclude."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Heading 3",
+          "Text": "Exploration",
+          "X": 16,
+          "Y": 3422,
+          "Width": 288,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Exploration"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Question",
+          "Text": "What could emerging technology help us investigate?",
+          "X": 16,
+          "Y": 3468,
+          "Width": 288,
+          "Height": 60,
+          "FontSize": 20,
+          "LineHeight": 30,
+          "Lines": [
+            "What could emerging technology ",
+            "help us investigate?"
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "AI, sensing, and other tools are possibilities to examine, not answers in themselves. We intend to judge experiments by what they can demonstrate and to state what remains unknown.",
+          "X": 16,
+          "Y": 3544,
+          "Width": 288,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "AI, sensing, and other tools are ",
+            "possibilities to examine, not answers ",
+            "in themselves. We intend to judge ",
+            "experiments by what they can ",
+            "demonstrate and to state what ",
+            "remains unknown."
+          ]
+        },
+        {
+          "Section": "P3",
+          "Role": "Body",
+          "Text": "An experimental tool is not established medical treatment. People remain responsible for interpretation and decisions.",
+          "X": 16,
+          "Y": 3734,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "An experimental tool is not ",
+            "established medical treatment. ",
+            "People remain responsible for ",
+            "interpretation and decisions."
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Heading 2",
+          "Text": "Parkinson\u0027s: our first initiative",
+          "X": 16,
+          "Y": 3906,
+          "Width": 288,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Parkinson\u0027s: our first ",
+            "initiative"
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "Parkinson\u0027s is where this work begins. It is personally meaningful to the founder and gives the initiative a focused place to start asking questions about research, experience, and change over time.",
+          "X": 16,
+          "Y": 3994,
+          "Width": 288,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Parkinson\u0027s is where this work begins.",
+            "It is personally meaningful to the ",
+            "founder and gives the initiative a ",
+            "focused place to start asking ",
+            "questions about research, experience,",
+            "and change over time."
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "One question we want to refine is:",
+          "X": 16,
+          "Y": 4184,
+          "Width": 288,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "One question we want to refine is:"
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Question",
+          "Text": "What would help people make sense of research and day-to-day observations well enough to ask a clearer question?",
+          "X": 16,
+          "Y": 4229,
+          "Width": 288,
+          "Height": 120,
+          "FontSize": 20,
+          "LineHeight": 30,
+          "Lines": [
+            "What would help people make ",
+            "sense of research and day-to-day ",
+            "observations well enough to ask ",
+            "a clearer question?"
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "The first step is to understand the question, not to build a system that interprets someone\u0027s condition.",
+          "X": 16,
+          "Y": 4365,
+          "Width": 288,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The first step is to understand the ",
+            "question, not to build a system that ",
+            "interprets someone\u0027s condition."
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "Parkinson\u0027s is the first initiative, not the limit of the organization\u0027s interests. Any future expansion would need its own purpose and justification.",
+          "X": 16,
+          "Y": 4468,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Parkinson\u0027s is the first initiative, not ",
+            "the limit of the organization\u0027s ",
+            "interests. Any future expansion would ",
+            "need its own purpose and ",
+            "justification."
+          ]
+        },
+        {
+          "Section": "P4",
+          "Role": "Body",
+          "Text": "This website is not enrolling a study or collecting health records.",
+          "X": 16,
+          "Y": 4629,
+          "Width": 288,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This website is not enrolling a study or",
+            "collecting health records."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Heading 2",
+          "Text": "How the question began",
+          "X": 16,
+          "Y": 4743,
+          "Width": 288,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "How the question ",
+            "began"
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "The founder\u0027s interest in emerging technology took shape early in his software career at Rebar Foundry, a dot-com-era incubator exploring new technologies. It encouraged a lasting habit: turn an intriguing possibility into something practical, then examine what it can actually do.",
+          "X": 16,
+          "Y": 4831,
+          "Width": 288,
+          "Height": 232,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The founder\u0027s interest in emerging ",
+            "technology took shape early in his ",
+            "software career at Rebar Foundry, a ",
+            "dot-com-era incubator exploring new ",
+            "technologies. It encouraged a lasting ",
+            "habit: turn an intriguing possibility ",
+            "into something practical, then ",
+            "examine what it can actually do."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "After decades building software, a Parkinson\u0027s diagnosis brought a different set of questions into that work. Cycling and a long-distance ride to raise Parkinson\u0027s awareness became part of the connection between technology and everyday experience.",
+          "X": 16,
+          "Y": 5079,
+          "Width": 288,
+          "Height": 232,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "After decades building software, a ",
+            "Parkinson\u0027s diagnosis brought a ",
+            "different set of questions into that ",
+            "work. Cycling and a long-distance ride",
+            "to raise Parkinson\u0027s awareness ",
+            "became part of the connection ",
+            "between technology and everyday ",
+            "experience."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "Technology experiments around the ride collected information about the journey. They were an opportunity to investigate measurement, not evidence of a treatment effect.",
+          "X": 16,
+          "Y": 5327,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Technology experiments around the ",
+            "ride collected information about the ",
+            "journey. They were an opportunity to ",
+            "investigate measurement, not ",
+            "evidence of a treatment effect."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "That work prompted a broader question: what might become possible if published research, experience over time, and emerging technology were considered together, without confusing their different roles?",
+          "X": 16,
+          "Y": 5488,
+          "Width": 288,
+          "Height": 203,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "That work prompted a broader ",
+            "question: what might become ",
+            "possible if published research, ",
+            "experience over time, and emerging ",
+            "technology were considered together,",
+            "without confusing their different ",
+            "roles?"
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative begins with that question. The aim is not to make one person\u0027s story stand for everyone else\u0027s, but to invite other perspectives into a careful exploration.",
+          "X": 16,
+          "Y": 5707,
+          "Width": 288,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The Emergent Collaborative begins ",
+            "with that question. The aim is not to ",
+            "make one person\u0027s story stand for ",
+            "everyone else\u0027s, but to invite other ",
+            "perspectives into a careful ",
+            "exploration."
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-16",
+          "X": 28,
+          "Y": 5909,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Review annotation / PH-16"
+          ]
+        },
+        {
+          "Section": "P5",
+          "Role": "Placeholder PH-16",
+          "Text": "[PUBLIC ORIGIN WORDING/PERMISSIONS \u2014 APPROVAL PENDING]",
+          "X": 28,
+          "Y": 5938,
+          "Width": 264,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[PUBLIC ORIGIN ",
+            "WORDING/PERMISSIONS \u2014 APPROVAL ",
+            "PENDING]"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Heading 2",
+          "Text": "What exists today",
+          "X": 16,
+          "Y": 6081,
+          "Width": 288,
+          "Height": 36,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "What exists today"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "The work is at the definition and content-prototype stage. The founding product brief and website requirements have been approved as the basis for this website.",
+          "X": 16,
+          "Y": 6133,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The work is at the definition and ",
+            "content-prototype stage. The ",
+            "founding product brief and website ",
+            "requirements have been approved as ",
+            "the basis for this website."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Heading 3",
+          "Text": "Website content and structure",
+          "X": 16,
+          "Y": 6310,
+          "Width": 288,
+          "Height": 60,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Website content and ",
+            "structure"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Neutral project status",
+          "Text": "Status: Prototype \u2014 internal written draft",
+          "X": 24,
+          "Y": 6390,
+          "Width": 272,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Status: Prototype \u2014 internal written ",
+            "draft"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "This draft explores how to explain the initiative, distinguish its ideas, and invite useful collaboration. It is a content prototype, not a working website, research tool, or medical service. Audience review will help refine it.",
+          "X": 16,
+          "Y": 6460,
+          "Width": 288,
+          "Height": 203,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This draft explores how to explain the ",
+            "initiative, distinguish its ideas, and ",
+            "invite useful collaboration. It is a ",
+            "content prototype, not a working ",
+            "website, research tool, or medical ",
+            "service. Audience review will help ",
+            "refine it."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "Documentation status checked: 18 October 2026.",
+          "X": 16,
+          "Y": 6679,
+          "Width": 288,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Documentation status checked: 18 ",
+            "October 2026."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Heading 3",
+          "Text": "Possible later directions",
+          "X": 16,
+          "Y": 6769,
+          "Width": 288,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Possible later directions"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Neutral project status",
+          "Text": "Status: Idea",
+          "X": 24,
+          "Y": 6819,
+          "Width": 79.104,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Status: Idea"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "Future work could explore organizing research sources, source-linked research assistance, or ways of examining change over time. These are proposals, not services offered by this website or commitments to delivery dates.",
+          "X": 16,
+          "Y": 6864,
+          "Width": 288,
+          "Height": 203,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Future work could explore organizing ",
+            "research sources, source-linked ",
+            "research assistance, or ways of ",
+            "examining change over time. These ",
+            "are proposals, not services offered by ",
+            "this website or commitments to ",
+            "delivery dates."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "Any future work involving personal records, sensing, or analysis would need separate requirements, privacy safeguards, and evaluation. Public research information and private personal information would remain separate.",
+          "X": 16,
+          "Y": 7083,
+          "Width": 288,
+          "Height": 203,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Any future work involving personal ",
+            "records, sensing, or analysis would ",
+            "need separate requirements, privacy ",
+            "safeguards, and evaluation. Public ",
+            "research information and private ",
+            "personal information would remain ",
+            "separate."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Body",
+          "Text": "This first website will not offer accounts, health logging, device connections, AI chat, or personalized medical interpretation.",
+          "X": 16,
+          "Y": 7302,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This first website will not offer ",
+            "accounts, health logging, device ",
+            "connections, AI chat, or personalized ",
+            "medical interpretation."
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Section link",
+          "Text": "Help shape the next step",
+          "X": 16,
+          "Y": 7443,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Help shape the next step"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-17",
+          "X": 28,
+          "Y": 7498,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Review annotation / PH-17"
+          ]
+        },
+        {
+          "Section": "P6",
+          "Role": "Placeholder PH-17",
+          "Text": "[FUTURE SOFTWARE IMPLEMENTATION STATUS \u2014 UNVERIFIED; IDEAS ARE NOT AVAILABLE SERVICES]",
+          "X": 28,
+          "Y": 7527,
+          "Width": 264,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[FUTURE SOFTWARE IMPLEMENTATION",
+            "STATUS \u2014 UNVERIFIED; IDEAS ARE NOT",
+            "AVAILABLE SERVICES]"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Heading 2",
+          "Text": "Help shape the next questions",
+          "X": 16,
+          "Y": 7694,
+          "Width": 288,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Help shape the next ",
+            "questions"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "You do not need to be a researcher or developer to offer a useful perspective.",
+          "X": 16,
+          "Y": 7782,
+          "Width": 288,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "You do not need to be a researcher or ",
+            "developer to offer a useful ",
+            "perspective."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "Ways to contribute could include:",
+          "X": 16,
+          "Y": 7885,
+          "Width": 288,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Ways to contribute could include:"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution bullet",
+          "Text": "\u2022",
+          "X": 16,
+          "Y": 7930,
+          "Width": 16,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "\u2022"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution example",
+          "Text": "Pointing out unclear language or a question the project has overlooked.",
+          "X": 40,
+          "Y": 7930,
+          "Width": 264,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Pointing out unclear language or a ",
+            "question the project has ",
+            "overlooked."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution bullet",
+          "Text": "\u2022",
+          "X": 16,
+          "Y": 8029,
+          "Width": 16,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "\u2022"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution example",
+          "Text": "Challenging an assumption or suggesting a more careful research approach.",
+          "X": 40,
+          "Y": 8029,
+          "Width": 264,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Challenging an assumption or ",
+            "suggesting a more careful research",
+            "approach."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution bullet",
+          "Text": "\u2022",
+          "X": 16,
+          "Y": 8128,
+          "Width": 16,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "\u2022"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution example",
+          "Text": "Helping make information easier to read and navigate.",
+          "X": 40,
+          "Y": 8128,
+          "Width": 264,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Helping make information easier ",
+            "to read and navigate."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution bullet",
+          "Text": "\u2022",
+          "X": 16,
+          "Y": 8198,
+          "Width": 16,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "\u2022"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Contribution example",
+          "Text": "Discussing a small, well-defined technical investigation.",
+          "X": 40,
+          "Y": 8198,
+          "Width": 264,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Discussing a small, well-defined ",
+            "technical investigation."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "These are starting points for a conversation, not staffed openings or promises of a project role.",
+          "X": 16,
+          "Y": 8272,
+          "Width": 288,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "These are starting points for a ",
+            "conversation, not staffed openings or ",
+            "promises of a project role."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Heading 3",
+          "Text": "Before you email",
+          "X": 16,
+          "Y": 8391,
+          "Width": 288,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Before you email"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Sensitive-information warning",
+          "Text": "Please keep your message about the project. Do not send medical records, symptom histories, medication details, location traces, or other sensitive health information. Do not attach files.",
+          "X": 32,
+          "Y": 8453,
+          "Width": 256,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Please keep your message about ",
+            "the project. Do not send medical ",
+            "records, symptom histories, ",
+            "medication details, location ",
+            "traces, or other sensitive health ",
+            "information. Do not attach files."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "No clinical or urgent service",
+          "Text": "This channel does not provide medical advice and is not monitored for urgent help. Contacting us does not enroll you in research or authorize publication of your message.",
+          "X": 32,
+          "Y": 8643,
+          "Width": 256,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This channel does not provide ",
+            "medical advice and is not ",
+            "monitored for urgent help. ",
+            "Contacting us does not enroll you ",
+            "in research or authorize ",
+            "publication of your message."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "Email shares your address and message with the email services involved. Read Privacy and contact information before deciding what to send.",
+          "X": 16,
+          "Y": 8849,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Email shares your address and ",
+            "message with the email services ",
+            "involved. Read Privacy and contact ",
+            "information before deciding what to ",
+            "send."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Heading 3",
+          "Text": "Email about the project",
+          "X": 16,
+          "Y": 9026,
+          "Width": 288,
+          "Height": 30,
+          "FontSize": 22,
+          "LineHeight": 30,
+          "Lines": [
+            "Email about the project"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-01",
+          "X": 28,
+          "Y": 9084,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-01"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Placeholder PH-01",
+          "Text": "[DEDICATED EMAIL ADDRESS \u2014 UNASSIGNED; MOCKUP CONTACT IS INACTIVE]",
+          "X": 28,
+          "Y": 9113,
+          "Width": 264,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[DEDICATED EMAIL ADDRESS \u2014 ",
+            "UNASSIGNED; MOCKUP CONTACT IS ",
+            "INACTIVE]"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 28,
+          "Y": 9228,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE",
+            "COPY"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Review annotation",
+          "Text": "Nonfunctional email-action placement: Email about collaboration. No address or delivery.",
+          "X": 28,
+          "Y": 9286,
+          "Width": 264,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Nonfunctional email-action placement:",
+            "Email about collaboration. No address ",
+            "or delivery."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "You can use your own email service. If an email application does not open, copy the address into a new message.",
+          "X": 16,
+          "Y": 9389,
+          "Width": 288,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "You can use your own email service. If ",
+            "an email application does not open, ",
+            "copy the address into a new message."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "A short note about the question or contribution you have in mind is enough. You do not need to disclose a diagnosis or personal health history. Your name, organization, and professional background are optional.",
+          "X": 16,
+          "Y": 9492,
+          "Width": 288,
+          "Height": 174,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "A short note about the question or ",
+            "contribution you have in mind is ",
+            "enough. You do not need to disclose a ",
+            "diagnosis or personal health history. ",
+            "Your name, organization, and ",
+            "professional background are optional."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Body",
+          "Text": "You can use the same address to flag a correction or ask about information handling.",
+          "X": 16,
+          "Y": 9682,
+          "Width": 288,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "You can use the same address to flag a",
+            "correction or ask about information ",
+            "handling."
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-02",
+          "X": 28,
+          "Y": 9797,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-02"
+          ]
+        },
+        {
+          "Section": "P7",
+          "Role": "Placeholder PH-02",
+          "Text": "[CONTACT ROLE AND RESPONSE EXPECTATION \u2014 FOUNDER APPROVAL PENDING]",
+          "X": 28,
+          "Y": 9826,
+          "Width": 264,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[CONTACT ROLE AND RESPONSE ",
+            "EXPECTATION \u2014 FOUNDER APPROVAL ",
+            "PENDING]"
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Heading 2",
+          "Text": "Sources and context",
+          "X": 16,
+          "Y": 9993,
+          "Width": 288,
+          "Height": 36,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Sources and context"
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Body",
+          "Text": "When we make a research claim, we intend to show where it comes from and explain the limits that matter to its interpretation.",
+          "X": 16,
+          "Y": 10045,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "When we make a research claim, we ",
+            "intend to show where it comes from ",
+            "and explain the limits that matter to ",
+            "its interpretation."
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Body",
+          "Text": "Personal accounts and project proposals are identified as such. They are not presented as scientific findings.",
+          "X": 16,
+          "Y": 10177,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Personal accounts and project ",
+            "proposals are identified as such. They ",
+            "are not presented as scientific ",
+            "findings."
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 28,
+          "Y": 10321,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "REVIEW ANNOTATION \u2014 NOT WEBSITE",
+            "COPY"
+          ]
+        },
+        {
+          "Section": "P8",
+          "Role": "Review annotation",
+          "Text": "No scientific source entries in this concept.",
+          "X": 28,
+          "Y": 10379,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "No scientific source entries in this ",
+            "concept."
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Heading 2",
+          "Text": "Responsibility and corrections",
+          "X": 16,
+          "Y": 10497,
+          "Width": 288,
+          "Height": 72,
+          "FontSize": 28,
+          "LineHeight": 36,
+          "Lines": [
+            "Responsibility and ",
+            "corrections"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative is an early-stage, founder-led initiative. This website explains its direction and invites project collaboration; it is not a clinical service.",
+          "X": 16,
+          "Y": 10585,
+          "Width": 288,
+          "Height": 145,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The Emergent Collaborative is an ",
+            "early-stage, founder-led initiative. ",
+            "This website explains its direction and",
+            "invites project collaboration; it is not a",
+            "clinical service."
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Body",
+          "Text": "Publication responsibility:",
+          "X": 16,
+          "Y": 10746,
+          "Width": 288,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Publication responsibility:"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-03",
+          "X": 28,
+          "Y": 10803,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-03"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Placeholder PH-03",
+          "Text": "[PUBLICATION RESPONSIBILITY \u2014 APPROVED PUBLIC NAME OR ROLE PENDING]",
+          "X": 28,
+          "Y": 10832,
+          "Width": 264,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[PUBLICATION RESPONSIBILITY \u2014 ",
+            "APPROVED PUBLIC NAME OR ROLE ",
+            "PENDING]"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Body",
+          "Text": "Content last reviewed:",
+          "X": 16,
+          "Y": 10935,
+          "Width": 288,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Content last reviewed:"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-04",
+          "X": 28,
+          "Y": 10992,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-04"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Placeholder PH-04",
+          "Text": "[PUBLIC CONTENT REVIEW DATE \u2014 NOT YET SET]",
+          "X": 28,
+          "Y": 11021,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[PUBLIC CONTENT REVIEW DATE \u2014 ",
+            "NOT YET SET]"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Body",
+          "Text": "See something unclear or inaccurate? Contact us about a correction.",
+          "X": 16,
+          "Y": 11099,
+          "Width": 288,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "See something unclear or inaccurate? ",
+            "Contact us about a correction."
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Utility link",
+          "Text": "Privacy and contact information",
+          "X": 16,
+          "Y": 11182,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Privacy and contact information"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Section link",
+          "Text": "Back to the introduction",
+          "X": 16,
+          "Y": 11234,
+          "Width": 288,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Back to the introduction"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Unresolved label",
+          "Text": "Unresolved / PH-05",
+          "X": 28,
+          "Y": 11289,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Unresolved / PH-05"
+          ]
+        },
+        {
+          "Section": "P9",
+          "Role": "Placeholder PH-05",
+          "Text": "[MATERIAL RELATIONSHIP DISCLOSURE \u2014 CONFIRM WHETHER APPLICABLE]",
+          "X": 28,
+          "Y": 11318,
+          "Width": 264,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[MATERIAL RELATIONSHIP ",
+            "DISCLOSURE \u2014 CONFIRM WHETHER ",
+            "APPLICABLE]"
+          ]
+        }
+      ],
+      "sha256": "1a5c98a46961e9b7228655e29e3a148c248450b351b6b53a518c3c02db900e1f"
+    },
+    {
+      "name": "text-200-intro-390",
+      "file": "text-200-intro-390.png",
+      "width": 390,
+      "height": 3977,
+      "textScale": 2,
+      "sections": [
+        "P0",
+        "P1"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 24,
+          "Y": 345,
+          "Width": 201.384,
+          "Height": 68,
+          "FontSize": 32,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 24,
+          "Y": 421,
+          "Width": 297.15997,
+          "Height": 68,
+          "FontSize": 32,
+          "Row": 2
+        },
+        {
+          "Label": "Current work",
+          "X": 24,
+          "Y": 497,
+          "Width": 192.776,
+          "Height": 68,
+          "FontSize": 32,
+          "Row": 3
+        },
+        {
+          "Label": "Collaborate",
+          "X": 24,
+          "Y": 573,
+          "Width": 174.02399,
+          "Height": 68,
+          "FontSize": 32,
+          "Row": 4
+        }
+      ],
+      "navigationRows": 4,
+      "navigationHeight": 296,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 358,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved ",
+            "content marked; no audience or accessibility results ",
+            "claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "text 200 intro 390  |  390 px  |  200% text; containers reflow",
+          "X": 16,
+          "Y": 115,
+          "Width": 358,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "text 200 intro 390  |  390 px  |  200% text; containers ",
+            "reflow"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 24,
+          "Y": 217,
+          "Width": 342,
+          "Height": 112,
+          "FontSize": 44,
+          "LineHeight": 56,
+          "Lines": [
+            "The Emergent ",
+            "Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 32,
+          "Y": 355,
+          "Width": 185.384,
+          "Height": 48,
+          "FontSize": 32,
+          "LineHeight": 48,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 32,
+          "Y": 431,
+          "Width": 281.15997,
+          "Height": 48,
+          "FontSize": 32,
+          "LineHeight": 48,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 32,
+          "Y": 507,
+          "Width": 176.776,
+          "Height": 48,
+          "FontSize": 32,
+          "LineHeight": 48,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 32,
+          "Y": 583,
+          "Width": 158.02399,
+          "Height": 48,
+          "FontSize": 32,
+          "LineHeight": 48,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Initiative maturity",
+          "Text": "Early-stage initiative",
+          "X": 24,
+          "Y": 697,
+          "Width": 342,
+          "Height": 50,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "Early-stage initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Heading 1",
+          "Text": "Explore change: evidence, lived insight, new tools.",
+          "X": 24,
+          "Y": 763,
+          "Width": 342,
+          "Height": 480,
+          "FontSize": 64,
+          "LineHeight": 80,
+          "Lines": [
+            "Explore ",
+            "change: ",
+            "evidence, ",
+            "lived ",
+            "insight, ",
+            "new tools."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative explores how scientific evidence, lived experience over time, and emerging technology might help people ask better questions about health.",
+          "X": 24,
+          "Y": 1259,
+          "Width": 342,
+          "Height": 580,
+          "FontSize": 36,
+          "LineHeight": 58,
+          "Lines": [
+            "The Emergent ",
+            "Collaborative explores",
+            "how scientific ",
+            "evidence, lived ",
+            "experience over time, ",
+            "and emerging ",
+            "technology might help",
+            "people ask better ",
+            "questions about ",
+            "health."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Emphasized message",
+          "Text": "Parkinson\u0027s: our first initiative.",
+          "X": 24,
+          "Y": 1855,
+          "Width": 342,
+          "Height": 116,
+          "FontSize": 36,
+          "LineHeight": 58,
+          "Lines": [
+            "Parkinson\u0027s: our first ",
+            "initiative."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "This is an informational and collaboration project, not a clinical service. We do not diagnose or provide treatment advice.",
+          "X": 24,
+          "Y": 1987,
+          "Width": 342,
+          "Height": 406,
+          "FontSize": 36,
+          "LineHeight": 58,
+          "Lines": [
+            "This is an ",
+            "informational and ",
+            "collaboration project, ",
+            "not a clinical service. ",
+            "We do not diagnose or",
+            "provide treatment ",
+            "advice."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Action-shaped section link",
+          "Text": "Explore ways to contribute",
+          "X": 44,
+          "Y": 2421,
+          "Width": 302,
+          "Height": 104,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Explore ways to ",
+            "contribute"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section link",
+          "Text": "Read about our approach",
+          "X": 24,
+          "Y": 2562,
+          "Width": 342,
+          "Height": 104,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Read about our ",
+            "approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section map label",
+          "Text": "On this page",
+          "X": 24,
+          "Y": 2691,
+          "Width": 342,
+          "Height": 50,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "On this page"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Why change over time",
+          "X": 24,
+          "Y": 2758,
+          "Width": 342,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Why change over time"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Our approach",
+          "X": 24,
+          "Y": 2836,
+          "Width": 342,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 24,
+          "Y": 2914,
+          "Width": 342,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Origin",
+          "X": 24,
+          "Y": 2992,
+          "Width": 342,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Origin"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Current work",
+          "X": 24,
+          "Y": 3070,
+          "Width": 342,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Collaborate",
+          "X": 24,
+          "Y": 3148,
+          "Width": 342,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Sources",
+          "X": 24,
+          "Y": 3226,
+          "Width": 342,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Sources"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-15",
+          "X": 36,
+          "Y": 3307,
+          "Width": 318,
+          "Height": 100,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "Review annotation / ",
+            "PH-15"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Placeholder PH-15",
+          "Text": "[HEADLINE IS PROVISIONAL \u2014 FINAL COPY APPROVAL PENDING]",
+          "X": 36,
+          "Y": 3411,
+          "Width": 318,
+          "Height": 200,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "[HEADLINE IS ",
+            "PROVISIONAL \u2014 FINAL ",
+            "COPY APPROVAL ",
+            "PENDING]"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 36,
+          "Y": 3651,
+          "Width": 318,
+          "Height": 100,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "REVIEW ANNOTATION ",
+            "\u2014 NOT WEBSITE COPY"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Decorative illustration omitted in this composition.",
+          "X": 36,
+          "Y": 3759,
+          "Width": 318,
+          "Height": 150,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "Decorative illustration ",
+            "omitted in this ",
+            "composition."
+          ]
+        }
+      ],
+      "sha256": "a7798ea11c5a8a5c44ff1d2f8b1315b21d65c2c01b6712be79f489766b226f0c"
+    },
+    {
+      "name": "text-200-intro-320",
+      "file": "text-200-intro-320.png",
+      "width": 320,
+      "height": 4525,
+      "textScale": 2,
+      "sections": [
+        "P0",
+        "P1"
+      ],
+      "navigation": [
+        {
+          "Label": "Our approach",
+          "X": 16,
+          "Y": 345,
+          "Width": 201.384,
+          "Height": 68,
+          "FontSize": 32,
+          "Row": 1
+        },
+        {
+          "Label": "Parkinson\u0027s initiative",
+          "X": 16,
+          "Y": 421,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 32,
+          "Row": 2
+        },
+        {
+          "Label": "Current work",
+          "X": 16,
+          "Y": 545,
+          "Width": 192.776,
+          "Height": 68,
+          "FontSize": 32,
+          "Row": 3
+        },
+        {
+          "Label": "Collaborate",
+          "X": 16,
+          "Y": 621,
+          "Width": 174.02399,
+          "Height": 68,
+          "FontSize": 32,
+          "Row": 4
+        }
+      ],
+      "navigationRows": 4,
+      "navigationHeight": 344,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 288,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 ",
+            "unresolved content marked; no audience ",
+            "or accessibility results claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "text 200 intro 320  |  320 px  |  200% text; containers reflow",
+          "X": 16,
+          "Y": 115,
+          "Width": 288,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "text 200 intro 320  |  320 px  |  200% text; ",
+            "containers reflow"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 16,
+          "Y": 217,
+          "Width": 288,
+          "Height": 112,
+          "FontSize": 44,
+          "LineHeight": 56,
+          "Lines": [
+            "The Emergent ",
+            "Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 24,
+          "Y": 355,
+          "Width": 185.384,
+          "Height": 48,
+          "FontSize": 32,
+          "LineHeight": 48,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 24,
+          "Y": 431,
+          "Width": 272,
+          "Height": 96,
+          "FontSize": 32,
+          "LineHeight": 48,
+          "Lines": [
+            "Parkinson\u0027s ",
+            "initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 24,
+          "Y": 555,
+          "Width": 176.776,
+          "Height": 48,
+          "FontSize": 32,
+          "LineHeight": 48,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 24,
+          "Y": 631,
+          "Width": 158.02399,
+          "Height": 48,
+          "FontSize": 32,
+          "LineHeight": 48,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Initiative maturity",
+          "Text": "Early-stage initiative",
+          "X": 16,
+          "Y": 745,
+          "Width": 288,
+          "Height": 50,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "Early-stage initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Heading 1",
+          "Text": "Explore change: evidence, lived insight, new tools.",
+          "X": 16,
+          "Y": 811,
+          "Width": 288,
+          "Height": 560,
+          "FontSize": 64,
+          "LineHeight": 80,
+          "Lines": [
+            "Explore ",
+            "change: ",
+            "evidence,",
+            "lived ",
+            "insight, ",
+            "new ",
+            "tools."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative explores how scientific evidence, lived experience over time, and emerging technology might help people ask better questions about health.",
+          "X": 16,
+          "Y": 1387,
+          "Width": 288,
+          "Height": 638,
+          "FontSize": 36,
+          "LineHeight": 58,
+          "Lines": [
+            "The Emergent ",
+            "Collaborative ",
+            "explores how ",
+            "scientific evidence,",
+            "lived experience ",
+            "over time, and ",
+            "emerging ",
+            "technology might ",
+            "help people ask ",
+            "better questions ",
+            "about health."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Emphasized message",
+          "Text": "Parkinson\u0027s: our first initiative.",
+          "X": 16,
+          "Y": 2041,
+          "Width": 288,
+          "Height": 116,
+          "FontSize": 36,
+          "LineHeight": 58,
+          "Lines": [
+            "Parkinson\u0027s: our ",
+            "first initiative."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "This is an informational and collaboration project, not a clinical service. We do not diagnose or provide treatment advice.",
+          "X": 16,
+          "Y": 2173,
+          "Width": 288,
+          "Height": 464,
+          "FontSize": 36,
+          "LineHeight": 58,
+          "Lines": [
+            "This is an ",
+            "informational and ",
+            "collaboration ",
+            "project, not a ",
+            "clinical service. We",
+            "do not diagnose or",
+            "provide treatment ",
+            "advice."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Action-shaped section link",
+          "Text": "Explore ways to contribute",
+          "X": 36,
+          "Y": 2665,
+          "Width": 248,
+          "Height": 104,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Explore ways to",
+            "contribute"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section link",
+          "Text": "Read about our approach",
+          "X": 16,
+          "Y": 2806,
+          "Width": 288,
+          "Height": 104,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Read about our ",
+            "approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section map label",
+          "Text": "On this page",
+          "X": 16,
+          "Y": 2935,
+          "Width": 288,
+          "Height": 50,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "On this page"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Why change over time",
+          "X": 16,
+          "Y": 3002,
+          "Width": 288,
+          "Height": 104,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Why change over ",
+            "time"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Our approach",
+          "X": 16,
+          "Y": 3132,
+          "Width": 288,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 16,
+          "Y": 3210,
+          "Width": 288,
+          "Height": 104,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Parkinson\u0027s ",
+            "initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Origin",
+          "X": 16,
+          "Y": 3340,
+          "Width": 288,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Origin"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Current work",
+          "X": 16,
+          "Y": 3418,
+          "Width": 288,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Collaborate",
+          "X": 16,
+          "Y": 3496,
+          "Width": 288,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Sources",
+          "X": 16,
+          "Y": 3574,
+          "Width": 288,
+          "Height": 52,
+          "FontSize": 36,
+          "LineHeight": 52,
+          "Lines": [
+            "Sources"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-15",
+          "X": 28,
+          "Y": 3655,
+          "Width": 264,
+          "Height": 100,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "Review annotation",
+            "/ PH-15"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Placeholder PH-15",
+          "Text": "[HEADLINE IS PROVISIONAL \u2014 FINAL COPY APPROVAL PENDING]",
+          "X": 28,
+          "Y": 3759,
+          "Width": 264,
+          "Height": 250,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "[HEADLINE IS ",
+            "PROVISIONAL \u2014 ",
+            "FINAL COPY ",
+            "APPROVAL ",
+            "PENDING]"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation label",
+          "Text": "REVIEW ANNOTATION \u2014 NOT WEBSITE COPY",
+          "X": 28,
+          "Y": 4049,
+          "Width": 264,
+          "Height": 200,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "REVIEW ",
+            "ANNOTATION \u2014 ",
+            "NOT WEBSITE ",
+            "COPY"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Decorative illustration omitted in this composition.",
+          "X": 28,
+          "Y": 4257,
+          "Width": 264,
+          "Height": 200,
+          "FontSize": 32,
+          "LineHeight": 50,
+          "Lines": [
+            "Decorative ",
+            "illustration omitted",
+            "in this ",
+            "composition."
+          ]
+        }
+      ],
+      "sha256": "4881c8ff9c3b6fcb97a7e60314d54d84a4eb21cbd53292677fb2968d65ccd5dc"
+    },
+    {
+      "name": "hero-1440",
+      "file": "hero-1440.png",
+      "width": 1440,
+      "height": 960,
+      "textScale": 1,
+      "sections": [
+        "P0",
+        "P1"
+      ],
+      "navigation": [],
+      "navigationRows": 0,
+      "navigationHeight": 0,
+      "records": [
+        {
+          "Section": "Review",
+          "Role": "Review caption",
+          "Text": "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed.",
+          "X": 16,
+          "Y": 16,
+          "Width": 1408,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "NONFUNCTIONAL DESIGN MOCKUP \u2014 unresolved content marked; no audience or accessibility results claimed."
+          ]
+        },
+        {
+          "Section": "Review",
+          "Role": "Frame label",
+          "Text": "hero 1440  |  1440 px  |  Default text",
+          "X": 16,
+          "Y": 65,
+          "Width": 1408,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "hero 1440  |  1440 px  |  Default text"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Text identity",
+          "Text": "The Emergent Collaborative",
+          "X": 160,
+          "Y": 142,
+          "Width": 380,
+          "Height": 28,
+          "FontSize": 22,
+          "LineHeight": 28,
+          "Lines": [
+            "The Emergent Collaborative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Our approach",
+          "X": 598,
+          "Y": 144,
+          "Width": 100.19199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 722.192,
+          "Y": 144,
+          "Width": 148.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Current work",
+          "X": 894.272,
+          "Y": 144,
+          "Width": 95.88799,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P0",
+          "Role": "Primary navigation",
+          "Text": "Collaborate",
+          "X": 1014.16,
+          "Y": 144,
+          "Width": 86.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Initiative maturity",
+          "Text": "Early-stage initiative",
+          "X": 160,
+          "Y": 266,
+          "Width": 608.32794,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Early-stage initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Heading 1",
+          "Text": "Explore change: evidence, lived insight, new tools.",
+          "X": 160,
+          "Y": 307,
+          "Width": 608.32794,
+          "Height": 112,
+          "FontSize": 48,
+          "LineHeight": 56,
+          "Lines": [
+            "Explore change: evidence, ",
+            "lived insight, new tools."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "The Emergent Collaborative explores how scientific evidence, lived experience over time, and emerging technology might help people ask better questions about health.",
+          "X": 160,
+          "Y": 435,
+          "Width": 608.32794,
+          "Height": 87,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "The Emergent Collaborative explores how scientific evidence, lived experience ",
+            "over time, and emerging technology might help people ask better questions ",
+            "about health."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Emphasized message",
+          "Text": "Parkinson\u0027s: our first initiative.",
+          "X": 160,
+          "Y": 538,
+          "Width": 608.32794,
+          "Height": 29,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "Parkinson\u0027s: our first initiative."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Body",
+          "Text": "This is an informational and collaboration project, not a clinical service. We do not diagnose or provide treatment advice.",
+          "X": 160,
+          "Y": 583,
+          "Width": 608.32794,
+          "Height": 58,
+          "FontSize": 18,
+          "LineHeight": 29,
+          "Lines": [
+            "This is an informational and collaboration project, not a clinical service. We do ",
+            "not diagnose or provide treatment advice."
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Action-shaped section link",
+          "Text": "Explore ways to contribute",
+          "X": 180,
+          "Y": 669,
+          "Width": 207.66599,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Explore ways to contribute"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section link",
+          "Text": "Read about our approach",
+          "X": 160,
+          "Y": 732,
+          "Width": 608.32794,
+          "Height": 26,
+          "FontSize": 18,
+          "LineHeight": 26,
+          "Lines": [
+            "Read about our approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Section map label",
+          "Text": "On this page",
+          "X": 160,
+          "Y": 783,
+          "Width": 608.32794,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "On this page"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Why change over time",
+          "X": 168,
+          "Y": 826,
+          "Width": 155.344,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Why change over time"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Our approach",
+          "X": 347.344,
+          "Y": 826,
+          "Width": 100.19199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Our approach"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Parkinson\u0027s initiative",
+          "X": 471.53598,
+          "Y": 826,
+          "Width": 148.07999,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Parkinson\u0027s initiative"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Origin",
+          "X": 643.61597,
+          "Y": 826,
+          "Width": 48.864,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Origin"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Current work",
+          "X": 168,
+          "Y": 878,
+          "Width": 95.88799,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Current work"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Collaborate",
+          "X": 287.888,
+          "Y": 878,
+          "Width": 86.51199,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Collaborate"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Secondary section map",
+          "Text": "Sources",
+          "X": 398.4,
+          "Y": 878,
+          "Width": 61.407997,
+          "Height": 24,
+          "FontSize": 16,
+          "LineHeight": 24,
+          "Lines": [
+            "Sources"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-20",
+          "X": 844.32794,
+          "Y": 536,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Review annotation / PH-20"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Placeholder PH-20",
+          "Text": "[OPTIONAL ABSTRACT ILLUSTRATION \u2014 ARTWORK AND RIGHTS REVIEW PENDING]",
+          "X": 844.32794,
+          "Y": 565,
+          "Width": 264,
+          "Height": 75,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[OPTIONAL ABSTRACT ILLUSTRATION ",
+            "\u2014 ARTWORK AND RIGHTS REVIEW ",
+            "PENDING]"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Review annotation",
+          "Text": "Review annotation / PH-15",
+          "X": 844.32794,
+          "Y": 692,
+          "Width": 264,
+          "Height": 25,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "Review annotation / PH-15"
+          ]
+        },
+        {
+          "Section": "P1",
+          "Role": "Placeholder PH-15",
+          "Text": "[HEADLINE IS PROVISIONAL \u2014 FINAL COPY APPROVAL PENDING]",
+          "X": 844.32794,
+          "Y": 721,
+          "Width": 264,
+          "Height": 50,
+          "FontSize": 16,
+          "LineHeight": 25,
+          "Lines": [
+            "[HEADLINE IS PROVISIONAL \u2014 FINAL ",
+            "COPY APPROVAL PENDING]"
+          ]
+        }
+      ],
+      "sha256": "af8d6513d7b3d93699ae0b8f2361c295ede73cfeaa63052078f168c55b3f7885"
+    }
+  ]
+}

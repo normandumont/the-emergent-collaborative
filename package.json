@@ -1,0 +1,36 @@
+{
+  "name": "meridian-station",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1",
+    "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1",
+    "check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:static": "node --test tests/static.test.mjs",
+    "test:browser": "playwright test",
+    "dev:ask": "npm run dev -- --port 4323",
+    "test:ask": "playwright test --config playwright.ask.config.ts",
+    "verify": "npm run check && npm run format:check && npm run build && npm run test:static && npm run test:browser",
+    "release:check": "node scripts/release-check.mjs"
+  },
+  "dependencies": {
+    "astro": "6.4.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.0.0",
+    "cross-env": "^10.1.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "~5.9.3"
+  }
+}

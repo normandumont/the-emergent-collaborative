@@ -1,0 +1,66 @@
+CURRENT RIDE-DERIVED FONT SYSTEM - founder-directed visual redesign, 29 October 2026
+
+The Ride for Parkinson's source requests Inter 400/500/600/700/800 and
+Libre Franklin 700/800. Meridian Station now adopts these exact families,
+not the earlier Source fonts. Both are distributed under SIL Open Font
+License 1.1. Unmodified Latin variable WOFF2 binaries and required copyright/
+license notices are bundled locally. No font service is contacted by visitors.
+Weights declared: Inter 400-800; Libre Franklin 700-800. Latin coverage includes
+the current site's English text, curly punctuation and downward arrow; it is
+not a promise of universal script coverage.
+
+Distribution selected using the official Google Fonts CSS:
+https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Libre+Franklin:wght@700..800&display=swap
+
+Inter-Latin-Variable.woff2 - 48256 bytes
+https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2
+SHA-256: 3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62
+License: Inter-OFL.txt, copyright 2020 The Inter Project Authors
+https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt
+License SHA-256: 5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57
+
+LibreFranklin-Latin-Variable.woff2 - 29292 bytes
+https://fonts.gstatic.com/s/librefranklin/v20/jizDREVItHgc8qDIbSTKq4XkRiUf2zc.woff2
+SHA-256: 52e605852c72cc2df1473df1fb7f26a3a0be58e31835bc8f33f29b1918c82cbd
+License: LibreFranklin-OFL.txt, copyright 2020 The Libre Franklin Project Authors
+https://raw.githubusercontent.com/google/fonts/main/ofl/librefranklin/OFL.txt
+License SHA-256: 2710268527181a27b8e938617551bae29e714e6525247be6679bf897a9942a60
+
+Combined font payload: 77548 bytes. Both files are preloaded using built local
+fingerprinted URLs and font-display: swap. License notices are preserved
+unmodified and included in public output. Local loading, intended families/
+weights and blocked-font fallback/reflow were tested in desktop Chrome.
+This is not a universal glyph, browser or accessibility-conformance assertion.
+
+HISTORICAL SOURCE FONT SYSTEM - superseded, retained for provenance
+
+The following source assets are no longer referenced or emitted by the build.
+Their licenses remain preserved. The approval described below was superseded
+by the founder's explicit Ride-derived visual redesign.
+
+Locally served font files from Adobe's official release branches:
+
+SourceSans3-Regular.woff2:
+https://raw.githubusercontent.com/adobe-fonts/source-sans/release/WOFF2/TTF/SourceSans3-Regular.ttf.woff2
+
+SourceSans3-Semibold.woff2:
+https://raw.githubusercontent.com/adobe-fonts/source-sans/release/WOFF2/TTF/SourceSans3-Semibold.ttf.woff2
+
+SourceSerif4-Semibold.woff2:
+https://raw.githubusercontent.com/adobe-fonts/source-serif/release/WOFF2/TTF/SourceSerif4-Semibold.ttf.woff2
+
+Files are unmodified official WOFF2 binaries with local filename simplification.
+SourceSans3-OFL.txt and SourceSerif4-OFL.txt contain the respective licenses.
+No font service is contacted by visitors. The founder approved Source Serif 4
+Semibold and Source Sans 3 Regular/Semibold with local project-controlled
+delivery in the Meridian Station decision pass. Preserve the SIL Open Font
+License 1.1 files. Final delivery/fallback verification remains a release check;
+bundling these files is not an accessibility claim.
+
+SHA-256 of the bundled binaries:
+SourceSans3-Regular.woff2
+53492fb3a0def77354f166a55d09b63a10855e91c206c7620a81cf56e97f8ec3
+SourceSans3-Semibold.woff2
+47b9b661b9f395fe7f0d0e119637fba5c8dad97bde3df60066fd24229c0792f4
+SourceSerif4-Semibold.woff2
+457a13ac92e977d82e376038a2daac7fdb5433610910bf5787bdf6c1c3781865
