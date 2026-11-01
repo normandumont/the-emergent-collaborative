@@ -1,5 +1,41 @@
 # The Emergent Collaborative: Founding Product Brief
 
+## Founder clarification — 29 October 2026 (current direction)
+
+Meridian Station is a research and technology initiative exploring how scientific
+evidence, personal experience over time, and emerging technology can help people
+understand complex health questions, beginning with Parkinson's disease. The
+founder has now explicitly confirmed the intended AI-assisted Parkinson's knowledge
+resource and longitudinal-data direction. This supersedes any interpretation of
+the discovery record below that reduces that direction to unspecified hypothetical
+ideas. It does not erase the earlier uncertainty about implementation status.
+
+Research Assistance means source-linked discovery, comparison and explanation with
+provenance, citations, limitations and uncertainty, for patients and families learning
+and preparing questions for healthcare professionals. Longitudinal Understanding
+means responsibly investigating contextual observations over time, potentially
+movement, exercise, sleep, symptoms and environmental conditions; patterns are
+questions, not proof of causation. Initiatives begin with Parkinson's without a
+promise of disease expansion. These are related directions, not three products.
+
+Ride for Parkinson's was an awareness and practical technology catalyst, including
+tracking prototypes and the educational AI-resource intent. Local ride-site source
+review substantiates the limited artifacts, not a working AI service, completed
+ride, operational native app or clinical study. See the dated source/evidence
+inventory in [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md#18-ride-product-alignment--29-october-2026).
+Current work includes this static review website and founder-led definition of
+the developing technology direction; the platform is not an available service.
+Evidence / Experience / Exploration, public/private separation, evaluation gates,
+and every Phase 1 runtime exclusion remain intact.
+
+The original discovery brief below is preserved as history, not rewritten to
+suggest that these later decisions or source reviews happened during discovery.
+
+> Historical discovery record. The project is now **Meridian Station**. Original
+> naming, proposals and phase limitations below are preserved, not current public
+> copy or operating status. Later founder decisions in [RELEASE_READINESS.md](RELEASE_READINESS.md)
+> govern; the approved headline is "Finding direction through evidence, experience, and emerging technology."
+
 **Date:** 2026-10-17  
 **Stage:** Founding discovery  
 **Decision authority:** Founder  

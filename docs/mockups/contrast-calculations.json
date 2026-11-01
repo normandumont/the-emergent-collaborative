@@ -1,0 +1,197 @@
+[
+  {
+    "foreground": "charcoal",
+    "background": "paper",
+    "ratio": 13.432
+  },
+  {
+    "foreground": "charcoal",
+    "background": "mineral",
+    "ratio": 12.622
+  },
+  {
+    "foreground": "charcoal",
+    "background": "white",
+    "ratio": 14.643
+  },
+  {
+    "foreground": "charcoal",
+    "background": "review",
+    "ratio": 12.28
+  },
+  {
+    "foreground": "slate",
+    "background": "paper",
+    "ratio": 6.511
+  },
+  {
+    "foreground": "slate",
+    "background": "mineral",
+    "ratio": 6.119
+  },
+  {
+    "foreground": "slate",
+    "background": "white",
+    "ratio": 7.099
+  },
+  {
+    "foreground": "slate",
+    "background": "review",
+    "ratio": 5.953
+  },
+  {
+    "foreground": "teal",
+    "background": "paper",
+    "ratio": 6.926
+  },
+  {
+    "foreground": "teal",
+    "background": "mineral",
+    "ratio": 6.509
+  },
+  {
+    "foreground": "teal",
+    "background": "white",
+    "ratio": 7.551
+  },
+  {
+    "foreground": "teal",
+    "background": "review",
+    "ratio": 6.332
+  },
+  {
+    "foreground": "hover",
+    "background": "paper",
+    "ratio": 9.504
+  },
+  {
+    "foreground": "hover",
+    "background": "mineral",
+    "ratio": 8.931
+  },
+  {
+    "foreground": "hover",
+    "background": "white",
+    "ratio": 10.362
+  },
+  {
+    "foreground": "hover",
+    "background": "review",
+    "ratio": 8.689
+  },
+  {
+    "foreground": "pressed",
+    "background": "paper",
+    "ratio": 11.086
+  },
+  {
+    "foreground": "pressed",
+    "background": "mineral",
+    "ratio": 10.418
+  },
+  {
+    "foreground": "pressed",
+    "background": "white",
+    "ratio": 12.086
+  },
+  {
+    "foreground": "pressed",
+    "background": "review",
+    "ratio": 10.135
+  },
+  {
+    "foreground": "visited",
+    "background": "paper",
+    "ratio": 6.838
+  },
+  {
+    "foreground": "visited",
+    "background": "mineral",
+    "ratio": 6.425
+  },
+  {
+    "foreground": "visited",
+    "background": "white",
+    "ratio": 7.454
+  },
+  {
+    "foreground": "visited",
+    "background": "review",
+    "ratio": 6.251
+  },
+  {
+    "foreground": "earth",
+    "background": "paper",
+    "ratio": 6.297
+  },
+  {
+    "foreground": "earth",
+    "background": "mineral",
+    "ratio": 5.918
+  },
+  {
+    "foreground": "earth",
+    "background": "white",
+    "ratio": 6.865
+  },
+  {
+    "foreground": "earth",
+    "background": "review",
+    "ratio": 5.757
+  },
+  {
+    "foreground": "boundary",
+    "background": "paper",
+    "ratio": 4.404
+  },
+  {
+    "foreground": "boundary",
+    "background": "mineral",
+    "ratio": 4.139
+  },
+  {
+    "foreground": "boundary",
+    "background": "white",
+    "ratio": 4.802
+  },
+  {
+    "foreground": "boundary",
+    "background": "review",
+    "ratio": 4.027
+  },
+  {
+    "foreground": "decorative-rule",
+    "background": "paper",
+    "ratio": 1.384
+  },
+  {
+    "foreground": "decorative-rule",
+    "background": "mineral",
+    "ratio": 1.301
+  },
+  {
+    "foreground": "decorative-rule",
+    "background": "white",
+    "ratio": 1.509
+  },
+  {
+    "foreground": "decorative-rule",
+    "background": "review",
+    "ratio": 1.266
+  },
+  {
+    "foreground": "on-accent",
+    "background": "#185D62",
+    "ratio": 7.446
+  },
+  {
+    "foreground": "on-accent",
+    "background": "#11474B",
+    "ratio": 10.217
+  },
+  {
+    "foreground": "on-accent",
+    "background": "#0D3C40",
+    "ratio": 11.918
+  }
+]

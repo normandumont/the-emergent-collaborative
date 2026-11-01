@@ -1,0 +1,27 @@
+---
+import Placeholder from "./Placeholder.astro";
+import { approvedCopy, siteName } from "../content/site";
+---
+
+<footer class="site-footer" data-section="P9">
+  <div class="shell">
+    <div class="reading">
+      <h2 id="responsibility">Responsibility and corrections</h2>
+      <p>
+        {siteName} is an early-stage, founder-led initiative. This website explains
+        its direction and invites project collaboration; it is not a clinical service.
+      </p>
+      <p>{approvedCopy.publicationResponsibility}</p>
+      <Placeholder id="PH-04" />
+      <p>
+        See something unclear or inaccurate?
+        <a href="/#collaborate">Contact us about a correction.</a>
+      </p>
+      <ul class="utility-links">
+        <li><a href="/privacy/">Privacy and contact information</a></li>
+        <li><a href="/#introduction">Back to the introduction</a></li>
+      </ul>
+      <p>{approvedCopy.materialRelationships}</p>
+    </div>
+  </div>
+</footer>

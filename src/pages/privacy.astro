@@ -1,0 +1,89 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Placeholder from "../components/Placeholder.astro";
+import { approvedCopy, contactEmail, siteName } from "../content/site";
+---
+
+<SiteLayout title="Privacy and contact information — review preview">
+  <section id="privacy-scope" class="page-section reading" data-section="U1">
+    <h1 class="utility-title">Privacy and contact information</h1>
+    <p>
+      This website explains {siteName} and invites project inquiries. It does not
+      offer accounts or intentionally collect personal health information. Please
+      do not send medical records or personal health details.
+    </p>
+    <p>
+      This is an incomplete notice for review, not an approved public privacy
+      notice. The operator and email policy below are founder-approved.
+      Hosting/logging details, third-party/international-processing disclosures,
+      and notice dates remain unresolved pending hosting verification and final
+      review.
+    </p>
+    <p><a href="/#introduction">Back to the introduction</a></p>
+  </section>
+  <section id="privacy-responsibility" class="page-section reading">
+    <h2>Who is responsible</h2>
+    <p>{approvedCopy.responsibleOperator}</p>
+    <p>Contact: <span class="email-address">{contactEmail}</span></p>
+    <p>
+      This notice applies to the public website and its dedicated project email
+      channel. It does not describe a personal-data research platform.
+    </p>
+    <p>
+      Future private personal data is outside this public informational site's
+      scope and must remain architecturally separate.
+    </p>
+  </section>
+  <section id="privacy-email" class="page-section reading">
+    <h2>If you email</h2>
+    <p>
+      Your email includes your address, the message you choose to send, and
+      information handled by the email services involved. Please send only a
+      short project-related inquiry, without attachments.
+    </p>
+    <p>{approvedCopy.authorizedRecipient}</p>
+    <p>{approvedCopy.correspondencePurposes}</p>
+    <p>
+      Contacting the project does not enroll you in a study or subscribe you to
+      marketing. We will ask separately before publicly quoting or crediting a
+      message.
+    </p>
+    <h3>Email handling and retention</h3>
+    <p>{approvedCopy.emailPolicy}</p>
+  </section>
+  <section id="privacy-visiting" class="page-section reading">
+    <h2>Visiting the website</h2>
+    <p>
+      This static implementation has no accounts, forms, health-data collection,
+      analytics, tracking, cookies, or browser storage. It makes no promise
+      about the logging or processing of Firebase Hosting. Actual hosting
+      details and related disclosures have not yet been verified.
+    </p>
+    <h3>Operational data and storage</h3>
+    <Placeholder id="PH-10" />
+    <Placeholder id="PH-11" />
+  </section>
+  <section id="privacy-requests" class="page-section reading">
+    <h2>Questions, deletion, or an accidental disclosure</h2>
+    <p>
+      If you have a question about information handling or want to request
+      deletion, use <a href="/#collaborate">Contact about privacy</a>. Please
+      identify the relevant correspondence without resending health records or
+      other sensitive material.
+    </p>
+    <p>
+      This link returns to the complete collaboration warning, privacy context,
+      and email action; it does not submit a request.
+    </p>
+    <p>{approvedCopy.requestPolicy}</p>
+  </section>
+  <section id="privacy-dates" class="page-section reading">
+    <h2>Notice dates and return links</h2>
+    <Placeholder id="PH-13" />
+    <Placeholder id="PH-14" />
+    <ul class="utility-links">
+      <li><a href="/#collaborate">Return to collaboration and contact</a></li>
+      <li><a href="/#introduction">Back to the introduction</a></li>
+    </ul>
+  </section>
+</SiteLayout>

@@ -1,0 +1,14 @@
+---
+import { placeholders, type PlaceholderId } from "../content/site";
+
+interface Props {
+  id: PlaceholderId;
+}
+
+const { id } = Astro.props;
+---
+
+<p class="placeholder" data-placeholder={id}>
+  <strong>{id}</strong>
+  {placeholders[id]}
+</p>

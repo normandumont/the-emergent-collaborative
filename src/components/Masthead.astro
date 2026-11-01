@@ -1,0 +1,22 @@
+---
+import { primaryNavigation, siteName } from "../content/site";
+---
+
+<header class="masthead" data-section="P0">
+  <div class="shell masthead-row">
+    <a class="identity" href="/#introduction" aria-label={siteName}
+      >Meridian <span>Station</span></a
+    >
+    <nav aria-label="Primary">
+      <ul class="primary-navigation">
+        {
+          primaryNavigation.map(({ label, href }) => (
+            <li>
+              <a href={href}>{label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

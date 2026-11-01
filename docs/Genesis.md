@@ -1,3 +1,7 @@
+> Historical founding prompt: the project was subsequently renamed **Meridian Station**.
+> This original intent/phase record is preserved. Later founder authorizations govern
+> implementation, final copy and release decisions; see [RELEASE_READINESS.md](RELEASE_READINESS.md).
+
 \# THE EMERGENT COLLABORATIVE
 
 \## Genesis Prompt
@@ -1807,4 +1811,3 @@ Your objective is to help turn the idea into a \*\*credible, useful, extensible 
 
 
 \# END GENESIS PROMPT
-

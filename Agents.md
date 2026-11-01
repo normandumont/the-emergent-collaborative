@@ -1,4 +1,8 @@
-\# The Emergent Collaborative — Agent Instructions
+\# Meridian Station — Agent Instructions
+
+Previously The Emergent Collaborative. GENESIS.md and the original discovery/design
+documents retain the historical name; current founder decisions and
+docs/RELEASE_READINESS.md govern current copy and publication gates.
 
 
 
@@ -33,4 +37,3 @@ The founder is the final decision maker.
 
 
 Prefer simple, extensible architectures over premature complexity.
-

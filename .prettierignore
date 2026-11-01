@@ -1,0 +1,14 @@
+docs/
+Agents.md
+ProductUpdatePrompt-v001.md
+public/
+src/assets/
+package-lock.json
+functions/package-lock.json
+functions/lib/
+node_modules/
+dist/
+.astro/
+.firebase/
+playwright-report/
+test-results/
