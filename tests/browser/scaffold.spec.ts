@@ -186,10 +186,9 @@ test("full narrative, editorial concepts, and publication gates remain visible",
   await expect(page.locator(".origin-transition")).toContainText(
     "Awareness + Technology",
   );
-  await expect(page.locator(".intro-actions .section-action")).toHaveAttribute(
-    "href",
-    "#parkinsons-initiative",
-  );
+  await expect(
+    page.locator("#introduction .intro-actions .section-action"),
+  ).toHaveAttribute("href", "#parkinsons-initiative");
   await expect(page.locator("#current-work")).toContainText(
     "These capabilities are not currently offered as clinical, diagnostic, or treatment services.",
   );
@@ -202,9 +201,12 @@ test("full narrative, editorial concepts, and publication gates remain visible",
       "#sources a, #sources ul, #sources ol, cite, [role='doc-bibliography']",
     ),
   ).toHaveCount(0);
+  await expect(page.locator('script[src="/ask.js"]')).toHaveCount(1);
   await expect(
-    page.locator("script, astro-island, form, input, textarea"),
+    page.locator("script:not([src]), astro-island, input"),
   ).toHaveCount(0);
+  await expect(page.locator("#ask-form")).toHaveCount(1);
+  await expect(page.locator("#ask-question")).toHaveCount(1);
   await expect(page.locator(".identity")).toHaveText("Meridian Station");
   await expect(page.locator("body")).not.toContainText(
     "The Emergent Collaborative",
@@ -230,7 +232,7 @@ test("full narrative, editorial concepts, and publication gates remain visible",
   }
 });
 
-test("collaboration and U1 preserve informed contact order and unresolved facts", async ({
+test("collaboration and privacy preserve contact order and current AI disclosures", async ({
   page,
 }) => {
   await page.goto("/");
@@ -261,10 +263,12 @@ test("collaboration and U1 preserve informed contact order and unresolved facts"
   await page.locator("#contact-privacy a").click();
   await expect(page.locator("main > section h2")).toHaveText([
     "Who is responsible",
+    "AI-assisted research questions",
     "If you email",
     "Visiting the website",
+    "Service providers",
     "Questions, deletion, or an accidental disclosure",
-    "Notice dates and return links",
+    "Notice dates",
   ]);
   await expect(page.locator("#privacy-email")).toContainText(
     "Cloudflare Email Routing",
@@ -273,14 +277,14 @@ test("collaboration and U1 preserve informed contact order and unresolved facts"
     "Meridian Station will make reasonable efforts to respond within 5–7 business days.",
   );
   await expect(page.locator("a[href^='mailto:']")).toHaveCount(0);
-  await expect(page.locator("[data-placeholder]")).toHaveCount(5);
-  for (const [id, text] of Object.entries(placeholders)) {
-    const number = Number(id.slice(3));
-    if (number < 6 || number > 14) continue;
-    const marker = page.locator(`[data-placeholder="${id}"]`);
-    await expect(marker).toBeVisible();
-    await expect(marker).toContainText(text);
-  }
+  await expect(page.locator("[data-placeholder]")).toHaveCount(1);
+  await expect(page.locator("#privacy-ai")).toContainText("OpenAI API");
+  await expect(page.locator("#privacy-ai")).toContainText(
+    "Firebase Cloud Function",
+  );
+  await expect(page.locator("main")).not.toContainText(
+    /PH-(?:10|11|13|14)|static implementation|incomplete notice|not yet been verified/i,
+  );
   await page
     .getByRole("link", { name: "Contact about privacy", exact: true })
     .click();
@@ -320,10 +324,9 @@ test("Ride fonts, navy/royal identity, contrast and visible keyboard states", as
     "border-top-color",
     "rgb(82, 120, 199)",
   );
-  await expect(page.locator(".intro-actions .section-action")).toHaveCSS(
-    "background-color",
-    "rgb(40, 78, 145)",
-  );
+  await expect(
+    page.locator("#introduction .intro-actions .section-action"),
+  ).toHaveCSS("background-color", "rgb(40, 78, 145)");
   await expect(page.locator("#origin")).toHaveCSS(
     "background-color",
     "rgb(25, 53, 84)",
@@ -371,7 +374,7 @@ test("Ride fonts, navy/royal identity, contrast and visible keyboard states", as
     ["#contact-privacy a", 4.5],
     [".site-footer a", 4.5],
     [".placeholder", 4.5],
-    [".intro-actions .section-action", 4.5],
+    ["#introduction .intro-actions .section-action", 4.5],
     [".secondary-action", 4.5],
     [".email-address", 4.5],
     [".implementation-notice", 4.5],
@@ -411,7 +414,7 @@ test("Ride fonts, navy/royal identity, contrast and visible keyboard states", as
   await page.screenshot({ path: testInfo.outputPath("keyboard-focus.png") });
   await page.keyboard.press("Enter");
   await expect(page.locator("#main-content")).toBeFocused();
-  const action = page.locator(".intro-actions .section-action");
+  const action = page.locator("#introduction .intro-actions .section-action");
   await action.focus();
   await expect(action).toHaveCSS("outline-style", "solid");
   await action.hover();

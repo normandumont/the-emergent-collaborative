@@ -16,7 +16,7 @@ export default defineConfig({
       : {}),
   },
   webServer: {
-    command: "npm run dev:ask",
+    command: "npm run preview -- --port 4323",
     url: "http://127.0.0.1:4323",
     reuseExistingServer: false,
     timeout: 30_000,

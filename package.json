@@ -17,8 +17,10 @@
     "test:browser": "playwright test",
     "dev:ask": "npm run dev -- --port 4323",
     "test:ask": "playwright test --config playwright.ask.config.ts",
+    "test:preview": "node --test tests/preview.test.mjs",
     "verify": "npm run check && npm run format:check && npm run build && npm run test:static && npm run test:browser",
-    "release:check": "node scripts/release-check.mjs"
+    "release:check": "node scripts/release-check.mjs",
+    "preview:check": "node scripts/release-check.mjs --preview"
   },
   "dependencies": {
     "astro": "6.4.8"

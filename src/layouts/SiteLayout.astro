@@ -50,17 +50,6 @@ const {
       class={wide ? "landing-main" : "shell utility-main"}
       tabindex="-1"
     >
-      <aside
-        class:list={["implementation-notice", { shell: wide }]}
-        aria-label="Implementation status"
-      >
-        <strong
-          >INCOMPLETE IMPLEMENTATION PREVIEW — NOT APPROVED FOR PUBLICATION.</strong
-        >
-        Draft website content is implemented for review; publication and operational
-        facts remain unresolved. This is not an available research or medical service.
-        No audience or accessibility-conformance results are claimed.
-      </aside>
       <slot />
     </main>
     <SiteFooter />

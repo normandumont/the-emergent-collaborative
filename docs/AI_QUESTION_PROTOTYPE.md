@@ -1,5 +1,143 @@
 # Ask Parkinson's Insights — local prototype
 
+## Current release-hardening tests — preview behavior
+
+The current founder-provided site now includes the Ask section in the normal
+build, uses the external same-origin `/ask.js` script, and has a Firebase Hosting
+`/api/ask` rewrite to `askParkinsons` in `us-central1`. The privacy page now
+contains AI/provider processing disclosures and notice dates. The earlier
+development-only implementation record below is historical where it conflicts
+with this current state. This testing pass does **not** authorize live release,
+change product/privacy copy, or change runtime/deployment configuration.
+
+### Coverage and expected behavior
+
+| Case | Automated level and contract |
+|---|---|
+| Valid question | Real local HTTP handler + official SDK with mocked transport: 200, nonblank answer, sources array, generated request ID; browser success under configured CSP |
+| Missing/empty/whitespace/non-string question | Unit + emulator: 400 and generic JSON; no model call |
+| More than 4000 characters | Unit + emulator: 400; boundary 4000 accepted at unit level |
+| Request body limit | Valid JSON larger than 24 KiB: emulator/handler 413 JSON; exact byte boundary and multibyte padding checked in unit tests |
+| Malformed JSON | Handler unit: 400 JSON; actual managed emulator: 400 HTML before handler, no response stack in production-style runtime |
+| Wrong media type | Unit + emulator: 415; browser handles rejection generically |
+| Missing/unapproved Origin | Unit + emulator reject 403 with no permissive CORS; hosted OPTIONS also checks the real policy |
+| Approved preview Origin | Exact-origin HTTP unit/integration acceptance and hosted OPTIONS 204; no wildcard allowlist |
+| Rate limits | Unit checks five/IP and 20/instance plus expiry/429; real emulator checks the sixth same-IP POST is 429 and waits the unchanged real minute window |
+| OpenAI timeout | Node mock timers advance the actual configured 25-second handler deadline, verify abort, generic 504, metadata-only logging and successful retry |
+| Provider failure/incomplete output | Official SDK mocked transport + real local HTTP mapping: generic 502, not raw SDK errors, provider body, key or stack |
+| Browser timeout | Real external script, Playwright clock: 30-second AbortController path and exact timeout message |
+| Reset/cancel | AbortSignal observed, old answer cleared, stale response deliberately released after cancellation without rendering it |
+| Double submit | Disabled button plus programmatic submit events produce only one fetch |
+| Rendering | HTML/script-like answer is literal text; malicious error bodies and malformed successful payloads are not rendered |
+| Persistence | Browser observes attempts to use storage/cookie setters without suppressing them; all attempts remain zero, stores/cookies empty, reload/reset cleared |
+| Static build | One Ask section directly after hero, `/api/ask`, one external `/ask.js`, no inline executable AI script or additional client bundles |
+| Headers | Local config CSP checked; real founder-review GETs check CSP, nosniff, referrer/permissions/cache policy, X-Robots-Tag and positive HSTS |
+| Privacy | Built `/privacy/` preserves AI/OpenAI/Firebase disclosures and rejects PH-10/11/13/14 and obsolete static-only/incomplete-notice wording |
+| Logging | Only requestId, timestamp, status, latencyMs, coarse category; flat metadata types and sentinels catch questions, answers, bodies, IPs, keys, instructions and raw errors |
+
+The browser suite now uses the **production build**, not Astro development mode.
+Its document responses receive the actual configured Firebase headers so
+`script-src 'self'` and `connect-src 'self'` govern the real `/ask.js` code.
+Model responses are mocked in the browser; no Firebase SDK or persisted state is
+added. Test instrumentation records only method names and cancellation flags,
+not question/answer contents.
+
+### Commands and hosted safety
+
+Use the existing site and Functions runtimes:
+
+```powershell
+# Site shell: Node 24
+npm run check
+npm run format:check
+npm run build
+npm run test:static
+npm run test:browser
+npm run test:ask
+npm run release:check
+
+# Functions shell: Node 22
+npm --prefix functions test
+npm --prefix functions run test:emulator
+```
+
+The emulator remains functions-only and uses the demo project with an ignored
+temporary whitespace-only local secret override; it never reads or changes the
+deployed key. It refuses to overwrite an existing local override. The real
+minute wait is intentional: it does not relax limits or spoof proxy/client IPs.
+
+For the optional hosted tests:
+
+```powershell
+$env:MERIDIAN_PREVIEW_URL = "<exact approved founder-review channel origin>"
+npm run test:preview
+```
+
+Only `https://meridian-station-preview--founder-review-<token>.web.app/` is
+accepted. Live Hosting, custom domains, credentials, extra paths and redirects
+are not permitted. With no URL, the two hosted checks explicitly skip rather
+than treating unavailable evidence as success. They make only GET requests to
+`/` and `/privacy/`, plus OPTIONS preflights to `/api/ask`; no hosted questions
+are submitted and no OpenAI generation is invoked.
+
+The configured origin was read only from the nonsecret `ASK_PREVIEW_ORIGIN`
+entry, not from API-key values. Its hosted header and Origin checks are recorded
+separately from mocked/local endpoint tests.
+
+### Limits and findings
+
+Firebase/Express still buffers and parses before the handler. The emulator
+demonstrated that syntactically valid JSON over the configured 24 KiB boundary
+reaches the handler and receives 413 JSON. Malformed JSON is rejected earlier
+with provider HTML and a framework parser stack in runtime logs. Tests do not
+rewrite this architecture or certify provider log/retention behavior.
+
+Actual billed model completion, research/clinical safety, remote-key access,
+network outages and multi-instance/global abuse limits are not certified by
+these deterministic tests. The in-memory limiter is not distributed abuse
+protection. Browser cancellation does not prove cancellation of already running
+server/provider work. Future service/provider retention and logging require
+ongoing operational review.
+
+No new production-code defect was found in the exercised paths. Obsolete tests
+requiring no JavaScript/forms, no Hosting rewrite, and rendered privacy
+placeholders were corrected to test the current founder-provided behavior.
+No production runtime, frontend script, visual design, product/privacy copy,
+CSP/CORS/limits, secret or deployment configuration was changed.
+
+The repository-wide formatting check has pre-existing failures in 28 untouched
+files under the current formatter. All changed/new testing files are formatted;
+unrelated source/configuration was not reformatted. The live-release checker
+still deliberately rejects preview/noindex/publication markers.
+
+### Verified results and changed files
+
+| Command | Result |
+|---|---|
+| `npm run check` | PASS: 21 files, no errors/warnings/hints |
+| `npm run build` | PASS: three static pages |
+| `npm run test:static` | PASS: seven tests |
+| `npm run test:browser` | PASS: 12 tests |
+| `npm run test:ask` | PASS: eight tests against the build under configured CSP |
+| `npm --prefix functions test` (Node 22) | PASS: 13 tests, including real local HTTP/SDK integration |
+| `npm --prefix functions run test:emulator` (Node 22) | PASS: real managed parser, byte/media/input validation and minute-window throttling |
+| `npm run test:preview` with the configured preview origin | PASS: two hosted tests, including X-Robots-Tag, HSTS and actual approved/missing/unapproved Origin preflights |
+| Prettier check of changed/new test and package files | PASS |
+| `npm run format:check` | FAIL: 28 pre-existing untouched files |
+| `npm run release:check` | Expected FAIL: the three pages remain preview/noindex/publication-blocked |
+
+No behavioral test is failing in the final run. The hosted tests were also
+checked without a URL: they explicitly skip instead of accessing another host.
+
+Changed: `functions\tests\ask.test.mjs`,
+`functions\tests\emulator-smoke.mjs`, `tests\static.test.mjs`,
+`tests\browser\scaffold.spec.ts`, `tests\ask-browser\ask.spec.ts`,
+`playwright.ask.config.ts`, `package.json` (test command only), and this document.
+Added: `tests\helpers\preview-security.mjs` and `tests\preview.test.mjs`.
+The pre-existing edit to `src\pages\privacy.astro` was preserved and not modified.
+No application code, product copy, visual design, production configuration,
+Secret Manager value or deployment changed. No dependencies were added.
+
 **Not production-ready. No deployment or cloud secret creation is authorized by
 this implementation.** This is a separately authorized local experiment, not a
 change to the approved public privacy notice or a deployed Phase 1 capability.

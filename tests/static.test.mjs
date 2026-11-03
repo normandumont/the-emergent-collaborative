@@ -3,6 +3,7 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
+import { assertCsp } from "./helpers/preview-security.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dist = path.join(root, "dist");
@@ -63,7 +64,12 @@ test("build emits only the static routes and safe local resources", async () => 
   assert.ok(files.some((file) => file.endsWith("LibreFranklin-OFL.txt")));
   assert.ok(files.some((file) => file.endsWith("SourceSans3-OFL.txt")));
   assert.ok(files.some((file) => file.endsWith("SourceSerif4-OFL.txt")));
-  assert.ok(!files.some((file) => /\.(?:m?js|ts|astro|map)$/i.test(file)));
+  assert.deepEqual(
+    files
+      .filter((file) => /\.(?:m?js|ts|astro|map)$/i.test(file))
+      .map((file) => path.relative(dist, file)),
+    ["ask.js"],
+  );
   assert.ok(!files.some((file) => /(?:firebase|package|GENESIS)/i.test(file)));
 
   for (const file of htmlFiles) {
@@ -91,8 +97,22 @@ test("build emits only the static routes and safe local resources", async () => 
     assert.equal((html.match(/<main(?:\s|>)/g) ?? []).length, 1);
     assert.doesNotMatch(
       html,
-      /<(?:script|style|form|input|textarea|iframe|astro-island)\b|\sstyle=|\son[a-z]+=|client:(?:load|idle|visible|media|only)/i,
+      /<(?:style|input|iframe|astro-island)\b|\sstyle=|\son[a-z]+=|client:(?:load|idle|visible|media|only)/i,
     );
+    const scripts = [
+      ...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi),
+    ];
+    const landing = file === path.join(dist, "index.html");
+    assert.equal(scripts.length, landing ? 1 : 0);
+    if (landing) {
+      assert.match(scripts[0][1], /\bsrc="\/ask\.js"/);
+      assert.match(scripts[0][1], /\bdefer\b/);
+      assert.equal(scripts[0][2].trim(), "", "No inline executable AI script");
+      assert.equal((html.match(/<form\b/g) ?? []).length, 1);
+      assert.equal((html.match(/<textarea\b/g) ?? []).length, 1);
+    } else {
+      assert.doesNotMatch(html, /<(?:form|textarea)\b/);
+    }
     assert.doesNotMatch(html, /(?:src|href)=["'](?:https?:)?\/\//i);
     for (const [, href] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
       if (href.startsWith("mailto:")) {
@@ -135,7 +155,7 @@ test("build emits only the static routes and safe local resources", async () => 
   );
 });
 
-test("only five exact PH gates remain and approved identity, headline and contact replace resolved gates", async () => {
+test("historical PH registry is retained but only PH-04 renders in the preview", async () => {
   const content = await readFile(
     path.join(root, "src", "content", "site.ts"),
     "utf8",
@@ -166,8 +186,19 @@ test("only five exact PH gates remain and approved identity, headline and contac
     "The remaining exact PH strings must retain their historical wording",
   );
   for (const [, id, copy] of markers) {
-    assert.ok((landing + privacy).includes(copy), `Missing exact text: ${id}`);
-    assert.ok((landing + privacy).includes(`data-placeholder="${id}"`));
+    if (id === "PH-04") {
+      assert.ok(
+        (landing + privacy).includes(copy),
+        `Missing exact text: ${id}`,
+      );
+      assert.ok((landing + privacy).includes(`data-placeholder="${id}"`));
+    } else {
+      assert.ok(
+        !(landing + privacy).includes(copy),
+        `Obsolete rendered marker: ${id}`,
+      );
+      assert.ok(!(landing + privacy).includes(`data-placeholder="${id}"`));
+    }
   }
   const allHtml = landing + privacy;
   for (const [, id] of approvedMarkers) {
@@ -187,7 +218,7 @@ test("only five exact PH gates remain and approved identity, headline and contac
         ),
       ),
     ].sort(),
-    remainingIds,
+    ["PH-04"],
   );
   assert.ok(textOnly(landing).includes(finalHeadline));
   assert.ok(
@@ -413,7 +444,7 @@ test("concepts, status boundaries, collaboration sequence, and source policy rem
   );
 });
 
-test("privacy follows U1 structure with unresolved operational facts in the relevant sections", async () => {
+test("privacy describes current AI processing without obsolete static-only wording", async () => {
   const privacy = await readFile(
     path.join(dist, "privacy", "index.html"),
     "utf8",
@@ -423,26 +454,25 @@ test("privacy follows U1 structure with unresolved operational facts in the rele
     [
       "privacy-scope",
       "privacy-responsibility",
+      "privacy-ai",
       "privacy-email",
       "privacy-visiting",
+      "privacy-third-parties",
       "privacy-requests",
       "privacy-dates",
     ],
   );
-  const sections = [
-    ["privacy-visiting", ["PH-10", "PH-11"]],
-    ["privacy-dates", ["PH-13", "PH-14"]],
-  ];
-  for (const [id, markers] of sections) {
-    const section = privacy.match(
-      new RegExp(`<section id="${id}"[^>]*>([\\s\\S]*?)</section>`),
-    );
-    assert.ok(section);
-    for (const marker of markers)
-      assert.ok(section[1].includes(`data-placeholder="${marker}"`));
-  }
+  assert.doesNotMatch(
+    textOnly(privacy),
+    /PH-(?:10|11|13|14)|static implementation|incomplete notice|not yet been verified/i,
+  );
   for (const copy of [
-    "This is an incomplete notice for review, not an approved public privacy notice.",
+    "AI-assisted research questions",
+    "Firebase Cloud Function",
+    "OpenAI API",
+    "does not intentionally save your question or the generated answer",
+    "abuse monitoring",
+    "provider security record",
     "Responsible operator: Norman Dumont, Founder, Meridian Station",
     `Contact: ${email}`,
     "Authorized recipient: Norman Dumont, Founder, Meridian Station",
@@ -451,7 +481,6 @@ test("privacy follows U1 structure with unresolved operational facts in the rele
     "Questions about information handling, correction requests, or deletion requests may be sent to contact@meridianstation.org. Meridian Station will make reasonable efforts to respond within 5–7 business days. Requests will be handled to the extent reasonably possible, subject to legal obligations, provider-controlled backups, security logs, and other technical limitations outside Meridian Station’s direct control.",
     "Contacting the project does not enroll you in a study or subscribe you to marketing.",
     "We will ask separately before publicly quoting or crediting a message.",
-    "It makes no promise about the logging or processing of Firebase Hosting.",
     "without resending health records or other sensitive material.",
   ]) {
     assert.ok(
@@ -470,21 +499,31 @@ test("privacy follows U1 structure with unresolved operational facts in the rele
   );
 });
 
-test("Hosting configuration serves only static output without backend rewrites", async () => {
+test("preview Hosting rewrites only /api/ask with a strict same-origin CSP", async () => {
   const config = JSON.parse(
     await readFile(path.join(root, "firebase.json"), "utf8"),
   );
   assert.deepEqual(Object.keys(config), ["hosting"]);
   assert.equal(config.hosting.public, "dist");
-  assert.equal(config.hosting.rewrites, undefined);
+  assert.deepEqual(config.hosting.rewrites, [
+    {
+      source: "/api/ask",
+      function: { functionId: "askParkinsons", region: "us-central1" },
+    },
+  ]);
   const headers = config.hosting.headers[0].headers;
   const csp = headers.find(
     ({ key }) => key === "Content-Security-Policy",
   ).value;
-  assert.match(csp, /script-src 'none'/);
-  assert.match(csp, /connect-src 'none'/);
-  assert.match(csp, /form-action 'none'/);
-  assert.doesNotMatch(csp, /unsafe-inline|unsafe-eval/);
+  assertCsp(csp);
+  const value = (name) => headers.find(({ key }) => key === name)?.value;
+  assert.equal(value("X-Content-Type-Options"), "nosniff");
+  assert.equal(value("Referrer-Policy"), "no-referrer");
+  assert.equal(value("Cache-Control"), "no-cache");
+  assert.match(
+    value("Permissions-Policy"),
+    /camera=\(\).*microphone=\(\).*geolocation=\(\)/,
+  );
   const manifest = JSON.parse(
     await readFile(path.join(root, "package.json"), "utf8"),
   );
@@ -498,5 +537,42 @@ test("Hosting configuration serves only static output without backend rewrites",
       ...manifest.devDependencies,
     }).some((name) => /firebase|analytics|tracking/i.test(name)),
     "No Firebase client SDK or analytics/tracking dependency is allowed",
+  );
+});
+
+test("normal build includes exactly one external-script Ask section immediately after the hero", async () => {
+  const landing = await readFile(path.join(dist, "index.html"), "utf8");
+  assert.equal(
+    (landing.match(/<section\b[^>]*id="ask-parkinsons"/g) ?? []).length,
+    1,
+  );
+  const section = landing.match(
+    /<section\b[^>]*id="ask-parkinsons"[^>]*>([\s\S]*?)<\/section>/,
+  );
+  assert.ok(section);
+  const ask = textOnly(section[1]);
+  assert.ok(ask.includes("Ask Parkinson's Insights"));
+  assert.match(section[1], /data-endpoint="\/api\/ask"/);
+  assert.match(section[1], /<label\b[^>]*for="ask-question"/);
+  assert.match(section[1], /maxlength="4000"/);
+  assert.ok(
+    section[1].indexOf('id="ask-warning"') <
+      section[1].indexOf('id="ask-question"'),
+  );
+  assert.match(
+    landing,
+    /<\/nav>\s*<\/section>\s*<section\b[^>]*id="ask-parkinsons"/,
+  );
+  assert.ok(
+    landing.indexOf('id="ask-parkinsons"') < landing.indexOf('id="why-change"'),
+  );
+  const script = await readFile(path.join(dist, "ask.js"), "utf8");
+  assert.equal(
+    script,
+    await readFile(path.join(root, "public", "ask.js"), "utf8"),
+  );
+  assert.doesNotMatch(
+    script,
+    /innerHTML|OPENAI_API_KEY|api\.openai\.com|firebase\/|localStorage|sessionStorage|indexedDB|document\.cookie/,
   );
 });
