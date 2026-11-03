@@ -1,22 +1,98 @@
-import { test, expect } from "@playwright/test";
+import { test as base, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { readFile } from "node:fs/promises";
 
-test("exact /api/ask reaches the local proxy without Astro's slash rejection", async ({
-  request,
-  baseURL,
-}) => {
-  const response = await request.post("/api/ask", {
-    headers: { Origin: baseURL! },
-    data: { question: "" },
-  });
-  // With the emulator stopped, Vite returns a connection error (500). With it
-  // running, the empty question is rejected before any billable model request.
-  expect([400, 500]).toContain(response.status());
-  if (response.status() === 400) {
-    expect(await response.json()).toEqual({
-      error: "Enter a question of 1 to 4000 characters.",
+const config = JSON.parse(
+  await readFile(new URL("../../firebase.json", import.meta.url), "utf8"),
+);
+const configuredHeaders: Record<string, string> = Object.fromEntries(
+  config.hosting.headers
+    .find(({ source }: { source: string }) => source === "**")
+    .headers.map(({ key, value }: { key: string; value: string }) => [
+      key,
+      value,
+    ]),
+);
+
+const test = base.extend({
+  page: async ({ page, context, baseURL }, use) => {
+    const external: string[] = [];
+    await context.addInitScript(() => {
+      // Record method names/abort state only, never question or answer contents.
+      const writes: string[] = [];
+      const requests: { aborted: boolean }[] = [];
+      Object.defineProperties(window, {
+        __askPersistenceWrites: { value: writes },
+        __askRequests: { value: requests },
+      });
+      const monitor = (prototype: object, name: string, label: string) => {
+        const descriptor = Object.getOwnPropertyDescriptor(prototype, name);
+        const original = descriptor?.value;
+        if (typeof original !== "function")
+          throw new Error(`Missing storage method: ${name}`);
+        Object.defineProperty(prototype, name, {
+          ...descriptor,
+          value: function (this: unknown, ...args: unknown[]) {
+            writes.push(label);
+            return Reflect.apply(original, this, args);
+          },
+        });
+      };
+      monitor(Storage.prototype, "setItem", "localStorage/sessionStorage");
+      monitor(IDBFactory.prototype, "open", "IndexedDB");
+      monitor(CacheStorage.prototype, "open", "Cache Storage");
+      for (const name of ["put", "add", "addAll"])
+        monitor(Cache.prototype, name, "Cache Storage write");
+      const cookie = Object.getOwnPropertyDescriptor(
+        Document.prototype,
+        "cookie",
+      );
+      const setCookie = cookie?.set;
+      if (!setCookie) throw new Error("Missing cookie setter");
+      Object.defineProperty(Document.prototype, "cookie", {
+        ...cookie,
+        set(value: string) {
+          writes.push("cookie");
+          setCookie.call(this, value);
+        },
+      });
+      const nativeFetch = window.fetch.bind(window);
+      window.fetch = (input, init) => {
+        const record = { aborted: false };
+        requests.push(record);
+        init?.signal?.addEventListener(
+          "abort",
+          () => {
+            record.aborted = true;
+          },
+          { once: true },
+        );
+        return nativeFetch(input, init);
+      };
     });
-  }
+    await page.route("**/*", async (route) => {
+      if (new URL(route.request().url()).origin !== baseURL) {
+        external.push(new URL(route.request().url()).origin);
+        await route.abort();
+        return;
+      }
+      if (route.request().resourceType() === "document") {
+        const response = await route.fetch();
+        await route.fulfill({
+          response,
+          headers: { ...response.headers(), ...configuredHeaders },
+        });
+        return;
+      }
+      await route.continue();
+    });
+    await use(page);
+    expect(external).toEqual([]);
+    expect(
+      await page.evaluate(() => Reflect.get(window, "__askPersistenceWrites")),
+    ).toEqual([]);
+    expect(await context.cookies()).toEqual([]);
+  },
 });
 
 test("form, safety order, keyboard focus and narrow layout are accessible", async ({
@@ -24,6 +100,9 @@ test("form, safety order, keyboard focus and narrow layout are accessible", asyn
 }) => {
   await page.goto("/");
   const form = page.locator("#ask-form");
+  await expect(page.locator('script[src="/ask.js"]')).toHaveCount(1);
+  await expect(page.locator("script:not([src])")).toHaveCount(0);
+  await expect(form).toHaveAttribute("data-endpoint", "/api/ask");
   await expect(
     page.getByRole("heading", { name: "Ask Parkinson's Insights" }),
   ).toBeVisible();
@@ -193,6 +272,9 @@ test("timeout and non-JSON gateway errors recover without losing the retry quest
   await expect(
     page.getByRole("button", { name: "Ask", exact: true }),
   ).toBeEnabled();
+  expect(
+    await page.evaluate(() => Reflect.get(window, "__askRequests")),
+  ).toEqual([{ aborted: true }]);
   await expect(page.locator("#ask-question")).toHaveValue("Question");
   await page.unroute("**/api/ask");
   await page.route("**/api/ask", (route) =>
@@ -207,20 +289,140 @@ test("timeout and non-JSON gateway errors recover without losing the retry quest
 test("reset can cancel a pending request without showing a late answer or error", async ({
   page,
 }) => {
+  let count = 0;
+  let release: (() => void) | undefined;
+  let fulfilled: (() => void) | undefined;
+  let started: (() => void) | undefined;
+  const secondStarted = new Promise<void>((resolve) => {
+    started = resolve;
+  });
+  const pending = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const staleFulfilled = new Promise<void>((resolve) => {
+    fulfilled = resolve;
+  });
   await page.route("**/api/ask", async (route) => {
-    await new Promise<void>((resolve) => setTimeout(resolve, 300));
+    if (++count === 1) {
+      await route.fulfill({
+        json: { answer: "Earlier answer", sources: [], requestId: "earlier" },
+      });
+      return;
+    }
+    started!();
+    await pending;
     await route.fulfill({
       json: { answer: "Late answer", sources: [], requestId: "late" },
     });
+    fulfilled!();
   });
   await page.goto("/");
   await page.getByLabel("Your Parkinson's research question").fill("Question");
   const ask = page.getByRole("button", { name: "Ask", exact: true });
   await ask.click();
-  await expect(ask).toBeDisabled();
-  await page.getByRole("button", { name: "Clear / reset" }).click();
-  await expect(ask).toBeEnabled();
+  await expect(page.locator("#ask-answer")).toHaveText("Earlier answer");
+  await ask.click();
+  await secondStarted;
+  try {
+    await expect(ask).toBeDisabled();
+    await expect(page.locator("#ask-answer")).toBeEmpty();
+    await page.getByRole("button", { name: "Clear / reset" }).click();
+    await expect(ask).toBeEnabled();
+    expect(
+      await page.evaluate(() => Reflect.get(window, "__askRequests")),
+    ).toEqual([{ aborted: false }, { aborted: true }]);
+  } finally {
+    release!();
+  }
+  await staleFulfilled;
   await expect(page.locator("#ask-question")).toHaveValue("");
   await expect(page.locator("#ask-status")).toBeEmpty();
   await expect(page.locator("#ask-answer")).toBeEmpty();
+});
+
+test("pending protects against programmatic double submission as well as a disabled button", async ({
+  page,
+}) => {
+  let count = 0;
+  let release: (() => void) | undefined;
+  const pending = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/api/ask", async (route) => {
+    count += 1;
+    await pending;
+    await route.fulfill({
+      json: { answer: "One answer", sources: [], requestId: "one" },
+    });
+  });
+  await page.goto("/");
+  await page.getByLabel("Your Parkinson's research question").fill("Research?");
+  const ask = page.getByRole("button", { name: "Ask", exact: true });
+  await ask.click();
+  await expect(ask).toBeDisabled();
+  try {
+    await page.locator("#ask-form").dispatchEvent("submit");
+    await page.locator("#ask-form").dispatchEvent("submit");
+    expect(
+      await page.evaluate(() => Reflect.get(window, "__askRequests")),
+    ).toHaveLength(1);
+  } finally {
+    release!();
+  }
+  await expect(page.locator("#ask-answer")).toHaveText("One answer");
+  expect(count).toBe(1);
+});
+
+test("validation, Origin, size, throttle and provider errors never render their response bodies", async ({
+  page,
+}) => {
+  const statuses = [400, 403, 413, 415, 429, 502, 503, 504];
+  let index = 0;
+  await page.route("**/api/ask", (route) =>
+    route.fulfill({
+      status: statuses[index++]!,
+      body: "<script>window.errorExecuted=true</script>sdk-sentinel API-key-sentinel",
+      contentType: "text/html",
+    }),
+  );
+  await page.goto("/");
+  await page.getByLabel("Your Parkinson's research question").fill("Research?");
+  for (const status of statuses) {
+    await page.getByRole("button", { name: "Ask", exact: true }).click();
+    await expect(page.locator("#ask-status")).toHaveText(
+      status === 429
+        ? "Too many requests. Please wait a minute and retry."
+        : "The research tool could not answer. Please retry later.",
+    );
+    await expect(page.locator("#ask-answer")).toBeEmpty();
+    await expect(page.locator("#ask-parkinsons")).not.toContainText(
+      /sdk-sentinel|API-key-sentinel/,
+    );
+    expect(await page.evaluate(() => "errorExecuted" in window)).toBe(false);
+  }
+});
+
+test("malformed successful payloads fail safely instead of becoming an answer", async ({
+  page,
+}) => {
+  const payloads = [
+    null,
+    {},
+    { answer: " ", sources: [], requestId: "x" },
+    { answer: "Answer", sources: "not-an-array", requestId: "x" },
+    { answer: "Answer", sources: [], requestId: 1 },
+  ];
+  let index = 0;
+  await page.route("**/api/ask", (route) =>
+    route.fulfill({ json: payloads[index++] }),
+  );
+  await page.goto("/");
+  await page.getByLabel("Your Parkinson's research question").fill("Research?");
+  for (const _payload of payloads) {
+    await page.getByRole("button", { name: "Ask", exact: true }).click();
+    await expect(page.locator("#ask-status")).toHaveText(
+      "No readable answer was received. Please retry.",
+    );
+    await expect(page.locator("#ask-answer")).toBeEmpty();
+  }
 });

@@ -1,86 +1,184 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
-import Placeholder from "../components/Placeholder.astro";
 import { approvedCopy, contactEmail, siteName } from "../content/site";
 ---
 
-<SiteLayout title="Privacy and contact information — review preview">
+<SiteLayout title="Privacy and contact information">
   <section id="privacy-scope" class="page-section reading" data-section="U1">
     <h1 class="utility-title">Privacy and contact information</h1>
+
     <p>
-      This website explains {siteName} and invites project inquiries. It does not
-      offer accounts or intentionally collect personal health information. Please
-      do not send medical records or personal health details.
+      This website explains {siteName}, provides an AI-assisted Parkinson's
+      research exploration tool, and invites project inquiries. The website
+      does not offer user accounts or intentionally collect medical records.
     </p>
+
     <p>
-      This is an incomplete notice for review, not an approved public privacy
-      notice. The operator and email policy below are founder-approved.
-      Hosting/logging details, third-party/international-processing disclosures,
-      and notice dates remain unresolved pending hosting verification and final
-      review.
+      Please do not submit medical records, names, addresses, account numbers,
+      or other sensitive personal or health information through the AI research
+      tool or project email.
     </p>
+
     <p><a href="/#introduction">Back to the introduction</a></p>
   </section>
+
   <section id="privacy-responsibility" class="page-section reading">
     <h2>Who is responsible</h2>
+
     <p>{approvedCopy.responsibleOperator}</p>
     <p>Contact: <span class="email-address">{contactEmail}</span></p>
+
     <p>
-      This notice applies to the public website and its dedicated project email
-      channel. It does not describe a personal-data research platform.
+      This notice applies to the public Meridian Station website, the
+      AI-assisted research question feature, and the project's dedicated email
+      channel.
     </p>
+
     <p>
-      Future private personal data is outside this public informational site's
-      scope and must remain architecturally separate.
+      Meridian Station is not operating a clinical service, patient portal, or
+      medical-record system through this website.
     </p>
   </section>
+
+  <section id="privacy-ai" class="page-section reading">
+    <h2>AI-assisted research questions</h2>
+
+    <p>
+      When you submit a question through Ask Parkinson's Insights, the text of
+      your question is sent to Meridian Station's server-side service for
+      processing. The request is handled by a Firebase Cloud Function operated
+      on Google infrastructure and is then sent to the OpenAI API so an answer
+      can be generated.
+    </p>
+
+    <p>
+      Meridian Station does not intentionally save your question or the
+      generated answer in a project database, browser storage, or conversation
+      history. The current tool processes one question at a time.
+    </p>
+
+    <p>
+      The service providers involved in processing the request may maintain
+      operational, security, abuse-prevention, or service logs according to
+      their own service practices. Provider-controlled records are not fully
+      controlled by Meridian Station.
+    </p>
+
+    <p>
+      OpenAI states that information submitted through its API is not used to
+      train or improve its models by default. OpenAI may retain API content and
+      related metadata for abuse monitoring and service operation according to
+      its applicable API data-retention practices.
+    </p>
+
+    <p>
+      Because the research tool is intended for general educational and
+      research questions, do not submit medical records or other sensitive
+      identifying information.
+    </p>
+  </section>
+
   <section id="privacy-email" class="page-section reading">
     <h2>If you email</h2>
+
     <p>
       Your email includes your address, the message you choose to send, and
       information handled by the email services involved. Please send only a
-      short project-related inquiry, without attachments.
+      short project-related inquiry and avoid medical records or other
+      sensitive material.
     </p>
+
     <p>{approvedCopy.authorizedRecipient}</p>
     <p>{approvedCopy.correspondencePurposes}</p>
+
     <p>
       Contacting the project does not enroll you in a study or subscribe you to
       marketing. We will ask separately before publicly quoting or crediting a
       message.
     </p>
+
     <h3>Email handling and retention</h3>
     <p>{approvedCopy.emailPolicy}</p>
   </section>
+
   <section id="privacy-visiting" class="page-section reading">
     <h2>Visiting the website</h2>
+
     <p>
-      This static implementation has no accounts, forms, health-data collection,
-      analytics, tracking, cookies, or browser storage. It makes no promise
-      about the logging or processing of Firebase Hosting. Actual hosting
-      details and related disclosures have not yet been verified.
+      Meridian Station does not currently use advertising trackers, analytics,
+      application cookies, browser storage, or a service worker on the public
+      site.
     </p>
-    <h3>Operational data and storage</h3>
-    <Placeholder id="PH-10" />
-    <Placeholder id="PH-11" />
+
+    <p>
+      The website is delivered through Firebase Hosting. Firebase Hosting may
+      process technical request information, including IP addresses, to provide
+      the service, detect abuse, and support infrastructure operations.
+    </p>
+
+    <h3>Server-side processing and logs</h3>
+
+    <p>
+      Requests to the AI research feature are processed by a Firebase Cloud
+      Function deployed in the United States. Cloud Functions automatically
+      generates operational logs in Google Cloud Logging. Meridian Station's
+      application code is designed not to intentionally log the submitted
+      question, generated answer, OpenAI API key, or other sensitive request
+      content.
+    </p>
+
+    <p>
+      Google may process Firebase service data on infrastructure operated by
+      Google or its service providers according to the applicable Firebase and
+      Google Cloud terms. Some Firebase services operate on global
+      infrastructure even when a specific function executes in a selected
+      region.
+    </p>
   </section>
+
+  <section id="privacy-third-parties" class="page-section reading">
+    <h2>Service providers</h2>
+
+    <p>
+      Meridian Station currently uses Firebase and Google Cloud infrastructure
+      for website delivery and server-side processing, OpenAI for generation of
+      AI-assisted research answers, and Cloudflare Email Routing for forwarding
+      project email.
+    </p>
+
+    <p>
+      These providers may process technical, request, or message-routing
+      information as necessary to provide their services. Meridian Station does
+      not control every infrastructure location, operational log, backup, or
+      provider security record maintained by these services.
+    </p>
+  </section>
+
   <section id="privacy-requests" class="page-section reading">
     <h2>Questions, deletion, or an accidental disclosure</h2>
+
     <p>
       If you have a question about information handling or want to request
-      deletion, use <a href="/#collaborate">Contact about privacy</a>. Please
-      identify the relevant correspondence without resending health records or
-      other sensitive material.
+      deletion of project correspondence, use
+      <a href="/#collaborate">Contact about privacy</a>. Please identify the
+      relevant correspondence without resending health records or other
+      sensitive material.
     </p>
+
     <p>
-      This link returns to the complete collaboration warning, privacy context,
-      and email action; it does not submit a request.
+      This link returns to the collaboration and contact section; it does not
+      itself submit a request.
     </p>
+
     <p>{approvedCopy.requestPolicy}</p>
   </section>
+
   <section id="privacy-dates" class="page-section reading">
-    <h2>Notice dates and return links</h2>
-    <Placeholder id="PH-13" />
-    <Placeholder id="PH-14" />
+    <h2>Notice dates</h2>
+
+    <p>Effective: October 31, 2026</p>
+    <p>Last reviewed: October 31, 2026</p>
+
     <ul class="utility-links">
       <li><a href="/#collaborate">Return to collaboration and contact</a></li>
       <li><a href="/#introduction">Back to the introduction</a></li>
