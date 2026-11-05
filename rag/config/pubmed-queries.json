@@ -1,0 +1,66 @@
+[
+  {
+    "id": "pd_core_trials",
+    "enabled": true,
+    "description": "Parkinson's randomized controlled and clinical trials.",
+    "query": "\"Parkinson Disease\"[MeSH Terms] AND (randomized controlled trial[Publication Type] OR clinical trial[Publication Type])",
+    "topics": ["clinical-trials"],
+    "maxResults": 100
+  },
+  {
+    "id": "pd_systematic_reviews",
+    "enabled": true,
+    "description": "Parkinson's systematic reviews and meta-analyses.",
+    "query": "\"Parkinson Disease\"[MeSH Terms] AND (systematic review[Publication Type] OR meta-analysis[Publication Type])",
+    "topics": ["systematic-reviews"],
+    "maxResults": 100
+  },
+  {
+    "id": "pd_exercise",
+    "enabled": true,
+    "description": "Parkinson's and exercise.",
+    "query": "\"Parkinson Disease\"[MeSH Terms] AND exercise",
+    "topics": ["exercise"],
+    "maxResults": 100
+  },
+  {
+    "id": "pd_sleep",
+    "enabled": true,
+    "description": "Parkinson's and sleep.",
+    "query": "\"Parkinson Disease\"[MeSH Terms] AND sleep",
+    "topics": ["sleep"],
+    "maxResults": 100
+  },
+  {
+    "id": "pd_digital_biomarkers",
+    "enabled": true,
+    "description": "Parkinson's digital biomarkers, wearables and sensors.",
+    "query": "\"Parkinson Disease\"[MeSH Terms] AND (digital biomarker OR wearable OR sensor)",
+    "topics": ["digital-biomarkers"],
+    "maxResults": 100
+  },
+  {
+    "id": "pd_glp1",
+    "enabled": true,
+    "description": "Parkinson's GLP-1 research.",
+    "query": "\"Parkinson Disease\"[MeSH Terms] AND (GLP-1 OR glucagon-like peptide-1 OR exenatide OR lixisenatide)",
+    "topics": ["glp1"],
+    "maxResults": 100
+  },
+  {
+    "id": "pd_alpha_synuclein",
+    "enabled": true,
+    "description": "Parkinson's alpha-synuclein research.",
+    "query": "\"Parkinson Disease\"[MeSH Terms] AND alpha-synuclein",
+    "topics": ["alpha-synuclein"],
+    "maxResults": 100
+  },
+  {
+    "id": "pd_stem_cells",
+    "enabled": true,
+    "description": "Parkinson's stem-cell and dopaminergic neuron transplantation research.",
+    "query": "\"Parkinson Disease\"[MeSH Terms] AND (stem cell OR dopaminergic neuron transplantation)",
+    "topics": ["stem-cells"],
+    "maxResults": 100
+  }
+]

@@ -1,0 +1,25 @@
+---
+import SiteLayout from "./SiteLayout.astro";
+
+interface Props {
+  title: string;
+  eyebrow: string;
+  intro: string;
+  feature?: boolean;
+}
+
+const { title, eyebrow, intro, feature = false } = Astro.props;
+---
+
+<SiteLayout title={title} wide>
+  <article class="detail-page">
+    <header class="detail-heading">
+      <p class="section-kicker">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p>{intro}</p>
+    </header>
+    <div class={feature ? "detail-feature" : "detail-sections"}>
+      <slot />
+    </div>
+  </article>
+</SiteLayout>

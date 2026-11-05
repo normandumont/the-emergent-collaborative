@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "rootDir": ".",
+    "outDir": "lib",
+    "types": ["node"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "discovery/**/*.ts",
+    "ingestion/**/*.ts",
+    "shared/**/*.ts",
+    "scripts/**/*.ts"
+  ],
+  "exclude": ["lib", "node_modules", "data", "tests"]
+}

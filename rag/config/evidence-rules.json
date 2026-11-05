@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "studyTypes": [
+    { "publicationTypes": ["Meta-Analysis"], "studyType": "meta-analysis" },
+    {
+      "publicationTypes": ["Systematic Review"],
+      "studyType": "systematic-review"
+    },
+    { "publicationTypes": ["Randomized Controlled Trial"], "studyType": "rct" },
+    {
+      "publicationTypes": [
+        "Clinical Trial",
+        "Clinical Trial, Phase I",
+        "Clinical Trial, Phase II",
+        "Clinical Trial, Phase III",
+        "Clinical Trial, Phase IV"
+      ],
+      "studyType": "clinical-trial"
+    }
+  ],
+  "population": { "human": "Humans", "animal": "Animals" }
+}

@@ -2,29 +2,27 @@
 import { approvedCopy, siteName } from "../content/site";
 ---
 
-<footer class="site-footer" data-section="P9">
-  <div class="shell">
-    <div class="reading">
-      <h2 id="responsibility">Responsibility and corrections</h2>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a class="footer-name" href="/">{siteName}</a>
+      <nav aria-label="Footer navigation">
+        <a href="/about/#collaborate">Contact</a>
+        <a href="/privacy/">Privacy</a>
+      </nav>
+    </div>
+    <div class="footer-meta">
       <p>
-        {siteName} is an early-stage, founder-led initiative. This website explains
-        its direction and invites project collaboration; it is not a clinical service.
+        Educational information only. Meridian Station does not diagnose
+        conditions, recommend treatment, or replace professional medical care.
       </p>
-      <p>{approvedCopy.publicationResponsibility}</p>
-      <p>
-        Public content last reviewed: <time datetime="2026-10-31"
-          >October 31, 2026</time
-        >
-      </p>
-      <p>
-        See something unclear or inaccurate?
-        <a href="/#collaborate">Contact us about a correction.</a>
-      </p>
-      <ul class="utility-links">
-        <li><a href="/privacy/">Privacy and contact information</a></li>
-        <li><a href="/#introduction">Back to the introduction</a></li>
-      </ul>
-      <p>{approvedCopy.materialRelationships}</p>
+      <div>
+        <p>{approvedCopy.publicationResponsibility}</p>
+        <p>
+          Public content last reviewed:
+          <time datetime="2026-10-31">October 31, 2026</time>
+        </p>
+      </div>
     </div>
   </div>
 </footer>

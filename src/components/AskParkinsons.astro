@@ -2,102 +2,68 @@
 const endpoint = "/api/ask";
 ---
 
-<section id="ask-parkinsons" class="page-section">
-<p class="eyebrow">AI-assisted Parkinson's research exploration</p>
-  <h2>Ask Parkinson's Insights</h2>
-  <p>
+<section id="ask-parkinsons" class="ask-section" aria-labelledby="ask-title">
+  <p class="section-kicker">AI-assisted research exploration</p>
+  <h2 id="ask-title">Ask Parkinson's Insights</h2>
+  <p class="ask-intro">
     Ask a question about Parkinson's research, symptoms, exercise, technology,
     or emerging evidence.
   </p>
-  <p>
-    This API prototype is not the founder's existing custom GPT. Answers can be
-    incorrect or out of date; no verified research library is connected.
+  <p id="ask-warning">
+    This tool provides educational and research information only. It does not
+    diagnose conditions, recommend treatment, or replace medical care. Do not
+    submit medical records or other sensitive personal information.
   </p>
-  <div class="contact-panel ask-panel">
-    <p id="ask-warning">
-      This tool provides educational and research information only. It does not
-      diagnose conditions, recommend treatment, or replace medical care. Do not
-      submit medical records or other sensitive personal information.
-    </p>
-<p id="ask-processing">
-  Submitting sends your question securely to the Meridian Station research
-  service for processing. Do not submit medical records or other sensitive
-  personal information.
-</p>
-    <form
-      id="ask-form"
-      data-endpoint={endpoint}
-      autocomplete="off"
-      aria-describedby="ask-warning ask-processing"
+  <form
+    id="ask-form"
+    class="ask-form"
+    data-endpoint={endpoint}
+    autocomplete="off"
+    aria-describedby="ask-warning ask-processing"
+  >
+    <label class="sr-only" for="ask-question"
+      >Your Parkinson's research question</label
     >
-      <label for="ask-question">Your Parkinson's research question</label>
+    <div class="composer">
       <textarea
         id="ask-question"
         name="question"
-        rows="5"
+        rows="2"
         maxlength="4000"
         required
         autocomplete="off"
+        placeholder="Ask a question about Parkinson's…"
         aria-describedby="ask-warning ask-processing"></textarea>
-      <div class="intro-actions">
-        <button type="submit" class="section-action">Ask</button>
-        <button type="reset" class="secondary-action">Clear / reset</button>
-      </div>
-    </form>
-    <div role="status" aria-live="polite" aria-atomic="true" id="ask-status">
+      <button type="submit" class="ask-button">Ask</button>
     </div>
-    <div id="ask-result" aria-live="polite" aria-atomic="true">
-      <h3 hidden id="ask-answer-heading">Answer</h3>
-      <p id="ask-answer"></p>
-      <p id="ask-sources"></p>
+    <div class="form-actions">
+      <p id="ask-processing">
+        Submitting sends your question securely to the Meridian Station research
+        service for processing. Do not submit medical records or other sensitive
+        personal information.
+      </p>
+      <button type="reset" class="reset-button">Clear / reset</button>
     </div>
-    <noscript>
-       This research tool requires JavaScript to submit a question.
-     </noscript>
+  </form>
+  <p class="prototype-note">
+    This API prototype is not the founder's existing custom GPT. Answers can be
+    incorrect or out of date; no verified research library is connected.
+  </p>
+  <div role="status" aria-live="polite" aria-atomic="true" id="ask-status">
   </div>
+  <div
+    id="ask-result"
+    class="answer-region"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    <h3 hidden id="ask-answer-heading">Answer</h3>
+    <p id="ask-answer"></p>
+    <p id="ask-sources"></p>
+  </div>
+  <noscript>
+    This research tool requires JavaScript to submit a question.
+  </noscript>
 </section>
 
 <script src="/ask.js" defer></script>
-
-<style>
-  .ask-panel {
-    max-width: var(--width-reading);
-  }
-  label {
-    display: block;
-    font-weight: 600;
-    margin-block-end: 0.5rem;
-  }
-  textarea {
-    display: block;
-    width: 100%;
-    min-width: 0;
-    resize: vertical;
-    font: inherit;
-    color: var(--color-ink);
-    background: var(--color-surface);
-    border: 2px solid var(--color-boundary);
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    margin-block-end: 1rem;
-  }
-  button {
-    font: inherit;
-    cursor: pointer;
-  }
-  button:disabled {
-    cursor: wait;
-  }
-  textarea:focus-visible,
-  button:focus-visible {
-    outline: 3px solid var(--color-focus);
-    outline-offset: 4px;
-  }
-  #ask-answer {
-    white-space: pre-wrap;
-  }
-  #ask-status:not(:empty) {
-    margin-block: 1rem;
-    font-weight: 600;
-  }
-</style>

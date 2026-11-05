@@ -1,462 +1,72 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import AskParkinsons from "../components/AskParkinsons.astro";
-import {
-  approvedCopy,
-  contactEmail,
-  definition,
-  headline,
-  secondaryNavigation,
-  siteName,
-} from "../content/site";
+import DevicePreview from "../components/DevicePreview.astro";
+import { headline, secondaryNavigation } from "../content/site";
 ---
 
-<SiteLayout title="Evidence, experience, and exploration — review preview" wide>
-  <section id="introduction" class="page-section hero" data-section="P1">
-    <div class="hero-grid">
-      <div>
-        <p class="eyebrow">Meridian Station · Early-stage initiative</p>
-        <h1>
-          {headline.slice(0, headline.indexOf("evidence"))}<span
-            >{headline.slice(headline.indexOf("evidence"))}</span
-          >
-        </h1>
-        <p class="hero-definition">{definition}</p>
-        <p class="initiative-label">
-          <strong>Parkinson's: our first initiative.</strong>
-        </p>
-        <p class="medical-boundary">
-          This is an informational and collaboration project, not a clinical
-          service. We do not diagnose or provide treatment advice.
-        </p>
-        <div class="intro-actions">
-          <a class="section-action" href="#parkinsons-initiative"
-            >Explore the Parkinson's initiative</a
-          >
-          <a class="secondary-action" href="#our-approach">Our approach</a>
+<SiteLayout title="Parkinson's research and technology" wide>
+  <div class="home-layout">
+    <aside class="explore-panel" aria-labelledby="story-nav-title">
+      <details class="story-nav" open>
+        <summary title="Explore Meridian Station">
+          <h2 id="story-nav-title">
+            <span class="panel-title">Explore Meridian Station</span>
+            <span class="panel-toggle" aria-hidden="true"></span>
+          </h2>
+        </summary>
+        <div class="panel-content">
+          <p class="section-kicker">The work behind the products</p>
+          <nav aria-label="Explore Meridian Station">
+            {
+              secondaryNavigation.map(({ label, href }) => (
+                <a href={href}>
+                  <span>{label}</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              ))
+            }
+          </nav>
         </div>
-      </div>
-      <div class="hero-panel">
-        <svg
-          class="direction-art"
-          viewBox="0 0 320 210"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path class="trajectory-back" d="M25 175 C105 175 70 40 180 40 H280"
-          ></path>
-          <path class="trajectory-front" d="M25 145 C100 145 95 75 180 75 H245"
-          ></path>
-          <path class="trajectory-tip" d="M253 13 L280 40 L253 67"></path>
-          <path class="trajectory-warm" d="M25 195 H75"></path>
-        </svg>
-        <p class="eyebrow">Our direction</p>
-        <h2>Research.<br />Understanding.<br />Better questions.</h2>
-        <p>
-          Our first major goal is an AI-assisted Parkinson's knowledge resource:
-          source-linked research explained for patients and families preparing
-          questions for healthcare professionals. We are also exploring tools
-          for understanding observations over time. This technology direction is
-          under development, not an available research platform.
-        </p>
-      </div>
-    </div>
-    <nav class="section-map" aria-labelledby="section-map-heading">
-      <h2 id="section-map-heading">On this page</h2>
-      <ul>
-        {
-          secondaryNavigation.map(({ label, href }) => (
-            <li>
-              <a href={href}>{label}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-  </section>
-
-  <AskParkinsons />
-
-  <section id="why-change" class="page-section section-split" data-section="P2">
-    <h2>Why look at change over time?</h2>
-    <div class="section-prose">
-      <p>
-        A research finding or an isolated observation can leave practical
-        questions unanswered. What was measured, under what conditions, and what
-        happened before or after? A snapshot can miss context that matters to
-        the question.
-      </p>
-      <p>
-        We want to make research easier to explore alongside questions about
-        everyday change, without treating personal observations as equivalent
-        evidence. Collecting more information is not the goal in itself: its
-        relevance, quality, missing context, and burden matter.
-      </p>
-      <p>
-        For us, <strong>longitudinal</strong> means paying attention to change over
-        time rather than treating each observation as an isolated snapshot. It does
-        not mean assuming that one event caused another.
-      </p>
-    </div>
-  </section>
-
-  <section
-    id="our-approach"
-    class="page-section approach-section"
-    data-section="P3"
-  >
-    <h2>Evidence. Experience. Exploration.</h2>
-    <p>
-      Three connected ideas guide the project. Keeping their differences visible
-      matters as much as exploring them together.
-    </p>
-    <div class="concept-grid">
-      <div class="concept-module" data-concept="Evidence">
-        <h3>Evidence</h3>
-        <p class="concept-question">
-          <strong
-            >What does published research report, and how strong is its support?</strong
-          >
-        </p>
-        <p>
-          Evidence means published research, how it was studied, the sources
-          supporting a claim, and its limitations. We intend to make claims
-          traceable. A citation is a starting point for checking a claim, not a
-          reason to stop asking questions.
-        </p>
-      </div>
-      <div class="concept-module" data-concept="Experience">
-        <h3>Experience</h3>
-        <p class="concept-question">
-          <strong>What does a person notice over time?</strong>
-        </p>
-        <p>
-          Experience means what a person observes or records over time, with
-          context and limitations. It helps shape the questions worth asking. We
-          will not treat one person's observation as proof of a treatment effect
-          or a cause.
-        </p>
-        <p>
-          That does not dismiss lived experience. When personal reports are used
-          in research, we will ask how they were collected and what the study
-          can reasonably conclude.
-        </p>
-      </div>
-      <div class="concept-module" data-concept="Exploration">
-        <h3>Exploration</h3>
-        <p class="concept-question">
-          <strong>What could emerging technology help us investigate?</strong>
-        </p>
-        <p>
-          Exploration means questions, prototypes, methods, and technologies
-          being investigated, not validation. AI, sensing, and other tools are
-          not answers in themselves. We intend to judge experiments by what they
-          can demonstrate and to state what remains unknown.
-        </p>
-        <p>
-          An experimental tool is not established medical treatment. People
-          remain responsible for interpretation and decisions.
-        </p>
-      </div>
-    </div>
-    <div class="direction-grid">
-      <div>
-        <h3>Research Assistance</h3>
-        <p>
-          The intended direction is AI-assisted research discovery and
-          explanation, with source-linked outputs, citations, provenance,
-          limitations, and uncertainty visible. Comparing findings should help
-          people ask better questions, not delegate medical answers to an
-          autonomous system.
-        </p>
-      </div>
-      <div>
-        <h3>Longitudinal Understanding</h3>
-        <p>
-          We are exploring how observations over time could be understood with
-          their context, missingness, provenance, and measurement limitations.
-          Patterns would be questions to investigate, not proof of causation.
-          Any future collection requires a justified purpose and separate
-          safeguards.
-        </p>
-      </div>
-      <div>
-        <h3>Initiatives</h3>
-        <p>
-          Parkinson's is the first application of this direction. The mission is
-          broader, but there is no promise to expand to other conditions or to
-          build three separate products.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section
-    id="parkinsons-initiative"
-    class="page-section initiative-section"
-    data-section="P4"
-  >
-    <h2>Parkinson's: our first initiative.</h2>
-    <p>
-      Parkinson's is where this work begins. It is personally meaningful to the
-      founder and gives the initiative a focused place to start asking questions
-      about research, experience, and change over time.
-    </p>
-    <div class="initiative-grid">
-      <div class="initiative-feature" data-feature="knowledge">
-        <p class="eyebrow">Research assistance</p>
-        <h3>AI-assisted knowledge resource</h3>
-        <p>
-          The first major goal is to develop an AI-assisted Parkinson's
-          knowledge resource that can organize credible research, preserve
-          source citations and limitations, and explain complex information in
-          language patients and families can use when learning about the disease
-          and preparing questions for healthcare professionals.
-        </p>
-      </div>
-      <div class="initiative-feature" data-feature="longitudinal">
-        <p class="eyebrow">Experience over time</p>
-        <h3>Longitudinal understanding</h3>
-        <p>
-          A second area of exploration is longitudinal information:
-          understanding whether responsibly collected observations such as
-          movement, exercise, sleep, symptoms, environmental conditions, and
-          other measurements can help people recognize patterns and formulate
-          better questions over time. Any future collection would need a defined
-          purpose, consent and privacy safeguards, and evaluation of measurement
-          limitations.
-        </p>
-      </div>
-    </div>
-    <p>
-      These tools are being explored as educational and research technologies.
-      They are not intended to diagnose Parkinson's, prescribe treatment, or
-      replace medical care.
-    </p>
-    <p>
-      Parkinson's is the first initiative, not the limit of the organization's
-      interests. Any future expansion would need its own purpose and
-      justification.
-    </p>
-    <p>This website is not enrolling a study or collecting health records.</p>
-  </section>
-
-  <section id="origin" class="page-section origin-section" data-section="P5">
-    <h2>How the question began</h2>
-    <div class="origin-grid">
-      <div class="origin-transition">
-        <p class="eyebrow">Where it started</p>
-        <p class="origin-name">Ride for Parkinson's</p>
-        <p>Awareness + Technology</p>
-        <span class="origin-arrow" aria-hidden="true">↓</span>
-        <p class="origin-name">Meridian Station</p>
-        <p>A broader mission. The same curiosity.</p>
-      </div>
-      <div class="origin-story">
-        <p>
-          An early software-career experience at Rebar Foundry, a dot-com-era
-          incubator exploring new technologies, helped shape the founder's
-          interest in turning emerging ideas into practical experiments.
-        </p>
-        <p>
-          After decades building software, Parkinson's and cycling brought new
-          questions into that work. Ride for Parkinson's began as an awareness
-          effort and became a catalyst for real-world technology
-          experimentation: live-tracking prototypes, mobile-development
-          questions, and how to make sense of observations over time.
-        </p>
-        <p>
-          The ride's wider mission included an AI-assisted knowledge resource
-          for patients and families. It prompted a broader question: how could
-          published evidence, experience over time, and emerging technology help
-          people understand health questions without confusing their different
-          roles?
-        </p>
-        <p>
-          {siteName} grew from that connection, not from a claim that ride observations
-          proved a treatment effect. One person's experience is a starting point for
-          questions, not a substitute for other perspectives or scientific evidence.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section
-    id="current-work"
-    class="page-section work-section"
-    data-section="P6"
-  >
-    <h2>What exists today</h2>
-    <div class="work-list">
-      <article class="work-item">
-        <div>
-          <h3>Earlier ride work</h3>
-          <p class="status-label">Status: Prototype — prior ride artifacts</p>
+      </details>
+    </aside>
+    <div class="home-content">
+      <section id="introduction" class="hero" aria-labelledby="home-title">
+        <div class="hero-inner">
+          <p class="hero-kicker">Parkinson's research and technology</p>
+          <h1 id="home-title">{headline}</h1>
+          <p class="hero-copy">
+            Meridian Station explores AI-assisted Parkinson's research and new
+            ways to understand responsibly selected observations over time.
+          </p>
         </div>
-        <div>
+      </section>
+
+      <div id="knowledgebase">
+        <AskParkinsons />
+      </div>
+
+      <section class="mobile-product" aria-labelledby="mobile-title">
+        <div class="mobile-copy">
+          <p class="section-kicker green-kicker">
+            Mobile application · In development
+          </p>
+          <h2 id="mobile-title">Understanding change over time.</h2>
           <p>
-            The Ride for Parkinson's source includes a route map, a
-            browser-based phone tracker, and Firebase-backed public tracking
-            code. Its records discuss native mobile development and a future
-            educational AI resource. Source artifacts establish prior
-            prototyping, not a verified operating tracker, working AI system,
-            completed ride, or formal research study.
+            Meridian Station is developing a mobile application to explore
+            responsibly selected observations such as movement, exercise,
+            symptoms, sleep, and environment over time.
           </p>
-        </div>
-      </article>
-      <article class="work-item">
-        <div>
-          <h3>Current website and research definition</h3>
-          <p class="status-label">Status: Prototype — static review website</p>
-        </div>
-        <div>
-          <p>
-            This implemented website explains the initiative and invites project
-            collaboration. The approved product brief, requirements, and earlier
-            written prototype support current research-definition work; they do
-            not constitute an available knowledge resource or personal-data
-            platform. Audience review remains part of refining the explanation.
+          <p class="product-caveat">
+            An exploratory technology project—not a diagnostic or clinical
+            product.
           </p>
+          <a class="text-link" href="/mobile/">
+            Explore the mobile project <span aria-hidden="true">→</span>
+          </a>
         </div>
-      </article>
-      <article class="work-item">
-        <div>
-          <h3>Technology direction under development</h3>
-          <p class="status-label">
-            Status: Active development — direction and scope
-          </p>
-        </div>
-        <div>
-          <p>{approvedCopy.futureCapabilities}</p>
-          <p class="documentation-date">
-            Status evidence checked: <strong
-              ><time datetime="2026-10-29">29 October 2026</time></strong
-            >, by the founder's direction and local source review. This is not
-            operational or clinical verification, or the final public content
-            review date.
-          </p>
-        </div>
-      </article>
-      <article class="work-item">
-        <div>
-          <h3>Future capabilities need separate implementation</h3>
-          <p class="status-label">
-            Status: Future exploration — separate implementation
-          </p>
-        </div>
-        <div>
-          <p>
-            Any future work involving personal records, sensing, or analysis
-            would need separate requirements, privacy safeguards, and
-            evaluation. Public research information and private personal
-            information would remain separate. No collection or analysis of
-            visitor health information is implemented here.
-          </p>
-          <p>
-            This first website will not offer accounts, health logging, device
-            connections, AI chat, or personalized medical interpretation.
-          </p>
-          <p><a href="#collaborate">Help shape the next step</a></p>
-        </div>
-      </article>
+        <DevicePreview />
+      </section>
     </div>
-  </section>
-
-  <section
-    id="collaborate"
-    class="page-section collaboration-band"
-    data-section="P7"
-  >
-    <div class="collaboration-intro">
-      <h2>Help shape the next questions</h2>
-      <div>
-        <p>
-          You do not need to be a researcher or developer to offer a useful
-          perspective.
-        </p>
-      </div>
-    </div>
-    <div class="contact-panel">
-      <p>Ways to contribute could include:</p>
-      <ul class="contribution-examples">
-        <li>
-          Offering lived-experience perspectives on the questions and language,
-          without sharing personal health histories.
-        </li>
-        <li>
-          Challenging an assumption or suggesting a more careful research
-          approach.
-        </li>
-        <li>Helping with design, accessibility, and clearer information.</li>
-        <li>
-          Discussing research assistance or a bounded technical investigation.
-        </li>
-      </ul>
-      <p>
-        These are starting points for a conversation, not staffed openings or
-        promises of a project role.
-      </p>
-      <div class="contact-warning">
-        <h3>Before you email</h3>
-        <p>
-          Please keep your message about the project. <strong
-            >Do not send medical records, symptom histories, medication details,
-            location traces, or other sensitive health information. Do not
-            attach files.</strong
-          >
-        </p>
-        <p>
-          This channel does not provide medical advice and is not monitored for
-          urgent help. Contacting us does not enroll you in research or
-          authorize publication of your message.
-        </p>
-      </div>
-      <p id="contact-privacy">
-        Email shares your address and message with the email services involved.
-        Read <a href="/privacy/">Privacy and contact information</a> before deciding
-        what to send.
-      </p>
-      <h3>Email about the project</h3>
-      <p class="contact-address">
-        <a class="email-address section-action" href={`mailto:${contactEmail}`}
-          >{contactEmail}</a
-        >
-      </p>
-      <p>
-        You can use your own email service. If an email application does not
-        open, copy the address into a new message.
-      </p>
-      <div class="message-guidance">
-        <p>
-          A short note about the question or contribution you have in mind is
-          enough. You do not need to disclose a diagnosis or personal health
-          history. Your name, organization, and professional background are
-          optional.
-        </p>
-        <p>
-          You can use the same address to flag a correction or ask about
-          information handling.
-        </p>
-      </div>
-      <p class="contact-expectation">{approvedCopy.contactExpectation}</p>
-    </div>
-  </section>
-
-  <section
-    id="sources"
-    class="page-section section-split sources-section"
-    data-section="P8"
-  >
-    <h2>Sources and context</h2>
-    <div class="section-prose">
-      <p>
-        When we make a research claim, we intend to show where it comes from and
-        explain the limits that matter to its interpretation.
-      </p>
-      <p>
-        Personal accounts and project proposals are identified as such. They are
-        not presented as scientific findings.
-      </p>
-    </div>
-  </section>
+  </div>
 </SiteLayout>

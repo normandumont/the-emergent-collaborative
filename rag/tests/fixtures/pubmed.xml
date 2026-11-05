@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE PubmedArticleSet SYSTEM "https://example.invalid/never-fetch.dtd">
+<PubmedArticleSet>
+  <PubmedArticle>
+    <MedlineCitation>
+      <PMID Version="1">10001</PMID>
+      <Article>
+        <Journal><Title>Prototype Research Journal</Title><JournalIssue><PubDate><Year>2025</Year><Month>Oct</Month><Day>7</Day></PubDate></JournalIssue></Journal>
+        <ArticleTitle>A synthetic <i>exercise</i> study &amp; its follow-up</ArticleTitle>
+        <Abstract><AbstractText Label="BACKGROUND">Authored fixture background.</AbstractText><AbstractText Label="RESULTS">A <b>mixed</b> text fixture.</AbstractText></Abstract>
+        <AuthorList><Author><LastName>Example</LastName><ForeName>Alex</ForeName></Author><Author><CollectiveName>Fixture Research Group</CollectiveName></Author></AuthorList>
+        <PublicationTypeList><PublicationType>Clinical Trial</PublicationType><PublicationType>Randomized Controlled Trial</PublicationType></PublicationTypeList>
+      </Article>
+      <MeshHeadingList><MeshHeading><DescriptorName>Parkinson Disease</DescriptorName><QualifierName>therapy</QualifierName></MeshHeading><MeshHeading><DescriptorName>Humans</DescriptorName></MeshHeading></MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData><ArticleIdList><ArticleId IdType="doi">10.0000/fixture.1</ArticleId><ArticleId IdType="pmc">PMC20001</ArticleId></ArticleIdList></PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation><PMID>10002</PMID><Article><Journal/><ArticleTitle/><PublicationTypeList/></Article></MedlineCitation>
+    <PubmedData/>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation>
+      <PMID>10003</PMID>
+      <Article><Journal><Title>Fixture Reviews</Title><JournalIssue><PubDate><MedlineDate>2024 Winter</MedlineDate></PubDate></JournalIssue></Journal>
+        <ArticleTitle>Synthetic review</ArticleTitle><ELocationID EIdType="doi" ValidYN="Y">10.0000/fixture.3</ELocationID>
+        <Abstract><AbstractText>Authored review abstract.</AbstractText></Abstract>
+        <PublicationTypeList><PublicationType>Systematic Review</PublicationType><PublicationType>Meta-Analysis</PublicationType></PublicationTypeList>
+      </Article>
+      <MeshHeadingList><MeshHeading><DescriptorName>Humans</DescriptorName></MeshHeading><MeshHeading><DescriptorName>Animals</DescriptorName></MeshHeading></MeshHeadingList>
+    </MedlineCitation>
+  </PubmedArticle>
+</PubmedArticleSet>

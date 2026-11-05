@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:ali="http://www.niso.org/schemas/ali/1.0">
+  <GetRecord><record>
+    <header><identifier>oai:pubmedcentral.nih.gov:20001</identifier><datestamp>2026-01-01</datestamp><setSpec>pmc-open</setSpec></header>
+    <metadata><article><front><article-meta>
+      <article-id pub-id-type="pmcid">PMC20001</article-id><article-id pub-id-type="pmid">10001</article-id>
+      <permissions><copyright-statement>Authored test fixture.</copyright-statement>
+        <license><ali:license_ref>https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>This synthetic fixture is licensed under Creative Commons Attribution 4.0.</license-p></license>
+      </permissions>
+    </article-meta></front></article></metadata>
+  </record></GetRecord>
+</OAI-PMH>

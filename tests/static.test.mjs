@@ -7,14 +7,22 @@ import { assertCsp } from "./helpers/preview-security.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dist = path.join(root, "dist");
-const remainingIds = ["PH-04", "PH-10", "PH-11", "PH-13", "PH-14"];
-const finalHeadline =
-  "Finding direction through evidence, experience, and emerging technology.";
 const email = "contact@meridianstation.org";
-const productDefinition =
-  "Meridian Station is a research and technology initiative exploring how scientific evidence, personal experience over time, and emerging technology can help people understand complex health questions—beginning with Parkinson’s disease.";
-const revisedDirection =
-  "Meridian Station is actively defining and developing a technology direction that includes AI-assisted research exploration and longitudinal-data tools. Some underlying concepts and prototypes began with the Ride for Parkinson’s project, while the broader Meridian Station platform remains under development. These capabilities are not currently offered as clinical, diagnostic, or treatment services.";
+const pages = [
+  "404.html",
+  "index.html",
+  ...[
+    "about",
+    "founder",
+    "mobile",
+    "parkinsons-project",
+    "privacy",
+    "project-story",
+    "research-approach",
+  ].map((route) => path.join(route, "index.html")),
+];
+const readPage = (route = "") =>
+  readFile(path.join(dist, route, "index.html"), "utf8");
 
 function textOnly(html) {
   return html
@@ -25,16 +33,6 @@ function textOnly(html) {
     .replace(/&amp;/g, "&")
     .replace(/\s+/g, " ")
     .trim();
-}
-
-function contentSection(html, id) {
-  const match = html.match(
-    new RegExp(
-      `<section\\b[^>]*data-section="${id}"[^>]*>([\\s\\S]*?)</section>`,
-    ),
-  );
-  assert.ok(match, `Missing content section ${id}`);
-  return match[1];
 }
 
 async function filesUnder(directory) {
@@ -48,51 +46,50 @@ async function filesUnder(directory) {
   return nested.flat();
 }
 
-test("build emits only the static routes and safe local resources", async () => {
+test("all static routes resolve links and emit only safe local resources", async () => {
   const files = await filesUnder(dist);
   const htmlFiles = files.filter((file) => file.endsWith(".html"));
   assert.deepEqual(
     htmlFiles.map((file) => path.relative(dist, file)).sort(),
-    ["404.html", "index.html", path.join("privacy", "index.html")].sort(),
+    [...pages].sort(),
   );
-  assert.equal(files.filter((file) => file.endsWith(".woff2")).length, 2);
+  assert.equal(files.filter((file) => file.endsWith(".woff2")).length, 1);
   assert.ok(files.some((file) => /Inter-Latin-Variable.+\.woff2$/.test(file)));
-  assert.ok(
-    files.some((file) => /LibreFranklin-Latin-Variable.+\.woff2$/.test(file)),
-  );
-  assert.ok(files.some((file) => file.endsWith("Inter-OFL.txt")));
-  assert.ok(files.some((file) => file.endsWith("LibreFranklin-OFL.txt")));
-  assert.ok(files.some((file) => file.endsWith("SourceSans3-OFL.txt")));
-  assert.ok(files.some((file) => file.endsWith("SourceSerif4-OFL.txt")));
+  for (const license of [
+    "Inter-OFL.txt",
+    "LibreFranklin-OFL.txt",
+    "SourceSans3-OFL.txt",
+    "SourceSerif4-OFL.txt",
+  ])
+    assert.ok(files.some((file) => file.endsWith(license)));
   assert.deepEqual(
     files
       .filter((file) => /\.(?:m?js|ts|astro|map)$/i.test(file))
       .map((file) => path.relative(dist, file)),
     ["ask.js"],
   );
-  assert.ok(!files.some((file) => /(?:firebase|package|GENESIS)/i.test(file)));
+  assert.ok(
+    !files.some((file) =>
+      /(?:firebase|package|GENESIS|design-reference)/i.test(file),
+    ),
+  );
 
   for (const file of htmlFiles) {
     const html = await readFile(file, "utf8");
     assert.match(html, /<html lang="en">/);
     assert.match(html, /name="robots" content="noindex, nofollow"/);
-    assert.match(html, /INCOMPLETE IMPLEMENTATION PREVIEW/);
     assert.match(html, /<title>[^<]+\| Meridian Station<\/title>/);
-    const identity = html.match(/<a class="identity"[^>]*>([\s\S]*?)<\/a>/);
-    assert.ok(identity);
-    assert.equal(textOnly(identity[1]), "Meridian Station");
-    assert.equal((html.match(/rel="preload"[^>]*as="font"/g) ?? []).length, 2);
-    assert.doesNotMatch(html, /The Emergent Collaborative/i);
+    assert.equal((html.match(/rel="preload"[^>]*as="font"/g) ?? []).length, 1);
+    assert.doesNotMatch(
+      html,
+      /The Emergent Collaborative|INCOMPLETE IMPLEMENTATION PREVIEW|IMPLEMENTATION PLACEHOLDER|data-placeholder=/i,
+    );
     assert.ok(
       textOnly(html).includes(
         "Publication responsibility: Norman Dumont, Founder, Meridian Station",
       ),
     );
-    assert.ok(
-      textOnly(html).includes(
-        "Material relationships: None currently disclosed.",
-      ),
-    );
+    assert.match(html, /<time datetime="2026-10-31">October 31, 2026<\/time>/);
     assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1);
     assert.equal((html.match(/<main(?:\s|>)/g) ?? []).length, 1);
     assert.doesNotMatch(
@@ -107,7 +104,7 @@ test("build emits only the static routes and safe local resources", async () => 
     if (landing) {
       assert.match(scripts[0][1], /\bsrc="\/ask\.js"/);
       assert.match(scripts[0][1], /\bdefer\b/);
-      assert.equal(scripts[0][2].trim(), "", "No inline executable AI script");
+      assert.equal(scripts[0][2].trim(), "");
       assert.equal((html.match(/<form\b/g) ?? []).length, 1);
       assert.equal((html.match(/<textarea\b/g) ?? []).length, 1);
     } else {
@@ -116,7 +113,7 @@ test("build emits only the static routes and safe local resources", async () => 
     assert.doesNotMatch(html, /(?:src|href)=["'](?:https?:)?\/\//i);
     for (const [, href] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
       if (href.startsWith("mailto:")) {
-        assert.equal(file, path.join(dist, "index.html"));
+        assert.equal(file, path.join(dist, "about", "index.html"));
         assert.equal(href, `mailto:${email}`);
         continue;
       }
@@ -155,20 +152,15 @@ test("build emits only the static routes and safe local resources", async () => 
   );
 });
 
-test("historical PH registry is retained but only PH-04 renders in the preview", async () => {
+test("historical PH registry stays intact without rendering resolved placeholders", async () => {
   const content = await readFile(
     path.join(root, "src", "content", "site.ts"),
-    "utf8",
-  );
-  const landing = await readFile(path.join(dist, "index.html"), "utf8");
-  const privacy = await readFile(
-    path.join(dist, "privacy", "index.html"),
     "utf8",
   );
   const markers = [...content.matchAll(/"(PH-\d{2})":\s*"([^"]+)"/g)];
   assert.deepEqual(
     markers.map(([, id]) => id),
-    remainingIds,
+    ["PH-04", "PH-10", "PH-11", "PH-13", "PH-14"],
   );
   const specification = await readFile(
     path.join(root, "docs", "HIGH_FIDELITY_MOCKUP_SPEC.md"),
@@ -181,274 +173,182 @@ test("historical PH registry is retained but only PH-04 renders in the preview",
   assert.deepEqual(
     markers.map(([, id, copy]) => [id, copy]),
     approvedMarkers
-      .filter(([, id]) => remainingIds.includes(id))
+      .filter(([, id]) => markers.some(([, marker]) => marker === id))
       .map(([, id, copy]) => [id, copy]),
-    "The remaining exact PH strings must retain their historical wording",
   );
-  for (const [, id, copy] of markers) {
-    if (id === "PH-04") {
-      assert.ok(
-        (landing + privacy).includes(copy),
-        `Missing exact text: ${id}`,
-      );
-      assert.ok((landing + privacy).includes(`data-placeholder="${id}"`));
-    } else {
-      assert.ok(
-        !(landing + privacy).includes(copy),
-        `Obsolete rendered marker: ${id}`,
-      );
-      assert.ok(!(landing + privacy).includes(`data-placeholder="${id}"`));
-    }
-  }
-  const allHtml = landing + privacy;
-  for (const [, id] of approvedMarkers) {
-    if (remainingIds.includes(id)) continue;
-    assert.doesNotMatch(allHtml, new RegExp(`data-placeholder="${id}"`));
-    const oldCopy = approvedMarkers.find(([, marker]) => marker === id)[2];
-    assert.ok(
-      !allHtml.includes(oldCopy),
-      `Resolved gate still rendered: ${id}`,
-    );
-  }
-  assert.deepEqual(
-    [
-      ...new Set(
-        [...allHtml.matchAll(/data-placeholder="([^"]+)"/g)].map(
-          ([, id]) => id,
-        ),
-      ),
-    ].sort(),
-    ["PH-04"],
-  );
-  assert.ok(textOnly(landing).includes(finalHeadline));
-  assert.ok(
-    textOnly(contentSection(landing, "P1")).includes(productDefinition),
-  );
-  assert.match(landing, /name="description" content="Meridian Station/);
-  assert.equal((landing.match(/mailto:/g) ?? []).length, 1);
-  assert.ok(
-    landing.indexOf("contact-warning") <
-      landing.indexOf('id="contact-privacy"'),
-  );
-  assert.ok(
-    landing.indexOf('id="contact-privacy"') <
-      landing.indexOf(`href="mailto:${email}"`),
-  );
-  assert.ok(
-    landing.indexOf(`href="mailto:${email}"`) <
-      landing.indexOf('class="contact-expectation"'),
-  );
-});
-
-test("landing contains P0-P9 in order, complete draft prose, and seven secondary destinations", async () => {
-  const landing = await readFile(path.join(dist, "index.html"), "utf8");
-  assert.deepEqual(
-    [...landing.matchAll(/data-section="(P\d)"/g)].map(([, id]) => id),
-    Array.from({ length: 10 }, (_, index) => `P${index}`),
-  );
-  assert.doesNotMatch(
-    landing,
-    /IMPLEMENTATION PLACEHOLDER|scaffold-slot|content is not implemented|await the complete content pass/i,
-  );
-  const introduction = contentSection(landing, "P1");
-  assert.match(introduction, /Parkinson's: our first initiative\./);
-  assert.ok(
-    textOnly(introduction).includes(
-      "We do not diagnose or provide treatment advice.",
-    ),
-  );
-  const sectionMap = introduction.match(
-    /<nav\b[^>]*aria-labelledby="section-map-heading"[^>]*>([\s\S]*?)<\/nav>/,
-  );
-  assert.ok(
-    sectionMap,
-    "Section map must follow the full introduction and actions",
-  );
-  assert.deepEqual(
-    [...sectionMap[1].matchAll(/href="#([^"]+)"/g)].map(([, id]) => id),
-    [
-      "why-change",
-      "our-approach",
-      "parkinsons-initiative",
-      "origin",
-      "current-work",
-      "collaborate",
-      "sources",
-    ],
-  );
-  assert.ok(
-    introduction.indexOf("We do not diagnose") <
-      introduction.indexOf('class="intro-actions"'),
-  );
-  assert.ok(
-    introduction.indexOf('class="intro-actions"') <
-      introduction.indexOf("<nav"),
-  );
-
-  const prototype = await readFile(
-    path.join(root, "docs", "LOW_FIDELITY_CONTENT_PROTOTYPE.md"),
-    "utf8",
-  );
-  for (const id of ["P2", "P3", "P4", "P5", "P6", "P8"]) {
-    const draft = prototype
-      .split(`## ${id === "P8" ? id + "." : "Current " + id + "."}`)[1]
-      ?.split("### Draft page copy")[1]
-      ?.split("### Review notes")[0];
-    assert.ok(draft, `Missing approved draft ${id}`);
-    const actual = textOnly(contentSection(landing, id));
-    for (const block of draft.trim().split(/\r?\n\r?\n/)) {
-      if (block.includes("[SOURCE ENTRIES")) continue;
-      const expected = block
-        .replace(/^#+\s*/gm, "")
-        .replace(/\*\*/g, "")
-        .replace(/\s+/g, " ")
-        .replaceAll("The Emergent Collaborative", "Meridian Station")
-        .trim();
-      assert.ok(
-        actual.includes(expected),
-        `Draft prose changed or missing in ${id}: ${expected}`,
-      );
-    }
+  for (const file of pages) {
+    const html = await readFile(path.join(dist, file), "utf8");
+    for (const [, , copy] of approvedMarkers) assert.ok(!html.includes(copy));
   }
 });
 
-test("concepts, status boundaries, collaboration sequence, and source policy remain explicit", async () => {
-  const landing = await readFile(path.join(dist, "index.html"), "utf8");
-  const approach = contentSection(landing, "P3");
-  assert.deepEqual(
-    [...approach.matchAll(/data-concept="([^"]+)"/g)].map(
-      ([, concept]) => concept,
+test("homepage prioritizes AI and mobile and links out to the story instead of repeating it", async () => {
+  const landing = await readPage();
+  const text = textOnly(landing);
+  assert.ok(
+    text.includes(
+      "Finding direction through evidence, experience, and emerging technology.",
     ),
-    ["Evidence", "Experience", "Exploration"],
   );
-  assert.doesNotMatch(approach, /role="(?:tab|tabpanel)"|<details|<button/i);
-  assert.deepEqual(
-    [...approach.matchAll(/<h3>([^<]+)<\/h3>/g)].map(([, heading]) => heading),
-    [
-      "Evidence",
-      "Experience",
-      "Exploration",
-      "Research Assistance",
-      "Longitudinal Understanding",
-      "Initiatives",
-    ],
+  assert.ok(text.includes("Understanding change over time."));
+  assert.ok(
+    text.includes(
+      "An exploratory technology project—not a diagnostic or clinical product.",
+    ),
   );
-  for (const copy of [
-    "citations, provenance, limitations, and uncertainty",
-    "context, missingness, provenance, and measurement limitations",
-    "not proof of causation",
-    "being investigated, not validation",
-    "not treat one person's observation as proof",
+  assert.ok(text.includes("Mobile application · In development"));
+  assert.ok(
+    landing.indexOf('id="introduction"') <
+      landing.indexOf('id="knowledgebase"'),
+  );
+  assert.ok(
+    landing.indexOf('id="knowledgebase"') <
+      landing.indexOf('class="mobile-product"'),
+  );
+  assert.ok(
+    landing.indexOf('class="story-nav"') < landing.indexOf('id="introduction"'),
+  );
+  assert.match(landing, /<details class="story-nav" open>/);
+  assert.equal((landing.match(/class="story-nav"/g) ?? []).length, 1);
+  for (const id of [
+    "why-change",
+    "our-approach",
+    "parkinsons-initiative",
+    "origin",
+    "current-work",
+    "collaborate",
+    "sources",
   ]) {
     assert.ok(
-      textOnly(approach).includes(copy),
-      `Missing framework boundary: ${copy}`,
+      !landing.includes(`id="${id}"`),
+      `Old homepage section still present: ${id}`,
     );
   }
-  const initiative = textOnly(contentSection(landing, "P4"));
+  assert.doesNotMatch(
+    landing,
+    /Rebar Foundry|dot-com-era|live-tracking prototypes/,
+  );
+  for (const route of [
+    "about",
+    "parkinsons-project",
+    "project-story",
+    "research-approach",
+    "founder",
+    "privacy",
+    "mobile",
+  ]) {
+    assert.ok(
+      landing.includes(`href="/${route}/"`),
+      `Missing secondary route: ${route}`,
+    );
+  }
+  assert.match(landing, /Concept illustration · Not recorded health data/);
+});
+
+test("moved content preserves evidence, status, source and contact boundaries", async () => {
+  const approach = textOnly(await readPage("research-approach"));
   for (const copy of [
-    "The first major goal is to develop an AI-assisted Parkinson's knowledge resource",
+    "Evidence",
+    "Experience",
+    "Exploration",
+    "not treat one person's observation as proof",
+    "being investigated, not validation",
+    "not established medical treatment",
+    "relevance, quality, missing context, and burden matter",
+    "not presented as scientific findings",
+  ]) {
+    assert.ok(approach.includes(copy), `Missing framework boundary: ${copy}`);
+  }
+  const initiative = textOnly(await readPage("parkinsons-project"));
+  for (const copy of [
+    "Parkinson's: our first initiative.",
     "preserve source citations and limitations",
+    "citations, provenance, limitations, and uncertainty",
     "preparing questions for healthcare professionals",
-    "movement, exercise, sleep, symptoms, environmental conditions, and other measurements",
-    "They are not intended to diagnose Parkinson's, prescribe treatment, or replace medical care.",
-    "This website is not enrolling a study or collecting health records.",
+    "No verified research library is connected.",
+    "not intended to diagnose Parkinson's, prescribe treatment, or replace medical care.",
+    "not enrolling a study or collecting health records",
   ]) {
     assert.ok(
       initiative.includes(copy),
-      `Missing initiative direction/boundary: ${copy}`,
+      `Missing initiative boundary: ${copy}`,
     );
   }
-  const origin = textOnly(contentSection(landing, "P5"));
-  for (const copy of [
-    "Ride for Parkinson's began as an awareness effort",
-    "catalyst for real-world technology experimentation",
-    "live-tracking prototypes, mobile-development questions",
-    "AI-assisted knowledge resource for patients and families",
-    "not from a claim that ride observations proved a treatment effect",
-  ]) {
-    assert.ok(origin.includes(copy), `Missing origin connection: ${copy}`);
-  }
-  const work = contentSection(landing, "P6");
-  const workText = textOnly(work);
-  for (const copy of [
-    "Status: Prototype — prior ride artifacts",
-    "Status: Prototype — static review website",
-    "Status: Active development — direction and scope",
-    "Status: Future exploration — separate implementation",
-    "29 October 2026",
-    "Source artifacts establish prior prototyping, not a verified operating tracker, working AI system, completed ride, or formal research study.",
-    "This is not operational or clinical verification, or the final public content review date.",
-    revisedDirection,
-    "Public research information and private personal information would remain separate.",
-    "No collection or analysis of visitor health information is implemented here.",
-  ]) {
-    assert.ok(workText.includes(copy), `Missing status boundary: ${copy}`);
-  }
-  assert.doesNotMatch(
-    workText,
-    /Status: Operational|coming soon|launch date|remain ideas or experiments unless/i,
+  const story = textOnly(await readPage("project-story"));
+  assert.ok(
+    story.includes(
+      "Source artifacts establish prior prototyping, not a verified operating tracker, working AI system, completed ride, or formal research study.",
+    ),
   );
-  const collaboration = contentSection(landing, "P7");
-  const orderedMarkers = [
+  assert.ok(
+    story.includes(
+      "not from a claim that ride observations proved a treatment effect",
+    ),
+  );
+  const founder = textOnly(await readPage("founder"));
+  assert.ok(founder.includes("Rebar Foundry"));
+  assert.ok(
+    founder.includes("Material relationships: None currently disclosed."),
+  );
+  const mobile = textOnly(await readPage("mobile"));
+  for (const copy of [
+    "not proof of causation",
+    "informed consent",
+    "separate privacy safeguards",
+    "not a clinical, diagnostic, or treatment product",
+    "does not collect mobile observations or enroll participants",
+  ]) {
+    assert.ok(mobile.includes(copy), `Missing mobile boundary: ${copy}`);
+  }
+  const about = await readPage("about");
+  assert.ok(
+    textOnly(about).includes(
+      "Parkinson's is the first initiative, not the limit",
+    ),
+  );
+  assert.ok(
+    textOnly(about).includes(
+      "Public research information and private personal information would remain separate.",
+    ),
+  );
+  assert.ok(
+    textOnly(about).includes(
+      "These capabilities are not currently offered as clinical, diagnostic, or treatment services.",
+    ),
+  );
+  let previous = -1;
+  for (const marker of [
     'class="contribution-examples"',
     'class="contact-warning"',
     'id="contact-privacy"',
     `href="mailto:${email}"`,
     'class="message-guidance"',
     'class="contact-expectation"',
-  ];
-  let previous = -1;
-  for (const marker of orderedMarkers) {
-    const position = collaboration.indexOf(marker);
+  ]) {
+    const position = about.indexOf(marker);
     assert.ok(
       position > previous,
-      `Missing/out-of-order contact content: ${marker}`,
+      `Missing/out-of-order contact safeguard: ${marker}`,
     );
     previous = position;
   }
-  assert.equal((collaboration.match(/<li>/g) ?? []).length, 4);
   for (const copy of [
-    "lived-experience",
-    "research approach",
-    "design, accessibility",
-    "technical investigation",
-  ]) {
-    assert.ok(textOnly(collaboration).includes(copy));
-  }
-  for (const copy of [
-    "Do not send medical records, symptom histories, medication details, location traces, or other sensitive health information. Do not attach files.",
-    "This channel does not provide medical advice and is not monitored for urgent help.",
-    "Contacting us does not enroll you in research or authorize publication of your message.",
+    "Do not attach files.",
+    "not monitored for urgent help",
+    "does not enroll you in research or authorize publication",
     "Your name, organization, and professional background are optional.",
-    "Messages are reviewed by the founder of Meridian Station. We aim to respond to project-related inquiries within 5–7 business days.",
-    "If an email application does not open, copy the address into a new message.",
+    "5–7 business days",
+    "copy the address into a new message",
   ]) {
     assert.ok(
-      textOnly(collaboration).includes(copy),
+      textOnly(about).includes(copy),
       `Missing contact boundary: ${copy}`,
     );
   }
-  const sources = contentSection(landing, "P8");
-  assert.equal((sources.match(/<p>/g) ?? []).length, 2);
-  assert.doesNotMatch(
-    sources,
-    /<(?:ul|ol|a|cite)\b|SOURCE-PD|SOURCE ENTRIES|doi\.org/i,
-  );
-  assert.doesNotMatch(landing, /SOURCE-PD-01|<cite\b|role="doc-bibliography"/i);
-  assert.match(landing, /Rebar Foundry/);
-  assert.ok(
-    textOnly(contentSection(landing, "P4")).includes(
-      "Parkinson's is the first initiative, not the limit of the organization's interests.",
-    ),
-  );
 });
 
-test("privacy describes current AI processing without obsolete static-only wording", async () => {
-  const privacy = await readFile(
-    path.join(dist, "privacy", "index.html"),
-    "utf8",
-  );
+test("privacy preserves AI processing disclosures and updated contact destinations", async () => {
+  const privacy = await readPage("privacy");
   assert.deepEqual(
     [...privacy.matchAll(/<section id="([^"]+)"/g)].map(([, id]) => id),
     [
@@ -482,16 +382,17 @@ test("privacy describes current AI processing without obsolete static-only wordi
     "Contacting the project does not enroll you in a study or subscribe you to marketing.",
     "We will ask separately before publicly quoting or crediting a message.",
     "without resending health records or other sensitive material.",
-  ]) {
+    "Effective: October 31, 2026",
+    "Last reviewed: October 31, 2026",
+  ])
     assert.ok(
       textOnly(privacy).includes(copy),
       `Missing privacy context: ${copy}`,
     );
-  }
-  assert.match(privacy, /href="\/#collaborate">Contact about privacy/);
+  assert.match(privacy, /href="\/about\/#collaborate">Contact about privacy/);
   assert.match(
     privacy,
-    /href="\/#collaborate">Return to collaboration and contact/,
+    /href="\/about\/#collaborate">Return to collaboration and contact/,
   );
   assert.doesNotMatch(
     privacy,
@@ -499,7 +400,7 @@ test("privacy describes current AI processing without obsolete static-only wordi
   );
 });
 
-test("preview Hosting rewrites only /api/ask with a strict same-origin CSP", async () => {
+test("preview Hosting and API routing retain strict same-origin security without a React runtime", async () => {
   const config = JSON.parse(
     await readFile(path.join(root, "firebase.json"), "utf8"),
   );
@@ -512,11 +413,8 @@ test("preview Hosting rewrites only /api/ask with a strict same-origin CSP", asy
     },
   ]);
   const headers = config.hosting.headers[0].headers;
-  const csp = headers.find(
-    ({ key }) => key === "Content-Security-Policy",
-  ).value;
-  assertCsp(csp);
   const value = (name) => headers.find(({ key }) => key === name)?.value;
+  assertCsp(value("Content-Security-Policy"));
   assert.equal(value("X-Content-Type-Options"), "nosniff");
   assert.equal(value("Referrer-Policy"), "no-referrer");
   assert.equal(value("Cache-Control"), "no-cache");
@@ -535,13 +433,13 @@ test("preview Hosting rewrites only /api/ask with a strict same-origin CSP", asy
     !Object.keys({
       ...manifest.dependencies,
       ...manifest.devDependencies,
-    }).some((name) => /firebase|analytics|tracking/i.test(name)),
-    "No Firebase client SDK or analytics/tracking dependency is allowed",
+    }).some((name) => /firebase|analytics|tracking|react|tailwind/i.test(name)),
+    "No frontend framework, Firebase client SDK or analytics dependency",
   );
 });
 
-test("normal build includes exactly one external-script Ask section immediately after the hero", async () => {
-  const landing = await readFile(path.join(dist, "index.html"), "utf8");
+test("normal build preserves exactly one functional external-script Ask interface after the hero", async () => {
+  const landing = await readPage();
   assert.equal(
     (landing.match(/<section\b[^>]*id="ask-parkinsons"/g) ?? []).length,
     1,
@@ -550,21 +448,23 @@ test("normal build includes exactly one external-script Ask section immediately 
     /<section\b[^>]*id="ask-parkinsons"[^>]*>([\s\S]*?)<\/section>/,
   );
   assert.ok(section);
-  const ask = textOnly(section[1]);
-  assert.ok(ask.includes("Ask Parkinson's Insights"));
+  assert.ok(textOnly(section[1]).includes("Ask Parkinson's Insights"));
+  assert.ok(
+    textOnly(section[1]).includes(
+      "It does not diagnose conditions, recommend treatment, or replace medical care.",
+    ),
+  );
   assert.match(section[1], /data-endpoint="\/api\/ask"/);
   assert.match(section[1], /<label\b[^>]*for="ask-question"/);
   assert.match(section[1], /maxlength="4000"/);
+  assert.match(section[1], /aria-describedby="ask-warning ask-processing"/);
   assert.ok(
     section[1].indexOf('id="ask-warning"') <
       section[1].indexOf('id="ask-question"'),
   );
   assert.match(
     landing,
-    /<\/nav>\s*<\/section>\s*<section\b[^>]*id="ask-parkinsons"/,
-  );
-  assert.ok(
-    landing.indexOf('id="ask-parkinsons"') < landing.indexOf('id="why-change"'),
+    /<\/section>\s*<div id="knowledgebase">\s*<section\b[^>]*id="ask-parkinsons"/,
   );
   const script = await readFile(path.join(dist, "ask.js"), "utf8");
   assert.equal(

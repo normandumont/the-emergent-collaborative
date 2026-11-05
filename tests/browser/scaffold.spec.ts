@@ -1,9 +1,20 @@
 import { test, expect } from "@playwright/test";
 import { writeFile } from "node:fs/promises";
 import AxeBuilder from "@axe-core/playwright";
-import { placeholders } from "../../src/content/site";
 
-test("all templates are readable, locally resourced, and pass bounded axe checks", async ({
+const routes = [
+  "/",
+  "/mobile/",
+  "/about/",
+  "/parkinsons-project/",
+  "/project-story/",
+  "/research-approach/",
+  "/founder/",
+  "/privacy/",
+  "/404.html",
+];
+
+test("all Astro routes are accessible, locally resourced and leave no persistence", async ({
   page,
   context,
   baseURL,
@@ -17,7 +28,7 @@ test("all templates are readable, locally resourced, and pass bounded axe checks
     }
     await route.continue();
   });
-  for (const route of ["/", "/privacy/", "/404.html"]) {
+  for (const route of routes) {
     await page.goto(route);
     await expect(page.getByRole("main")).toBeVisible();
     await expect(page.locator("h1")).toHaveCount(1);
@@ -37,6 +48,11 @@ test("all templates are readable, locally resourced, and pass bounded axe checks
         workers: (await navigator.serviceWorker.getRegistrations()).length,
       })),
     ).toEqual({ local: 0, session: 0, databases: [], caches: [], workers: 0 });
+    await expect(page.locator("[data-placeholder]")).toHaveCount(0);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      "content",
+      "noindex, nofollow",
+    );
   }
   await page.goto("/missing-scaffold-route/");
   await expect(
@@ -46,210 +62,216 @@ test("all templates are readable, locally resourced, and pass bounded axe checks
   expect(await context.cookies()).toEqual([]);
 });
 
-test("skip link, four navigation destinations, and privacy are usable without client scripts", async ({
+test("skip link, desktop and native mobile navigation work without JavaScript", async ({
   browser,
   baseURL,
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   try {
     const page = await context.newPage();
-    await page.goto(baseURL!);
-    await page.keyboard.press("Tab");
-    await expect(
-      page.getByRole("link", { name: "Skip to main content" }),
-    ).toBeFocused();
-    await page.keyboard.press("Enter");
-    await expect(page.locator("#main-content")).toBeFocused();
-    const nav = page.getByRole("navigation", { name: "Primary" });
-    await expect(nav.getByRole("link")).toHaveCount(4);
-    for (const [name, id] of [
-      ["Our approach", "our-approach"],
-      ["Parkinson's initiative", "parkinsons-initiative"],
-      ["Current work", "current-work"],
-      ["Collaborate", "collaborate"],
-    ] as const) {
-      await nav.getByRole("link", { name, exact: true }).click();
-      await expect(page).toHaveURL(new RegExp(`#${id}$`));
-      await expect(page.locator(`#${id}`)).toBeInViewport();
-    }
-    const map = page.getByRole("navigation", {
-      name: "On this page",
-      exact: true,
-    });
-    await expect(map.getByRole("link")).toHaveText([
-      "Why change over time",
-      "Our approach",
-      "Parkinson's initiative",
-      "Origin",
-      "Current work",
-      "Collaborate",
-      "Sources",
-    ]);
-    for (const id of [
-      "why-change",
-      "our-approach",
-      "parkinsons-initiative",
-      "origin",
-      "current-work",
-      "collaborate",
-      "sources",
-    ]) {
-      await map.locator(`a[href="#${id}"]`).click();
-      await expect(page).toHaveURL(new RegExp(`#${id}$`));
+    for (const width of [1440, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(baseURL!);
+      await page.keyboard.press("Tab");
       await expect(
-        page.locator(`#${id} > h2, #${id} > .collaboration-intro > h2`),
-      ).toBeInViewport();
+        page.getByRole("link", { name: "Skip to main content" }),
+      ).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(page.locator("#main-content")).toBeFocused();
+      for (const [name, destination] of [
+        ["AI Knowledgebase", "/#knowledgebase"],
+        ["Mobile App", "/mobile/"],
+        ["About", "/about/"],
+        ["Project Story", "/project-story/"],
+        ["Privacy", "/privacy/"],
+      ] as const) {
+        if (width < 900) {
+          const menu = page.locator(".mobile-nav summary");
+          await menu.focus();
+          await page.keyboard.press("Enter");
+        }
+        const nav = page.getByRole("navigation", {
+          name: width < 900 ? "Mobile navigation" : "Primary navigation",
+          exact: true,
+        });
+        await expect(nav.getByRole("link")).toHaveCount(5);
+        await nav.getByRole("link", { name, exact: true }).click();
+        await expect(page).toHaveURL(new URL(destination!, baseURL!).href);
+        if (name === "AI Knowledgebase") {
+          await expect(page.locator("#ask-form")).toBeInViewport();
+          expect(await page.locator("noscript").textContent()).toContain(
+            "requires JavaScript",
+          );
+          // Close the native menu before testing the next destination.
+          if (width < 900) await page.locator(".mobile-nav summary").click();
+        }
+      }
     }
-    await page.locator("#contact-privacy").getByRole("link").click();
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Privacy and contact information",
-    );
-    await expect(page.locator("#privacy-responsibility")).toContainText(
-      "Responsible operator: Norman Dumont, Founder, Meridian Station",
-    );
   } finally {
     await context.close();
   }
 });
 
-test("full narrative, editorial concepts, and publication gates remain visible", async ({
+test("homepage has only the product-led flow and all five secondary story links", async ({
   page,
 }) => {
   await page.goto("/");
-  expect(
-    await page
-      .locator("[data-section]")
-      .evaluateAll((elements) =>
-        elements.map((element) => element.getAttribute("data-section")),
-      ),
-  ).toEqual(Array.from({ length: 10 }, (_, index) => `P${index}`));
   await expect(page.locator("#introduction h1")).toHaveText(
     "Finding direction through evidence, experience, and emerging technology.",
   );
-  await expect(page.locator("#parkinsons-initiative h2")).toHaveText(
-    "Parkinson's: our first initiative.",
+  await expect(page.locator("#ask-title")).toHaveText(
+    "Ask Parkinson's Insights",
   );
-  const concepts = page.locator("#our-approach .concept-module");
-  await expect(concepts.locator("h3")).toHaveText([
-    "Evidence",
-    "Experience",
-    "Exploration",
+  await expect(page.locator("#mobile-title")).toHaveText(
+    "Understanding change over time.",
+  );
+  await expect(page.locator(".mobile-copy")).toContainText("In development");
+  await expect(page.locator(".mobile-copy")).toContainText(
+    "not a diagnostic or clinical product",
+  );
+  const story = page.getByRole("navigation", {
+    name: "Explore Meridian Station",
+  });
+  await expect(story.getByRole("link")).toHaveText([
+    "Why Meridian Station →",
+    "The Parkinson's Project →",
+    "The 711-mile ride →",
+    "Research approach →",
+    "About the founder →",
   ]);
-  expect(
-    await concepts.evaluateAll((elements) =>
-      elements.every(
-        (element, index) =>
-          index === 0 ||
-          Boolean(
-            elements[index - 1]!.compareDocumentPosition(element) &
-            Node.DOCUMENT_POSITION_FOLLOWING,
-          ),
-      ),
-    ),
-  ).toBe(true);
-  for (const concept of await concepts.all()) {
-    await expect(concept).toBeVisible();
-    const bounds = await concept.boundingBox();
-    expect(bounds).not.toBeNull();
+  for (const link of await story.getByRole("link").all()) {
+    const href = await link.getAttribute("href");
+    expect(href).toMatch(
+      /^\/(?:about|parkinsons-project|project-story|research-approach|founder)\/$/,
+    );
   }
-  await expect(page.locator("#origin")).toContainText("Rebar Foundry");
-  await expect(page.locator("#origin")).toContainText("Ride for Parkinson's");
-  await expect(page.locator("#introduction")).toContainText(
-    "research and technology initiative",
-  );
-  await expect(page.locator("#parkinsons-initiative")).toContainText(
-    "AI-assisted Parkinson's knowledge resource",
-  );
-  await expect(page.locator("#parkinsons-initiative")).toContainText(
-    "movement, exercise, sleep, symptoms, environmental conditions",
-  );
-  await expect(page.locator("#our-approach .direction-grid h3")).toHaveText([
-    "Research Assistance",
-    "Longitudinal Understanding",
-    "Initiatives",
-  ]);
-  await expect(page.locator("#current-work .status-label")).toHaveText([
-    "Status: Prototype — prior ride artifacts",
-    "Status: Prototype — static review website",
-    "Status: Active development — direction and scope",
-    "Status: Future exploration — separate implementation",
-  ]);
-  await expect(page.locator("#current-work time")).toHaveAttribute(
-    "datetime",
-    "2026-10-29",
-  );
-  await expect(page.locator(".initiative-feature h3")).toHaveText([
-    "AI-assisted knowledge resource",
-    "Longitudinal understanding",
-  ]);
-  await expect(page.locator(".work-item")).toHaveCount(4);
-  await expect(page.locator(".origin-transition")).toContainText(
-    "Awareness + Technology",
-  );
-  await expect(
-    page.locator("#introduction .intro-actions .section-action"),
-  ).toHaveAttribute("href", "#parkinsons-initiative");
-  await expect(page.locator("#current-work")).toContainText(
-    "These capabilities are not currently offered as clinical, diagnostic, or treatment services.",
-  );
-  await expect(page.locator("#current-work")).not.toContainText(
-    "remain ideas or experiments",
-  );
-  await expect(page.locator("#sources p")).toHaveCount(2);
-  await expect(
-    page.locator(
-      "#sources a, #sources ul, #sources ol, cite, [role='doc-bibliography']",
-    ),
-  ).toHaveCount(0);
+  for (const selector of [
+    "#origin",
+    "#current-work",
+    "#collaborate",
+    "#our-approach",
+    "#sources",
+    ".section-map",
+  ])
+    await expect(page.locator(selector)).toHaveCount(0);
   await expect(page.locator('script[src="/ask.js"]')).toHaveCount(1);
   await expect(
     page.locator("script:not([src]), astro-island, input"),
   ).toHaveCount(0);
   await expect(page.locator("#ask-form")).toHaveCount(1);
-  await expect(page.locator("#ask-question")).toHaveCount(1);
-  await expect(page.locator(".identity")).toHaveText("Meridian Station");
-  await expect(page.locator("body")).not.toContainText(
-    "The Emergent Collaborative",
+  await expect(page.locator("#ask-form")).toHaveAttribute(
+    "data-endpoint",
+    "/api/ask",
   );
-  await expect(page).toHaveTitle(/Meridian Station$/);
-  await expect(page.locator("a[href^='mailto:']")).toHaveCount(1);
-  await expect(page.locator(".email-address")).toHaveText(
-    "contact@meridianstation.org",
+  await expect(page.locator(".device-preview")).toHaveCount(1);
+  await expect(page.locator(".device-preview figcaption")).toContainText(
+    "Not recorded health data",
   );
-  await expect(page.locator(".email-address")).toHaveAttribute(
-    "href",
-    "mailto:contact@meridianstation.org",
+  await expect(page.locator(".wordmark")).toHaveAccessibleName(
+    "Meridian Station home",
   );
-  await expect(page.locator("#parkinsons-initiative")).toContainText(
-    "Parkinson's is the first initiative, not the limit of the organization's interests.",
-  );
-  await expect(page.locator("[data-placeholder]")).toHaveCount(1);
-  for (const [id, text] of Object.entries(placeholders)) {
-    if (Number(id.slice(3)) >= 6 && Number(id.slice(3)) <= 14) continue;
-    const marker = page.locator(`[data-placeholder="${id}"]`);
-    await expect(marker).toBeVisible();
-    await expect(marker).toContainText(text);
+  const sections = await page
+    .locator("#introduction, #knowledgebase, .mobile-product")
+    .all();
+  let previousBottom = 0;
+  for (const section of sections) {
+    const bounds = await section.boundingBox();
+    expect(bounds!.y).toBeGreaterThanOrEqual(previousBottom);
+    previousBottom = bounds!.y + bounds!.height;
   }
 });
 
-test("collaboration and privacy preserve contact order and current AI disclosures", async ({
+test("Explore panel is expanded by default and collapses accessibly without JavaScript", async ({
+  browser,
+  baseURL,
+}, testInfo) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  try {
+    const page = await context.newPage();
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(baseURL!);
+    const panel = page.locator(".story-nav");
+    const toggle = panel.locator("summary");
+    const navigation = panel.getByRole("navigation", {
+      name: "Explore Meridian Station",
+    });
+    await expect(panel).toHaveAttribute("open", "");
+    await expect(navigation.getByRole("link")).toHaveCount(5);
+    await expect(toggle).toHaveAccessibleName("Explore Meridian Station");
+    const content = page.locator(".home-content");
+    const expanded = await content.boundingBox();
+    const sidebar = await page.locator(".explore-panel").boundingBox();
+    expect(sidebar!.x + sidebar!.width).toBeLessThanOrEqual(expanded!.x);
+    await page.screenshot({
+      path: testInfo.outputPath("explore-expanded.png"),
+    });
+
+    await toggle.focus();
+    await page.keyboard.press("Space");
+    await expect(panel).not.toHaveAttribute("open");
+    await expect(navigation).not.toBeVisible();
+    await expect(toggle).toBeFocused();
+    await expect(toggle).toHaveCSS("outline-style", "solid");
+    expect((await content.boundingBox())!.width).toBeGreaterThan(
+      expanded!.width,
+    );
+    await page.screenshot({
+      path: testInfo.outputPath("explore-collapsed.png"),
+    });
+
+    await page.keyboard.press("Enter");
+    await expect(panel).toHaveAttribute("open", "");
+    await expect(navigation.getByRole("link").first()).toBeVisible();
+    await page.setViewportSize({ width: 390, height: 900 });
+    await page.reload();
+    await expect(panel).toHaveAttribute("open", "");
+    const stacked = await page.locator(".explore-panel").boundingBox();
+    const main = await content.boundingBox();
+    expect(stacked!.y + stacked!.height).toBeLessThanOrEqual(main!.y);
+    await toggle.click();
+    await expect(navigation).not.toBeVisible();
+    expect((await content.boundingBox())!.y).toBeLessThan(main!.y);
+    await page.screenshot({
+      path: testInfo.outputPath("explore-mobile-collapsed.png"),
+    });
+  } finally {
+    await context.close();
+  }
+});
+
+test("background pages and contact/privacy journey preserve their safety boundaries", async ({
   page,
 }) => {
-  await page.goto("/");
-  const sequence = [
+  await page.goto("/research-approach/");
+  await expect(page.locator("[data-concept] h2")).toHaveText([
+    "Evidence",
+    "Experience",
+    "Exploration",
+  ]);
+  await expect(page.locator('[data-concept="Experience"]')).toContainText(
+    "not treat one person's observation as proof",
+  );
+  await expect(page.locator('[data-concept="Exploration"]')).toContainText(
+    "not established medical treatment",
+  );
+  await page.goto("/project-story/");
+  await expect(page.locator("main")).toContainText(
+    "not a verified operating tracker, working AI system, completed ride, or formal research study",
+  );
+  await page.goto("/founder/");
+  await expect(page.locator("main")).toContainText("Rebar Foundry");
+  await page.goto("/about/#collaborate");
+  let previousBottom = 0;
+  for (const selector of [
     ".contribution-examples",
     ".contact-warning",
     "#contact-privacy",
     ".contact-address",
     ".message-guidance",
     ".contact-expectation",
-  ];
-  let previousBottom = 0;
-  for (const selector of sequence) {
+  ]) {
     const item = page.locator(`#collaborate ${selector}`);
-    await expect(item).toBeVisible();
     const bounds = await item.boundingBox();
-    expect(bounds).not.toBeNull();
     expect(bounds!.y).toBeGreaterThanOrEqual(previousBottom);
     previousBottom = bounds!.y + bounds!.height;
   }
@@ -257,8 +279,12 @@ test("collaboration and privacy preserve contact order and current AI disclosure
   await expect(page.locator(".contact-warning")).toContainText(
     "Do not attach files.",
   );
-  await expect(page.locator(".contact-expectation")).toHaveText(
-    "Messages are reviewed by the founder of Meridian Station. We aim to respond to project-related inquiries within 5–7 business days.",
+  await expect(page.locator(".contact-expectation")).toContainText(
+    "5–7 business days",
+  );
+  await expect(page.locator(".email-address")).toHaveAttribute(
+    "href",
+    "mailto:contact@meridianstation.org",
   );
   await page.locator("#contact-privacy a").click();
   await expect(page.locator("main > section h2")).toHaveText([
@@ -270,29 +296,22 @@ test("collaboration and privacy preserve contact order and current AI disclosure
     "Questions, deletion, or an accidental disclosure",
     "Notice dates",
   ]);
-  await expect(page.locator("#privacy-email")).toContainText(
-    "Cloudflare Email Routing",
-  );
-  await expect(page.locator("#privacy-requests")).toContainText(
-    "Meridian Station will make reasonable efforts to respond within 5–7 business days.",
-  );
-  await expect(page.locator("a[href^='mailto:']")).toHaveCount(0);
-  await expect(page.locator("[data-placeholder]")).toHaveCount(1);
   await expect(page.locator("#privacy-ai")).toContainText("OpenAI API");
   await expect(page.locator("#privacy-ai")).toContainText(
     "Firebase Cloud Function",
   );
-  await expect(page.locator("main")).not.toContainText(
-    /PH-(?:10|11|13|14)|static implementation|incomplete notice|not yet been verified/i,
+  await expect(page.locator("#privacy-email")).toContainText(
+    "Cloudflare Email Routing",
   );
+  await expect(page.locator("a[href^='mailto:']")).toHaveCount(0);
   await page
     .getByRole("link", { name: "Contact about privacy", exact: true })
     .click();
-  await expect(page).toHaveURL(/\/#collaborate$/);
+  await expect(page).toHaveURL(/\/about\/#collaborate$/);
   await expect(page.locator("#collaborate h2")).toBeInViewport();
 });
 
-test("Ride fonts, navy/royal identity, contrast and visible keyboard states", async ({
+test("reference typography, primary blue and secondary green retain contrast and visible focus", async ({
   page,
 }, testInfo) => {
   await page.goto("/");
@@ -304,43 +323,30 @@ test("Ride fonts, navy/royal identity, contrast and visible keyboard states", as
         status: font.status,
       })),
     ),
-  ).toEqual([
-    { family: "Inter", status: "loaded" },
-    { family: "Libre Franklin", status: "loaded" },
-  ]);
-  await expect(page.locator("body")).toHaveCSS("font-family", /Inter/);
-  await expect(page.locator("h1")).toHaveCSS("font-family", /Libre Franklin/);
-  await expect(page.locator("h1")).toHaveCSS("font-weight", "700");
-  await expect(page.locator(".identity")).toHaveCSS("font-weight", "800");
+  ).toEqual([{ family: "Inter", status: "loaded" }]);
+  await expect(page.locator("h1")).toHaveCSS("font-family", /Inter/);
+  await expect(page.locator("h1")).toHaveCSS("font-weight", "540");
   await expect(page.locator("body")).toHaveCSS(
     "background-color",
-    "rgb(245, 247, 248)",
+    "rgb(246, 246, 243)",
   );
-  await expect(page.locator(".hero h1 span")).toHaveCSS(
-    "color",
-    "rgb(82, 120, 199)",
-  );
-  await expect(page.locator(".hero-panel")).toHaveCSS(
-    "border-top-color",
-    "rgb(82, 120, 199)",
-  );
-  await expect(
-    page.locator("#introduction .intro-actions .section-action"),
-  ).toHaveCSS("background-color", "rgb(40, 78, 145)");
-  await expect(page.locator("#origin")).toHaveCSS(
+  await expect(page.locator(".ask-button")).toHaveCSS(
     "background-color",
-    "rgb(25, 53, 84)",
+    "rgb(49, 87, 213)",
   );
-  for (const [index, color] of [
-    "rgb(25, 53, 84)",
-    "rgb(82, 120, 199)",
-    "rgb(20, 95, 104)",
-  ].entries()) {
-    await expect(page.locator(".concept-module").nth(index)).toHaveCSS(
-      "border-top-color",
-      color,
-    );
-  }
+  await expect(page.locator(".device-dot")).toHaveCSS(
+    "background-color",
+    "rgb(111, 159, 122)",
+  );
+  await expect(page.locator(".green-kicker")).toHaveCSS(
+    "color",
+    "rgb(56, 98, 67)",
+  );
+  await expect(page.locator(".mobile-product")).toHaveCSS(
+    "background-color",
+    "rgb(234, 234, 243)",
+  );
+
   function luminance(rgb: string) {
     const values = rgb
       .match(/\d+/g)!
@@ -354,31 +360,20 @@ test("Ride fonts, navy/royal identity, contrast and visible keyboard states", as
     return values[0]! * 0.2126 + values[1]! * 0.7152 + values[2]! * 0.0722;
   }
   const ratios = [];
-  for (const [selector, minimum] of [
-    ["body", 4.5],
-    [".primary-navigation a", 4.5],
-    [".primary-navigation li:last-child a", 4.5],
-    [".identity span", 4.5],
-    [".hero h1 span", 3],
-    [".hero-definition", 4.5],
-    [".initiative-label", 4.5],
-    [".medical-boundary", 4.5],
-    [".hero-panel h2", 4.5],
-    [".concept-module h3", 4.5],
-    [".initiative-feature .eyebrow", 4.5],
-    [".origin-story", 4.5],
-    [".origin-name", 4.5],
-    [".status-label", 4.5],
-    [".documentation-date", 4.5],
-    [".contact-warning", 4.5],
-    ["#contact-privacy a", 4.5],
-    [".site-footer a", 4.5],
-    [".placeholder", 4.5],
-    ["#introduction .intro-actions .section-action", 4.5],
-    [".secondary-action", 4.5],
-    [".email-address", 4.5],
-    [".implementation-notice", 4.5],
-  ] as const) {
+  for (const selector of [
+    "body",
+    ".desktop-nav a",
+    ".wordmark-mark",
+    ".hero-copy",
+    "#ask-warning",
+    ".ask-button",
+    ".reset-button",
+    ".green-kicker",
+    ".product-caveat",
+    ".device-preview figcaption",
+    ".footer-meta",
+    ".site-footer a",
+  ]) {
     const pair = await page
       .locator(selector)
       .first()
@@ -395,69 +390,33 @@ test("Ride fonts, navy/royal identity, contrast and visible keyboard states", as
         }
         return { foreground: getComputedStyle(element).color, background };
       });
-    const a = luminance(pair.foreground);
-    const b = luminance(pair.background);
+    const a = luminance(pair.foreground),
+      b = luminance(pair.background);
     const ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
-    expect(ratio, `${selector} text contrast`).toBeGreaterThanOrEqual(minimum);
-    ratios.push({ selector, ...pair, ratio, minimum });
+    expect(ratio, `${selector} text contrast`).toBeGreaterThanOrEqual(4.5);
+    ratios.push({ selector, ...pair, ratio });
   }
-  const contrastPath = testInfo.outputPath("rendered-contrast.json");
-  await writeFile(contrastPath, JSON.stringify(ratios, null, 2));
-  await testInfo.attach("rendered-contrast.json", {
-    path: contrastPath,
-    contentType: "application/json",
-  });
+  await writeFile(
+    testInfo.outputPath("rendered-contrast.json"),
+    JSON.stringify(ratios, null, 2),
+  );
   await page.keyboard.press("Tab");
-  const skip = page.getByRole("link", { name: "Skip to main content" });
-  await expect(skip).toBeFocused();
-  await expect(skip).toHaveCSS("outline-style", "solid");
-  await page.screenshot({ path: testInfo.outputPath("keyboard-focus.png") });
+  await expect(
+    page.getByRole("link", { name: "Skip to main content" }),
+  ).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("#main-content")).toBeFocused();
-  const action = page.locator("#introduction .intro-actions .section-action");
+  const action = page.getByRole("button", { name: "Ask", exact: true });
   await action.focus();
   await expect(action).toHaveCSS("outline-style", "solid");
   await action.hover();
-  await expect(action).toHaveCSS("background-color", "rgb(29, 61, 117)");
+  await expect(action).toHaveCSS("background-color", "rgb(36, 69, 181)");
   await expect(action).toHaveCSS("color", "rgb(255, 255, 255)");
-  const focusColor = await action.evaluate(
-    (element) => getComputedStyle(element).outlineColor,
-  );
-  const focusA = luminance(focusColor);
-  const focusB = luminance("rgb(245, 247, 248)");
-  expect(
-    (Math.max(focusA, focusB) + 0.05) / (Math.min(focusA, focusB) + 0.05),
-  ).toBeGreaterThanOrEqual(3);
-  await action.evaluate((element) =>
-    element.scrollIntoView({ block: "center" }),
-  );
-  await page.screenshot({
-    path: testInfo.outputPath("action-focus-hover.png"),
-  });
+  await action.screenshot({ path: testInfo.outputPath("ask-focus.png") });
   await page.emulateMedia({ forcedColors: "active" });
   await expect(action).toHaveCSS("outline-style", "solid");
   await page.screenshot({
     path: testInfo.outputPath("forced-colors-focus.png"),
-  });
-  await expect(page.locator("#our-approach h3")).toHaveText([
-    "Evidence",
-    "Experience",
-    "Exploration",
-    "Research Assistance",
-    "Longitudinal Understanding",
-    "Initiatives",
-  ]);
-  await page.emulateMedia({ forcedColors: "none" });
-  const privacyLink = page.locator("#contact-privacy a");
-  await privacyLink.click();
-  await expect(page).toHaveURL(/\/privacy\/$/);
-  await page.goBack();
-  await page
-    .locator("#contact-privacy")
-    .evaluate((element) => element.scrollIntoView({ block: "center" }));
-  await expect(privacyLink).toHaveCSS("text-decoration-line", "underline");
-  await page.screenshot({
-    path: testInfo.outputPath("visited-privacy-return.png"),
   });
 });
 
@@ -498,30 +457,41 @@ test("font failure retains readable fallback and narrow enlarged reflow", async 
   }
 });
 
-test("desktop redesign review specimens", async ({ page }, testInfo) => {
+test("desktop product and secondary-page visual review specimens", async ({
+  page,
+}, testInfo) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
-  for (const id of [
-    "introduction",
-    "our-approach",
-    "parkinsons-initiative",
-    "origin",
-    "current-work",
-    "collaborate",
+  await page.screenshot({
+    fullPage: true,
+    path: testInfo.outputPath("homepage-desktop.png"),
+  });
+  for (const selector of [
+    "#introduction",
+    "#ask-parkinsons",
+    ".mobile-product",
+    ".story-nav",
   ]) {
-    await page
-      .locator(`#${id}`)
-      .screenshot({ path: testInfo.outputPath(`desktop-${id}.png`) });
+    await page.locator(selector).screenshot({
+      path: testInfo.outputPath(`desktop-${selector.replace(/[.#]/g, "")}.png`),
+    });
+  }
+  for (const route of ["mobile", "research-approach"]) {
+    await page.goto(`/${route}/`);
+    await page.screenshot({
+      fullPage: true,
+      path: testInfo.outputPath(`${route}-desktop.png`),
+    });
   }
 });
 
 for (const width of [320, 390, 768, 1024, 1440]) {
-  test(`layout reflows at ${width}px and 200% text without clipping`, async ({
+  test(`product and detail layouts reflow at ${width}px and 200% text`, async ({
     page,
   }, testInfo) => {
     await page.setViewportSize({ width, height: 900 });
-    for (const route of ["/", "/privacy/"]) {
+    for (const route of ["/", "/mobile/", "/about/", "/privacy/"]) {
       await page.goto(route);
       await page.evaluate(() => document.fonts.ready);
       const textTargets = page.locator("h1, main p, nav a");
@@ -533,13 +503,13 @@ for (const width of [320, 390, 768, 1024, 1440]) {
       for (const enlarged of [false, true]) {
         if (enlarged) {
           await page.addStyleTag({ content: "html { font-size: 200%; }" });
-          const enlargedSizes = await textTargets.evaluateAll((elements) =>
+          const sizes = await textTargets.evaluateAll((elements) =>
             elements.map((element) =>
               parseFloat(getComputedStyle(element).fontSize),
             ),
           );
-          expect(enlargedSizes).toHaveLength(original.length);
-          enlargedSizes.forEach((size, index) =>
+          expect(sizes).toHaveLength(original.length);
+          sizes.forEach((size, index) =>
             expect(size).toBeGreaterThanOrEqual(original[index]! * 2),
           );
         }
@@ -550,7 +520,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
         ).toBe(true);
         const clipped = await page
           .locator(
-            "h1, h2, h3, p, li, nav, a, .concept-module, .hero-panel, .initiative-feature, .origin-transition, .work-item, .contact-panel, .contact-warning, .implementation-notice",
+            "h1, h2, h3, p, li, nav, a, .composer, .mobile-copy, .detail-heading, .contact-warning",
           )
           .evaluateAll((elements) =>
             elements
@@ -560,63 +530,13 @@ for (const width of [320, 390, 768, 1024, 1440]) {
               .map((element) => element.textContent),
           );
         expect(clipped).toEqual([]);
+        const name = route === "/" ? "homepage" : route.replaceAll("/", "");
         await page.screenshot({
           fullPage: !enlarged,
           path: testInfo.outputPath(
-            `${route === "/" ? "landing" : "privacy"}-${width}-${enlarged ? "200" : "100"}.png`,
+            `${name}-${width}-${enlarged ? "200" : "100"}.png`,
           ),
         });
-        if (route === "/") {
-          await expect(page.locator(".direction-art")).toHaveCSS(
-            "display",
-            width >= 1024 ? "block" : "none",
-          );
-          if (enlarged) {
-            const work = page.locator(".work-item").first();
-            const heading = await work.locator("h3").boundingBox();
-            const description = await work.locator("p").last().boundingBox();
-            expect(description!.y).toBeGreaterThan(
-              heading!.y + heading!.height,
-            );
-            for (const [selector, name] of [
-              [".concept-module", "concept"],
-              [".work-item", "work"],
-              [".contact-warning", "warning"],
-            ] as const) {
-              await page
-                .locator(selector)
-                .first()
-                .screenshot({
-                  path: testInfo.outputPath(`${name}-${width}-200.png`),
-                });
-            }
-            if (width === 320) {
-              expect(
-                await page
-                  .locator(".primary-navigation li:last-child a")
-                  .evaluate((element) => {
-                    const range = document.createRange();
-                    range.selectNodeContents(element);
-                    return range.getClientRects().length;
-                  }),
-              ).toBe(1);
-            }
-          }
-        }
-        await page.locator("h1").screenshot({
-          path: testInfo.outputPath(
-            `${route === "/" ? "headline" : "privacy-title"}-${width}-${enlarged ? "200" : "100"}.png`,
-          ),
-        });
-        if (route === "/" && !enlarged) {
-          await page
-            .locator(".concept-module")
-            .first()
-            .screenshot({
-              path: testInfo.outputPath(`concepts-${width}.png`),
-            });
-          await page.evaluate(() => window.scrollTo(0, 0));
-        }
       }
     }
   });
