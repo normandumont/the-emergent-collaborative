@@ -3,7 +3,6 @@ import Masthead from "../components/Masthead.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { definition, siteName } from "../content/site";
 import interFont from "../assets/fonts/Inter-Latin-Variable.woff2?url";
-import headingFont from "../assets/fonts/LibreFranklin-Latin-Variable.woff2?url";
 import "../styles/global.css";
 
 interface Props {
@@ -29,13 +28,6 @@ const {
     <link
       rel="preload"
       href={interFont}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href={headingFont}
       as="font"
       type="font/woff2"
       crossorigin

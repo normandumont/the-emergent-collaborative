@@ -26,20 +26,19 @@ export const approvedCopy = {
 } as const;
 
 export const primaryNavigation = [
-  { label: "Our approach", href: "/#our-approach" },
-  { label: "Parkinson's initiative", href: "/#parkinsons-initiative" },
-  { label: "Current work", href: "/#current-work" },
-  { label: "Collaborate", href: "/#collaborate" },
+  { label: "AI Knowledgebase", href: "/#knowledgebase" },
+  { label: "Mobile App", href: "/mobile/" },
+  { label: "About", href: "/about/" },
+  { label: "Project Story", href: "/project-story/" },
+  { label: "Privacy", href: "/privacy/" },
 ] as const;
 
 export const secondaryNavigation = [
-  { label: "Why change over time", href: "#why-change" },
-  { label: "Our approach", href: "#our-approach" },
-  { label: "Parkinson's initiative", href: "#parkinsons-initiative" },
-  { label: "Origin", href: "#origin" },
-  { label: "Current work", href: "#current-work" },
-  { label: "Collaborate", href: "#collaborate" },
-  { label: "Sources", href: "#sources" },
+  { label: "Why Meridian Station", href: "/about/" },
+  { label: "The Parkinson's Project", href: "/parkinsons-project/" },
+  { label: "The 711-mile ride", href: "/project-story/" },
+  { label: "Research approach", href: "/research-approach/" },
+  { label: "About the founder", href: "/founder/" },
 ] as const;
 
 export const placeholders = {

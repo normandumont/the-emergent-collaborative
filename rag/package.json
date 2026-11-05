@@ -1,0 +1,25 @@
+{
+  "name": "meridian-station-rag-prototype",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "search": "npm run build && node lib/scripts/run-discovery.js",
+    "ingest": "npm run build && node lib/scripts/ingest-pmids.js",
+    "ingest-query": "npm run build && node lib/scripts/ingest-query.js",
+    "status": "npm run build && node lib/scripts/status.js",
+    "test": "npm run build && node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.12.0",
+    "fast-xml-validator": "^1.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "~5.9.3"
+  }
+}

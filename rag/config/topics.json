@@ -1,0 +1,10 @@
+[
+  { "id": "clinical-trials", "label": "Clinical trials" },
+  { "id": "systematic-reviews", "label": "Systematic reviews" },
+  { "id": "exercise", "label": "Exercise" },
+  { "id": "sleep", "label": "Sleep" },
+  { "id": "digital-biomarkers", "label": "Digital biomarkers" },
+  { "id": "glp1", "label": "GLP-1" },
+  { "id": "alpha-synuclein", "label": "Alpha-synuclein" },
+  { "id": "stem-cells", "label": "Stem cells" }
+]

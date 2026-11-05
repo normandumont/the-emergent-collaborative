@@ -1,0 +1,8 @@
+node_modules/
+lib/
+data/**
+!data/raw/
+!data/raw/.gitkeep
+!data/normalized/
+!data/normalized/.gitkeep
+.env*

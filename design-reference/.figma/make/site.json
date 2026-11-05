@@ -1,0 +1,12 @@
+{
+  "title": "Meridian Station",
+  "description": "Explore Parkinson’s research with AI-assisted insights and discover a mobile project for tracking real-world observations over time.",
+  "language": "en",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -1,0 +1,35 @@
+---
+import DetailLayout from "../layouts/DetailLayout.astro";
+import DevicePreview from "../components/DevicePreview.astro";
+---
+
+<DetailLayout
+  title="Understanding change over time."
+  eyebrow="Mobile application · In development"
+  intro="Meridian Station is exploring how responsibly selected observations could help people recognize patterns and formulate better questions over time."
+  feature
+>
+  <DevicePreview />
+  <section aria-labelledby="mobile-context">
+    <h2 id="mobile-context">Context matters.</h2>
+    <p>
+      Potential observations include movement, exercise, symptoms, sleep,
+      environment, and other carefully selected measurements. More information
+      is not automatically better; purpose, relevance, burden, missing context,
+      and measurement quality all matter.
+    </p>
+    <p>
+      Patterns would be prompts for further investigation—not proof of
+      causation. Any future collection would require defined purposes, informed
+      consent, and separate privacy safeguards.
+    </p>
+    <p class="product-caveat">
+      This project is in development. It is not a clinical, diagnostic, or
+      treatment product. This website does not collect mobile observations or
+      enroll participants.
+    </p>
+    <a class="text-link" href="/research-approach/"
+      >Read our research approach <span aria-hidden="true">→</span></a
+    >
+  </section>
+</DetailLayout>

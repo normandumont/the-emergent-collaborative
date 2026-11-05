@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <GetRecord><record>
+    <header><identifier>oai:pubmedcentral.nih.gov:20001</identifier><datestamp>2026-01-01</datestamp><setSpec>pmc-open</setSpec></header>
+    <metadata><article><front><article-meta>
+      <article-id pub-id-type="pmc">20001</article-id><article-id pub-id-type="pmid">10001</article-id>
+      <permissions><copyright-statement>Authored test fixture.</copyright-statement>
+        <license xlink:href="https://creativecommons.org/licenses/by/4.0/"><license-p>This synthetic fixture is licensed under Creative Commons Attribution 4.0.</license-p></license>
+      </permissions>
+    </article-meta></front>
+    <body>
+      <sec><title>1. Introduction</title><p>Authored <italic>introduction</italic> paragraph.</p><p>A second paragraph.</p></sec>
+      <sec><title>Materials and methods</title><p>Fixture parent method.</p><sec><title>Observation procedure</title><p>Fixture nested method.</p></sec></sec>
+      <sec><title>Results</title><p>Fixture results, not scientific findings.</p><fig><caption><p>Excluded figure text.</p></caption></fig><table-wrap><table><tr><td>Excluded table text.</td></tr></table></table-wrap></sec>
+      <sec><title>Discussion</title><p>Fixture discussion.</p></sec>
+      <sec><title>Conclusions</title><p>Fixture conclusion.</p></sec>
+      <sec><title>Limitations</title><p>Fixture limitation.</p></sec>
+    </body>
+    </article></metadata>
+  </record></GetRecord>
+</OAI-PMH>

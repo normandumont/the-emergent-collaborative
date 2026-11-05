@@ -1,0 +1,38 @@
+---
+import DetailLayout from "../layouts/DetailLayout.astro";
+import { approvedCopy } from "../content/site";
+---
+
+<DetailLayout
+  title="Technology, questions, and lived context."
+  eyebrow="Founder"
+  intro="Meridian Station was founded by Norman Dumont after decades in software and a personal intersection of Parkinson's, cycling, and technology experimentation."
+>
+  <section>
+    <h2>A practical technology perspective</h2>
+    <p>
+      An early software-career experience at Rebar Foundry, a dot-com-era
+      incubator exploring new technologies, helped shape the founder's interest
+      in turning emerging ideas into practical experiments.
+    </p>
+    <p>
+      After decades building software, Parkinson's and cycling brought new
+      questions into that work. Ride for Parkinson's began as an awareness
+      effort and became a catalyst for real-world technology experimentation.
+    </p>
+    <a class="text-link" href="/project-story/"
+      >Read the project story <span aria-hidden="true">→</span></a
+    >
+  </section>
+  <section>
+    <h2>Publication responsibility</h2>
+    <p>{approvedCopy.publicationResponsibility}</p>
+    <p>{approvedCopy.materialRelationships}</p>
+    <p>
+      Corrections, questions, and project-focused inquiries are welcome.
+      <a href="/about/#collaborate"
+        >Contact us about a correction or collaboration.</a
+      >
+    </p>
+  </section>
+</DetailLayout>

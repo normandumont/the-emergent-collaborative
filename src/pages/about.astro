@@ -1,0 +1,103 @@
+---
+import DetailLayout from "../layouts/DetailLayout.astro";
+import { approvedCopy, contactEmail, definition } from "../content/site";
+---
+
+<DetailLayout title="Why Meridian Station" eyebrow="About" intro={definition}>
+  <section>
+    <h2>A focused place to begin</h2>
+    <p>
+      Meridian Station is an early-stage, founder-led initiative. Parkinson's is
+      where this work begins. It is personally meaningful to the founder and
+      gives the initiative a focused place to start asking questions about
+      research, experience, and change over time.
+    </p>
+    <p>
+      Parkinson's is the first initiative, not the limit of the organization's
+      interests. Any future expansion would need its own purpose and
+      justification.
+    </p>
+  </section>
+  <section id="current-work">
+    <h2>What we are building</h2>
+    <p>{approvedCopy.futureCapabilities}</p>
+    <p>
+      The AI question tool is a prototype, not a verified research library.
+      Source-linked research discovery remains an intended direction. The mobile
+      application is an exploratory development project, not an available
+      personal-data platform.
+    </p>
+    <p>
+      Public research information and private personal information would remain
+      separate. Any future work involving personal records, sensing, or analysis
+      would need separate requirements, privacy safeguards, and evaluation.
+    </p>
+  </section>
+  <section id="collaborate">
+    <h2>Help shape the next questions</h2>
+    <p>
+      You do not need to be a researcher or developer to offer a useful
+      perspective. Ways to contribute could include:
+    </p>
+    <ul class="contribution-examples">
+      <li>
+        Offering lived-experience perspectives on the questions and language,
+        without sharing personal health histories.
+      </li>
+      <li>
+        Challenging an assumption or suggesting a more careful research
+        approach.
+      </li>
+      <li>Helping with design, accessibility, and clearer information.</li>
+      <li>
+        Discussing research assistance or a bounded technical investigation.
+      </li>
+    </ul>
+    <p>
+      These are starting points for a conversation, not staffed openings or
+      promises of a project role.
+    </p>
+    <div class="contact-warning">
+      <h3>Before you email</h3>
+      <p>
+        Please keep your message about the project. <strong
+          >Do not send medical records, symptom histories, medication details,
+          location traces, or other sensitive health information. Do not attach
+          files.</strong
+        >
+      </p>
+      <p>
+        This channel does not provide medical advice and is not monitored for
+        urgent help. Contacting us does not enroll you in research or authorize
+        publication of your message.
+      </p>
+    </div>
+    <p id="contact-privacy">
+      Email shares your address and message with the email services involved.
+      Read <a href="/privacy/">Privacy and contact information</a> before deciding
+      what to send.
+    </p>
+    <h3>Email about the project</h3>
+    <p class="contact-address">
+      <a class="email-address" href={`mailto:${contactEmail}`}>{contactEmail}</a
+      >
+    </p>
+    <p>
+      You can use your own email service. If an email application does not open,
+      copy the address into a new message.
+    </p>
+    <div class="message-guidance">
+      <p>
+        A short note about the question or contribution you have in mind is
+        enough. You do not need to disclose a diagnosis or personal health
+        history. Your name, organization, and professional background are
+        optional.
+      </p>
+      <p>
+        You can use the same address to flag a correction or ask about
+        information handling.
+      </p>
+    </div>
+    <p class="contact-expectation">{approvedCopy.contactExpectation}</p>
+  </section>
+</DetailLayout>
