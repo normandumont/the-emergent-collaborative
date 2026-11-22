@@ -426,3 +426,163 @@ test("malformed successful payloads fail safely instead of becoming an answer", 
     await expect(page.locator("#ask-answer")).toBeEmpty();
   }
 });
+
+test("RAG sources use safe canonical links, retain evidence labels and clear on reset", async ({
+  page,
+}) => {
+  const title =
+    "<script>window.sourceExecuted=true</script> Aerobic exercise evidence";
+  await page.route("**/api/ask", (route) =>
+    route.fulfill({
+      json: {
+        answer: "Clinical evidence is limited [PMID 41171380]",
+        requestId: "rag",
+        retrieval: { used: true, sourceCount: 1 },
+        sources: [
+          {
+            pmid: "41171380",
+            title,
+            year: 2026,
+            studyType: "randomized-controlled-trial",
+            population: "human",
+            evidenceType: "Randomized controlled trial",
+            url: "https://pubmed.ncbi.nlm.nih.gov/41171380/",
+            score: 0.9876,
+            fileId: "file-internal-sentinel",
+            filename: "internal-filename-sentinel.md",
+            warnings: ["internal-warning-sentinel"],
+            studyDesignTier: 2,
+            chunks: ["raw-chunk-sentinel"],
+          },
+        ],
+      },
+    }),
+  );
+  await page.goto("/");
+  await page
+    .getByLabel("Your Parkinson's research question")
+    .fill("Exercise evidence?");
+  await page.getByRole("button", { name: "Ask", exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "Research sources" }),
+  ).toBeVisible();
+  const link = page.locator("#ask-sources a");
+  await expect(link).toHaveText(title);
+  await expect(link).toHaveAttribute(
+    "href",
+    "https://pubmed.ncbi.nlm.nih.gov/41171380/",
+  );
+  await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  await expect(page.locator("#ask-sources")).toContainText(
+    "PMID 41171380 (2026)",
+  );
+  await expect(page.locator("#ask-sources")).toContainText(
+    "Randomized controlled trial",
+  );
+  await expect(page.locator("#ask-sources script")).toHaveCount(0);
+  await expect(page.locator("#ask-sources")).not.toContainText(
+    /0\.9876|file-internal|internal-filename|internal-warning|raw-chunk|studyDesignTier/,
+  );
+  expect(await page.evaluate(() => "sourceExecuted" in window)).toBe(false);
+  await page.setViewportSize({ width: 320, height: 900 });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+  expect(
+    (await new AxeBuilder({ page }).include("#ask-parkinsons").analyze())
+      .violations,
+  ).toEqual([]);
+  await page.getByRole("button", { name: "Clear / reset" }).click();
+  await expect(page.locator("#ask-sources")).toBeEmpty();
+});
+
+test("inconsistent retrieval/source payloads never render provenance or an answer", async ({
+  page,
+}) => {
+  const source = {
+    pmid: "10001",
+    title: "Public research source",
+    year: null,
+    evidenceType: "Mechanistic study",
+    url: "https://pubmed.ncbi.nlm.nih.gov/10001/",
+  };
+  const cases = [
+    { used: true, sourceCount: 0, sources: [] },
+    { used: false, sourceCount: 1, sources: [source] },
+    { used: true, sourceCount: 2, sources: [source, source] },
+    {
+      used: true,
+      sourceCount: 1,
+      sources: [{ ...source, url: "https://pubmed.ncbi.nlm.nih.gov/10002/" }],
+    },
+    { used: true, sourceCount: 1, sources: [{ ...source, title: "" }] },
+  ];
+  let index = 0;
+  await page.route("**/api/ask", (route) => {
+    const { sources, ...retrieval } = cases[index++]!;
+    return route.fulfill({
+      json: {
+        answer: "Untrusted claim",
+        requestId: "test",
+        sources,
+        retrieval,
+      },
+    });
+  });
+  await page.goto("/");
+  await page.getByLabel("Your Parkinson's research question").fill("Research?");
+  for (const _payload of cases) {
+    await page.getByRole("button", { name: "Ask", exact: true }).click();
+    await expect(page.locator("#ask-status")).toHaveText(
+      "No readable answer was received. Please retry.",
+    );
+    await expect(page.locator("#ask-answer")).toBeEmpty();
+    await expect(page.locator("#ask-sources a")).toHaveCount(0);
+  }
+});
+
+test("RAG source URLs cannot inject arbitrary links and fallback has no sources heading", async ({
+  page,
+}) => {
+  let calls = 0;
+  await page.route("**/api/ask", (route) =>
+    route.fulfill({
+      json:
+        ++calls === 1
+          ? {
+              answer: "Claim",
+              requestId: "unsafe",
+              retrieval: { used: true, sourceCount: 1 },
+              sources: [
+                {
+                  pmid: "10001",
+                  title: "Unsafe",
+                  year: 2026,
+                  evidenceType: "Unknown",
+                  url: "javascript:alert(1)",
+                },
+              ],
+            }
+          : {
+              answer: "Fallback",
+              requestId: "fallback",
+              retrieval: { used: false, sourceCount: 0 },
+              sources: [],
+            },
+    }),
+  );
+  await page.goto("/");
+  await page.getByLabel("Your Parkinson's research question").fill("Research?");
+  await page.getByRole("button", { name: "Ask", exact: true }).click();
+  await expect(page.locator("#ask-status")).toHaveText(
+    "No readable answer was received. Please retry.",
+  );
+  await expect(page.locator("#ask-sources a")).toHaveCount(0);
+  await page.getByRole("button", { name: "Ask", exact: true }).click();
+  await expect(page.locator("#ask-answer")).toHaveText("Fallback");
+  await expect(
+    page.getByRole("heading", { name: "Research sources" }),
+  ).toHaveCount(0);
+});

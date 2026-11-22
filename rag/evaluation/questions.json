@@ -1,0 +1,227 @@
+[
+  {
+    "id": "exercise-001",
+    "question": "What evidence supports aerobic exercise for Parkinson's disease?",
+    "expectedTopics": ["exercise"],
+    "preferredStudyTypes": [
+      "systematic-review",
+      "meta-analysis",
+      "randomized-controlled-trial"
+    ],
+    "expectedPmids": [],
+    "notes": "Human review required: identify relevant exercise syntheses and controlled trials, not just papers mentioning exercise."
+  },
+  {
+    "id": "exercise-002",
+    "question": "Does cycling improve motor symptoms in Parkinson's disease?",
+    "expectedTopics": ["exercise"],
+    "preferredStudyTypes": ["systematic-review", "randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Separate cycling interventions from generic activity and from mechanistic claims."
+  },
+  {
+    "id": "exercise-003",
+    "question": "What systematic reviews compare exercise approaches for Parkinson's motor symptoms?",
+    "expectedTopics": ["exercise"],
+    "preferredStudyTypes": ["systematic-review", "meta-analysis"],
+    "expectedPmids": [],
+    "notes": "Review-ranking challenge: a directly relevant synthesis should rank above a weak observational exercise paper."
+  },
+  {
+    "id": "exercise-004",
+    "question": "Which randomized human trials distinguish exercise symptom improvement from disease modification?",
+    "expectedTopics": ["exercise", "disease-modification"],
+    "preferredStudyTypes": ["randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": {
+      "humanOnly": true,
+      "studyType": "randomized-controlled-trial"
+    },
+    "notes": "Motor improvement is not proof of disease modification. This corpus may lack adequate longitudinal outcomes."
+  },
+  {
+    "id": "sleep-001",
+    "question": "What is known about sleep disturbance in Parkinson's disease?",
+    "expectedTopics": ["sleep"],
+    "preferredStudyTypes": ["systematic-review", "meta-analysis"],
+    "expectedPmids": [],
+    "notes": "Likely coverage gap in the initial exercise corpus."
+  },
+  {
+    "id": "sleep-002",
+    "question": "Which human randomized trials evaluate treatments for REM sleep behavior disorder in Parkinson's disease?",
+    "expectedTopics": ["sleep"],
+    "preferredStudyTypes": ["systematic-review", "randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Do not substitute exercise sleep-quality secondary outcomes for trials of REM sleep behavior disorder."
+  },
+  {
+    "id": "tremor-001",
+    "question": "What evidence exists for treatments targeting Parkinsonian tremor?",
+    "expectedTopics": ["tremor"],
+    "preferredStudyTypes": ["systematic-review", "randomized-controlled-trial"],
+    "expectedPmids": [],
+    "notes": "Assess direct tremor outcomes, not only broad motor scales."
+  },
+  {
+    "id": "tremor-002",
+    "question": "What randomized evidence compares focused ultrasound and deep brain stimulation for Parkinsonian tremor?",
+    "expectedTopics": [
+      "tremor",
+      "focused-ultrasound",
+      "deep-brain-stimulation"
+    ],
+    "preferredStudyTypes": ["systematic-review", "randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Deliberately difficult: head-to-head evidence may not exist, and mentions are not comparisons."
+  },
+  {
+    "id": "digital-001",
+    "question": "Can wearable sensors measure Parkinson's motor symptoms?",
+    "expectedTopics": ["wearable", "digital-biomarker"],
+    "preferredStudyTypes": ["systematic-review", "cohort", "longitudinal"],
+    "expectedPmids": [],
+    "notes": "Look for measurement validation, not efficacy claims inferred from device use."
+  },
+  {
+    "id": "digital-002",
+    "question": "Have digital gait biomarkers been validated longitudinally in people with Parkinson's disease?",
+    "expectedTopics": ["digital-biomarker", "gait"],
+    "preferredStudyTypes": ["longitudinal", "cohort", "systematic-review"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "One-off sensor snapshots are not longitudinal validation."
+  },
+  {
+    "id": "glp1-001",
+    "question": "What human evidence exists for GLP-1 receptor agonists in Parkinson's disease?",
+    "expectedTopics": ["glp1"],
+    "preferredStudyTypes": ["randomized-controlled-trial", "systematic-review"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Human-versus-animal discrimination test. Initial corpus likely has no direct clinical trial."
+  },
+  {
+    "id": "glp1-002",
+    "question": "Do human randomized trials of exenatide or lixisenatide demonstrate sustained disease modification?",
+    "expectedTopics": ["glp1", "disease-modification"],
+    "preferredStudyTypes": ["randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": {
+      "humanOnly": true,
+      "studyType": "randomized-controlled-trial"
+    },
+    "notes": "Do not treat preclinical neuroprotection or symptomatic endpoints as established disease modification."
+  },
+  {
+    "id": "alpha-synuclein-001",
+    "question": "What is the evidence for alpha-synuclein targeted therapies?",
+    "expectedTopics": ["alpha-synuclein"],
+    "preferredStudyTypes": ["systematic-review", "randomized-controlled-trial"],
+    "expectedPmids": [],
+    "notes": "Separate mechanisms from completed clinical outcomes."
+  },
+  {
+    "id": "alpha-synuclein-002",
+    "question": "Which alpha-synuclein antibody trials report randomized human motor outcomes?",
+    "expectedTopics": ["alpha-synuclein"],
+    "preferredStudyTypes": ["randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Human-versus-animal discrimination; likely unsupported by exercise-only corpus."
+  },
+  {
+    "id": "stem-cell-001",
+    "question": "What clinical evidence exists for stem-cell-derived dopaminergic neuron transplantation?",
+    "expectedTopics": ["stem-cell"],
+    "preferredStudyTypes": [
+      "clinical-trial",
+      "randomized-controlled-trial",
+      "systematic-review"
+    ],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Experimental transplantation must not be presented as established treatment."
+  },
+  {
+    "id": "stem-cell-002",
+    "question": "What long-term human safety data exist after dopaminergic stem cell transplantation?",
+    "expectedTopics": ["stem-cell"],
+    "preferredStudyTypes": ["clinical-trial", "longitudinal", "cohort"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Distinguish animal graft survival from human long-term safety."
+  },
+  {
+    "id": "disease-modification-001",
+    "question": "Which therapies have randomized clinical evidence suggesting disease modification in Parkinson's disease?",
+    "expectedTopics": ["disease-modification"],
+    "preferredStudyTypes": ["systematic-review", "randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Suggestive evidence is not an established disease-modifying treatment."
+  },
+  {
+    "id": "disease-modification-002",
+    "question": "Which randomized trials show reduced long-term Parkinson's progression after treatment withdrawal?",
+    "expectedTopics": ["disease-modification"],
+    "preferredStudyTypes": ["randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Difficult endpoint-specific query; unrelated symptom improvement is not adequate retrieval."
+  },
+  {
+    "id": "nutrition-001",
+    "question": "What evidence exists for dietary interventions in Parkinson's disease?",
+    "expectedTopics": ["nutrition"],
+    "preferredStudyTypes": ["systematic-review", "randomized-controlled-trial"],
+    "expectedPmids": [],
+    "notes": "Likely corpus gap; observational associations are not intervention effects."
+  },
+  {
+    "id": "nutrition-002",
+    "question": "Do randomized human trials support a ketogenic diet for Parkinson's motor outcomes?",
+    "expectedTopics": ["nutrition"],
+    "preferredStudyTypes": ["randomized-controlled-trial", "systematic-review"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Do not substitute mitochondrial mechanism papers for dietary trials."
+  },
+  {
+    "id": "mitochondria-001",
+    "question": "What evidence connects mitochondrial dysfunction with Parkinson's disease?",
+    "expectedTopics": ["mitochondria"],
+    "preferredStudyTypes": ["systematic-review", "basic-science"],
+    "expectedPmids": [],
+    "notes": "Mixed and unknown populations are allowed here; mechanism is not clinical efficacy."
+  },
+  {
+    "id": "mitochondria-002",
+    "question": "Does aerobic exercise affect mitophagy pathways relevant to Parkinson's disease?",
+    "expectedTopics": ["mitochondria", "exercise"],
+    "preferredStudyTypes": ["systematic-review", "basic-science"],
+    "expectedPmids": [],
+    "notes": "Potentially covered mechanistic topic. A human reviewer must curate relevant PMIDs; do not infer human benefit."
+  },
+  {
+    "id": "gap-001",
+    "question": "Which phase III human randomized trials prove that a consumer wearable reverses Parkinson's disease?",
+    "expectedTopics": ["wearable", "disease-modification"],
+    "preferredStudyTypes": ["randomized-controlled-trial"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Deliberately unsupported premise. High semantic similarity must not be mistaken for confirmation."
+  },
+  {
+    "id": "gap-002",
+    "question": "What five-year randomized evidence shows that cycling cures Parkinson's disease?",
+    "expectedTopics": ["exercise", "disease-modification"],
+    "preferredStudyTypes": ["randomized-controlled-trial", "systematic-review"],
+    "expectedPmids": [],
+    "filters": { "humanOnly": true },
+    "notes": "Deliberately unsupported cure claim. Human assessment should identify inadequate sources, not reward any exercise hit."
+  }
+]

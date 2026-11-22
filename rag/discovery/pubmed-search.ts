@@ -109,15 +109,28 @@ export async function discover(
   const existing = ids.filter((pmid) => catalog.articles[pmid]).length;
   for (const pmid of ids) {
     const entry = catalog.articles[pmid];
+    const relationships = new Map(
+      (entry?.discoveredBy ?? []).map((item) => [item.queryId, item.topics]),
+    );
+    relationships.set(
+      query.id,
+      [
+        ...new Set([...(relationships.get(query.id) ?? []), ...query.topics]),
+      ].sort(),
+    );
     catalog.articles[pmid] = {
       pmid,
       firstDiscoveredAt: entry?.firstDiscoveredAt ?? executedAt,
       lastDiscoveredAt: executedAt,
       queryIds: [...new Set([...(entry?.queryIds ?? []), query.id])],
       topics: [...new Set([...(entry?.topics ?? []), ...query.topics])],
+      discoveredBy: [...relationships]
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([queryId, topics]) => ({ queryId, topics })),
       status: entry?.status ?? "discovered",
       lastIngestedAt: entry?.lastIngestedAt ?? null,
       errorCategory: entry?.errorCategory ?? null,
+      ...(entry?.corpus ? { corpus: entry.corpus } : {}),
     };
   }
   const result: DiscoveryRun = {

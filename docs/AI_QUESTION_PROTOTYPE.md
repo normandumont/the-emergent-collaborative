@@ -1,5 +1,139 @@
 # Ask Parkinson's Insights — local prototype
 
+## Readiness hardening
+
+See [RAG readiness](RAG_READINESS.md) for the current validation report, bounded
+provider-call/deadline contract, preview smoke commands and production blockers.
+See the [withdrawal runbook](RAG_WITHDRAWAL_RUNBOOK.md) for the snapshot refresh
+and approved incident procedure. Neither document authorizes deployment.
+
+The runtime package now also requires `functions\runtime-manifest.sha256`.
+Exporting the verified snapshot writes both files. Validate with
+`npm.cmd --prefix functions run rag:manifest:check`.
+Structured application logs use `totalLatencyMs` (replacing the historical
+`latencyMs` name), `generationLatencyMs`, `ragFallback` and normalized
+`rag-*` fallback categories. The earlier implementation record below describes
+the initial integration where it differs from this hardening pass.
+
+## Reversible RAG integration — 13 November 2026
+
+Implementation only; **no Firebase deployment or rollout is authorized**.
+`RAG_ENABLED` is a server-side Boolean parameter, default **false**.
+`OPENAI_VECTOR_STORE_ID` is a server-side string parameter, default empty.
+The existing `OPENAI_API_KEY` secret, Origin checks, 4000-character/24-KiB input
+limits, five/IP and 20/instance per minute, four concurrent requests, 25-second
+upstream budget, 35-second function limit, `store:false`, and no-history behavior
+remain unchanged. Disabling RAG restores the original model instructions/input.
+The backward-compatible success extension is `retrieval: { used, sourceCount }`;
+`answer`, `sources`, and `requestId` remain. Sources are the model's validated
+cited subset, at most five, not every candidate and not proof of claim validity.
+
+### Reuse and packaged state
+
+`rag\retrieval\pipeline.ts` owns the existing candidate limit 50, final five
+papers/two chunks, intent/topic matching, filters and unchanged `diversify`
+scoring. The CLI adapter still verifies the current local manifest, indexed
+receipts, governed/base records, retrieval bytes and every raw-source hash.
+The Firebase adapter invokes the **same pipeline**, never a CLI subprocess.
+Its only filesystem input is `functions\runtime-manifest.json`.
+
+The explicit offline exporter verifies the synchronized store, no pending work,
+all eligible document/source hashes and unchanged manifest/vector-state bytes.
+It packages titles, safety/design/topic metadata, canonical source URLs,
+document SHA-256, indexed file identities/fingerprints and taxonomy. It does
+**not** package abstracts, full text, raw snapshots, normalized records,
+discovery queries, evaluations or reports. The file includes 519 policy entries,
+516 eligible; excluded entries cannot pass the runtime gate.
+`functions\runtime` contains generated shared library code/types, not corpus
+data. Both generated artifacts are ignored by Git and must be prepared explicitly
+for an approved deployment. Ordinary Functions builds never export corpus data.
+`gcp-build` uses the packaged library instead of requiring a sibling RAG checkout.
+
+**Important limitation:** runtime governance is an immutable deployment snapshot,
+not a live registry. Metadata/fingerprint mismatches are hard-rejected, but a
+withdrawal still present in the old remote store cannot be discovered from an old
+snapshot alone. Regenerate the whitelist and obtain deployment approval for
+governance changes; disable RAG while addressing urgent withdrawals. Never use
+vector attributes alone to bypass the local whitelist. This development store
+and `draft-human-review` gold set do not establish public clinical readiness.
+
+### Budgets, grounding and failure handling
+
+Retrieval gets five seconds within the unchanged 25-second overall budget;
+generation uses the remaining time and the original request AbortSignal.
+The SDK and retry/rate-limiter waits honor cancellation; timers/listeners are
+cleared. Missing/mismatched/corrupt configuration, failed or malformed retrieval,
+timeouts or zero useful evidence use the original non-RAG answer path.
+`retrieval.used=false` never represents source-grounded output.
+
+Evidence uses at most five papers/two 1200-character excerpts, with a total
+16,000-character cap **after escaping/serialization**. Complete blocks are
+retained; fewer sources may fit when escaping expands content. Source text is
+untrusted user-role reference data, not developer/system authority. Higher-level
+instructions forbid following embedded instructions, medical advice, invented
+citations, conflating animal/cellular mechanisms with human clinical benefit,
+observational causality or symptom benefit with disease modification.
+
+RAG Responses use a strict JSON schema (`answer`, `citedPmids`) whose allowed
+PMIDs come from the bounded evidence set. The server independently validates
+structured and inline `[PMID ...]` citations; unlisted IDs, mismatches and
+unsolicited URLs/internal identifiers are rejected. Invalid citations trigger
+one non-RAG regeneration within the same remaining budget. This can cost a second
+generation call; it never resets the request deadline. Prompt instructions and
+schema checks are safeguards, not proof against every model-level injection or
+scientific overclaim. Full-text/clinical and human review remain necessary.
+
+Success logging adds only `ragUsed`, `ragSourceCount`, `ragLatencyMs` and a coarse
+`ragFallbackCategory`. No questions, answers, bodies, excerpts, PMIDs, IPs,
+internal IDs, API keys or provider errors are logged by the adapter. Existing
+platform/provider retention still needs its separate privacy review.
+The frontend keeps text-only answers and warnings, and displays compact canonical
+PubMed links with title, PMID, year and a design label only for RAG-used responses.
+Design is not a clinical-quality score. Reset/reload clear the panel; no storage
+or new analytics are added.
+
+### Manual validation before any deployment
+
+From the repository root, with the existing local development corpus:
+
+```powershell
+npm.cmd --prefix rag run runtime-manifest -- --store-id vs_6aee7894bc2c8191b9ddf52a1a8baee6
+npm.cmd --prefix rag run build
+npm.cmd --prefix rag test
+npm.cmd --prefix functions run build
+npm.cmd --prefix functions test
+npm.cmd --prefix functions run test:emulator
+npm.cmd run check
+npm.cmd run format:check
+npm.cmd run build
+npm.cmd run test:static
+npm.cmd run test:ask
+npm.cmd run release:check
+```
+
+The emulator smoke test is demo-project/blank-secret only, and refuses to
+overwrite an existing local secret override. It uses the configured Node 22
+Functions runtime; no Firestore/Java emulator is added. Publication checks still
+independently govern rollout; a passing test does not authorize deployment.
+
+For authorized **local-only live** smoke tests in an already credential-configured
+terminal (never paste or commit the key):
+
+```powershell
+$env:RAG_ENABLED = 'true'
+$env:OPENAI_VECTOR_STORE_ID = 'vs_6aee7894bc2c8191b9ddf52a1a8baee6'
+npm.cmd --prefix functions run test:rag:live
+```
+
+This invokes retrieval and Responses locally for aerobic-exercise evidence and
+exercise/progression distinction questions. It prints only source counts and
+validation metadata, not question/answer content, and does not call Firebase or
+mutate vectors. Assess clinical-versus-mechanistic interpretation and disease-
+modification caution in a separately authorized manual UI review; whitelist
+checks alone do not validate scientific claims. Restore the shell flag to false
+after testing. Enabling the deployed parameter and deploying any reviewed
+artifact remain separate founder decisions.
+
 ## Current release-hardening tests — preview behavior
 
 The current founder-provided site now includes the Ask section in the normal
@@ -12,28 +146,28 @@ change product/privacy copy, or change runtime/deployment configuration.
 
 ### Coverage and expected behavior
 
-| Case | Automated level and contract |
-|---|---|
-| Valid question | Real local HTTP handler + official SDK with mocked transport: 200, nonblank answer, sources array, generated request ID; browser success under configured CSP |
-| Missing/empty/whitespace/non-string question | Unit + emulator: 400 and generic JSON; no model call |
-| More than 4000 characters | Unit + emulator: 400; boundary 4000 accepted at unit level |
-| Request body limit | Valid JSON larger than 24 KiB: emulator/handler 413 JSON; exact byte boundary and multibyte padding checked in unit tests |
-| Malformed JSON | Handler unit: 400 JSON; actual managed emulator: 400 HTML before handler, no response stack in production-style runtime |
-| Wrong media type | Unit + emulator: 415; browser handles rejection generically |
-| Missing/unapproved Origin | Unit + emulator reject 403 with no permissive CORS; hosted OPTIONS also checks the real policy |
-| Approved preview Origin | Exact-origin HTTP unit/integration acceptance and hosted OPTIONS 204; no wildcard allowlist |
-| Rate limits | Unit checks five/IP and 20/instance plus expiry/429; real emulator checks the sixth same-IP POST is 429 and waits the unchanged real minute window |
-| OpenAI timeout | Node mock timers advance the actual configured 25-second handler deadline, verify abort, generic 504, metadata-only logging and successful retry |
-| Provider failure/incomplete output | Official SDK mocked transport + real local HTTP mapping: generic 502, not raw SDK errors, provider body, key or stack |
-| Browser timeout | Real external script, Playwright clock: 30-second AbortController path and exact timeout message |
-| Reset/cancel | AbortSignal observed, old answer cleared, stale response deliberately released after cancellation without rendering it |
-| Double submit | Disabled button plus programmatic submit events produce only one fetch |
-| Rendering | HTML/script-like answer is literal text; malicious error bodies and malformed successful payloads are not rendered |
-| Persistence | Browser observes attempts to use storage/cookie setters without suppressing them; all attempts remain zero, stores/cookies empty, reload/reset cleared |
-| Static build | One Ask section directly after hero, `/api/ask`, one external `/ask.js`, no inline executable AI script or additional client bundles |
-| Headers | Local config CSP checked; real founder-review GETs check CSP, nosniff, referrer/permissions/cache policy, X-Robots-Tag and positive HSTS |
-| Privacy | Built `/privacy/` preserves AI/OpenAI/Firebase disclosures and rejects PH-10/11/13/14 and obsolete static-only/incomplete-notice wording |
-| Logging | Only requestId, timestamp, status, latencyMs, coarse category; flat metadata types and sentinels catch questions, answers, bodies, IPs, keys, instructions and raw errors |
+| Case                                         | Automated level and contract                                                                                                                                              |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Valid question                               | Real local HTTP handler + official SDK with mocked transport: 200, nonblank answer, sources array, generated request ID; browser success under configured CSP             |
+| Missing/empty/whitespace/non-string question | Unit + emulator: 400 and generic JSON; no model call                                                                                                                      |
+| More than 4000 characters                    | Unit + emulator: 400; boundary 4000 accepted at unit level                                                                                                                |
+| Request body limit                           | Valid JSON larger than 24 KiB: emulator/handler 413 JSON; exact byte boundary and multibyte padding checked in unit tests                                                 |
+| Malformed JSON                               | Handler unit: 400 JSON; actual managed emulator: 400 HTML before handler, no response stack in production-style runtime                                                   |
+| Wrong media type                             | Unit + emulator: 415; browser handles rejection generically                                                                                                               |
+| Missing/unapproved Origin                    | Unit + emulator reject 403 with no permissive CORS; hosted OPTIONS also checks the real policy                                                                            |
+| Approved preview Origin                      | Exact-origin HTTP unit/integration acceptance and hosted OPTIONS 204; no wildcard allowlist                                                                               |
+| Rate limits                                  | Unit checks five/IP and 20/instance plus expiry/429; real emulator checks the sixth same-IP POST is 429 and waits the unchanged real minute window                        |
+| OpenAI timeout                               | Node mock timers advance the actual configured 25-second handler deadline, verify abort, generic 504, metadata-only logging and successful retry                          |
+| Provider failure/incomplete output           | Official SDK mocked transport + real local HTTP mapping: generic 502, not raw SDK errors, provider body, key or stack                                                     |
+| Browser timeout                              | Real external script, Playwright clock: 30-second AbortController path and exact timeout message                                                                          |
+| Reset/cancel                                 | AbortSignal observed, old answer cleared, stale response deliberately released after cancellation without rendering it                                                    |
+| Double submit                                | Disabled button plus programmatic submit events produce only one fetch                                                                                                    |
+| Rendering                                    | HTML/script-like answer is literal text; malicious error bodies and malformed successful payloads are not rendered                                                        |
+| Persistence                                  | Browser observes attempts to use storage/cookie setters without suppressing them; all attempts remain zero, stores/cookies empty, reload/reset cleared                    |
+| Static build                                 | One Ask section directly after hero, `/api/ask`, one external `/ask.js`, no inline executable AI script or additional client bundles                                      |
+| Headers                                      | Local config CSP checked; real founder-review GETs check CSP, nosniff, referrer/permissions/cache policy, X-Robots-Tag and positive HSTS                                  |
+| Privacy                                      | Built `/privacy/` preserves AI/OpenAI/Firebase disclosures and rejects PH-10/11/13/14 and obsolete static-only/incomplete-notice wording                                  |
+| Logging                                      | Only requestId, timestamp, status, latencyMs, coarse category; flat metadata types and sentinels catch questions, answers, bodies, IPs, keys, instructions and raw errors |
 
 The browser suite now uses the **production build**, not Astro development mode.
 Its document responses receive the actual configured Firebase headers so
@@ -112,19 +246,19 @@ still deliberately rejects preview/noindex/publication markers.
 
 ### Verified results and changed files
 
-| Command | Result |
-|---|---|
-| `npm run check` | PASS: 21 files, no errors/warnings/hints |
-| `npm run build` | PASS: three static pages |
-| `npm run test:static` | PASS: seven tests |
-| `npm run test:browser` | PASS: 12 tests |
-| `npm run test:ask` | PASS: eight tests against the build under configured CSP |
-| `npm --prefix functions test` (Node 22) | PASS: 13 tests, including real local HTTP/SDK integration |
-| `npm --prefix functions run test:emulator` (Node 22) | PASS: real managed parser, byte/media/input validation and minute-window throttling |
+| Command                                                   | Result                                                                                                        |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `npm run check`                                           | PASS: 21 files, no errors/warnings/hints                                                                      |
+| `npm run build`                                           | PASS: three static pages                                                                                      |
+| `npm run test:static`                                     | PASS: seven tests                                                                                             |
+| `npm run test:browser`                                    | PASS: 12 tests                                                                                                |
+| `npm run test:ask`                                        | PASS: eight tests against the build under configured CSP                                                      |
+| `npm --prefix functions test` (Node 22)                   | PASS: 13 tests, including real local HTTP/SDK integration                                                     |
+| `npm --prefix functions run test:emulator` (Node 22)      | PASS: real managed parser, byte/media/input validation and minute-window throttling                           |
 | `npm run test:preview` with the configured preview origin | PASS: two hosted tests, including X-Robots-Tag, HSTS and actual approved/missing/unapproved Origin preflights |
-| Prettier check of changed/new test and package files | PASS |
-| `npm run format:check` | FAIL: 28 pre-existing untouched files |
-| `npm run release:check` | Expected FAIL: the three pages remain preview/noindex/publication-blocked |
+| Prettier check of changed/new test and package files      | PASS                                                                                                          |
+| `npm run format:check`                                    | FAIL: 28 pre-existing untouched files                                                                         |
+| `npm run release:check`                                   | Expected FAIL: the three pages remain preview/noindex/publication-blocked                                     |
 
 No behavioral test is failing in the final run. The hosted tests were also
 checked without a URL: they explicitly skip instead of accessing another host.
@@ -305,17 +439,17 @@ logs and SDK missing-secret warnings are separate; they require runtime review.
 
 ## 9. Cost controls
 
-| Control | Local implementation |
-|---|---|
-| Model | `MODEL = "gpt-6-luna"` in `functions/src/config.ts` only |
-| Model basis | Founder-selected Responses text model; <https://developers.openai.com/api/docs/models/gpt-6-luna> |
-| Question | 1–4000 UTF-16 code units, nonblank; 24 KiB full raw JSON body |
-| Input budget | No extra history/tools/files; conservative bound under 16,000 UTF-8 question bytes plus fixed instruction tokens, not an exact tokenizer limit |
-| Output | `max_output_tokens: 1200`; low verbosity; reasoning effort `none`; incomplete/empty answers rejected |
-| Timeout | 25 s abort/deadline for OpenAI; no SDK retries; 35 s function; 30 s browser |
-| Rate | 5 POST attempts/IP/minute, 20 total/instance/minute; fixed window; validation failures count |
-| Scale | `maxInstances: 1`, concurrency 4, minimum instances 0; no unlimited scale |
-| Monitoring plan | OpenAI project usage/budgets/alerts plus Google billing, function counts, status and latency metrics |
+| Control         | Local implementation                                                                                                                           |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Model           | `MODEL = "gpt-6-luna"` in `functions/src/config.ts` only                                                                                       |
+| Model basis     | Founder-selected Responses text model; <https://developers.openai.com/api/docs/models/gpt-6-luna>                                              |
+| Question        | 1–4000 UTF-16 code units, nonblank; 24 KiB full raw JSON body                                                                                  |
+| Input budget    | No extra history/tools/files; conservative bound under 16,000 UTF-8 question bytes plus fixed instruction tokens, not an exact tokenizer limit |
+| Output          | `max_output_tokens: 1200`; low verbosity; reasoning effort `none`; incomplete/empty answers rejected                                           |
+| Timeout         | 25 s abort/deadline for OpenAI; no SDK retries; 35 s function; 30 s browser                                                                    |
+| Rate            | 5 POST attempts/IP/minute, 20 total/instance/minute; fixed window; validation failures count                                                   |
+| Scale           | `maxInstances: 1`, concurrency 4, minimum instances 0; no unlimited scale                                                                      |
+| Monitoring plan | OpenAI project usage/budgets/alerts plus Google billing, function counts, status and latency metrics                                           |
 
 Character/byte limits conservatively bound input size but are not an exact input
 token cap. Expected conservative input budget is roughly 18,000 tokens including

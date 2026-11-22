@@ -3,6 +3,8 @@ import path from "node:path";
 import { MAX_BATCH_SIZE, MAX_RESULTS, RAG_ROOT } from "./constants.js";
 import { RagError } from "./logging.js";
 import type { StudyType } from "./article-schema.js";
+import { object, strings } from "./guards.js";
+export { object, strings };
 
 export interface Query {
   id: string;
@@ -27,15 +29,6 @@ export interface Config {
   batchSize: number;
 }
 
-export function object(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-export function strings(value: unknown): value is string[] {
-  return (
-    Array.isArray(value) &&
-    value.every((item) => typeof item === "string" && !!item.trim())
-  );
-}
 function fail(): never {
   throw new RagError("configuration", "Invalid RAG configuration.");
 }

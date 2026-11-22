@@ -8,12 +8,23 @@ import {
   MAX_RETRY_WAIT_MS,
   REQUEST_TIMEOUT_MS,
 } from "../shared/constants.js";
-import { RagError } from "../shared/logging.js";
+import { RagError, type ErrorCategory } from "../shared/logging.js";
 import { pmcid } from "./deduplicate.js";
 
 export interface Clock {
   now(): number;
   sleep(ms: number): Promise<void>;
+}
+export interface HttpDiagnostic {
+  host: string;
+  operation:
+    "pmc-front-matter" | "pmc-full-text" | "pubmed-search" | "pubmed-fetch";
+  attempt: number;
+  startedAt: string;
+  endedAt: string;
+  status: number | null;
+  category: ErrorCategory | null;
+  elapsedMs: number;
 }
 const realClock: Clock = {
   now: Date.now,
@@ -60,8 +71,12 @@ export function retryDelay(
   header: string | null,
   now: number,
   attempt: number,
+  random: () => number = () => 0,
 ): number {
-  if (header === null) return 1000 * 2 ** attempt;
+  if (header === null) {
+    const base = 1000 * 2 ** attempt;
+    return base + Math.floor(base * 0.25 * random());
+  }
   const delay = /^\d+$/.test(header)
     ? Number(header) * 1000
     : Date.parse(header) - now;
@@ -123,7 +138,13 @@ function bodyThrottled(body: string): boolean {
       /rate limit exceeded/i.test(json["error"])
     );
   }
-  return /<ERROR>\s*[^<]*rate limit exceeded[^<]*<\/ERROR>/i.test(body);
+  return (
+    /<ERROR(?:\s[^>]*)?>\s*[^<]*rate limit exceeded[^<]*<\/ERROR>/i.test(
+      body,
+    ) ||
+    (/<html\b/i.test(body.slice(0, 512)) &&
+      /\b(?:rate limit exceeded|too many requests)\b/i.test(body))
+  );
 }
 
 export class PubmedClient {
@@ -136,6 +157,13 @@ export class PubmedClient {
     private readonly config: Config,
     private readonly fetcher: typeof fetch = fetch,
     private readonly clock: Clock = realClock,
+    private readonly random: () => number = Math.random,
+    private readonly diagnostics:
+      ((event: HttpDiagnostic) => void) | undefined = process.env[
+      "RAG_HTTP_DIAGNOSTICS"
+    ] === "1"
+      ? (event) => console.log(JSON.stringify(event))
+      : undefined,
   ) {
     if (config.requestsPerSecond > (config.apiKey ? 10 : 3))
       throw new RagError(
@@ -202,6 +230,8 @@ export class PubmedClient {
     init: RequestInit,
     oai: boolean,
   ): Promise<string> {
+    const headers = new Headers(init.headers);
+    headers.set("User-Agent", this.config.tool);
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
       if (oai && this.oaiAttempts >= 100 && peakHours(this.clock.now()))
         throw new RagError(
@@ -212,16 +242,22 @@ export class PubmedClient {
       if (oai) this.oaiAttempts++;
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+      const started = this.clock.now();
+      let status: number | null = null;
+      let failure: ErrorCategory | null = null;
       let delay: number | null = null;
       try {
         const response = await this.fetcher(url, {
           ...init,
+          headers,
           signal: controller.signal,
           redirect: "error",
           credentials: "omit",
           cache: "no-store",
         });
+        status = response.status;
         if (response.status === 429 || response.status >= 500) {
+          failure = response.status === 429 ? "throttled" : "http";
           await response.body?.cancel();
           if (attempt === MAX_ATTEMPTS - 1)
             throw new RagError(
@@ -232,8 +268,10 @@ export class PubmedClient {
             response.headers.get("Retry-After"),
             this.clock.now(),
             attempt,
+            this.random,
           );
         } else if (!response.ok) {
+          failure = "http";
           await response.body?.cancel();
           throw new RagError(
             "http",
@@ -242,6 +280,7 @@ export class PubmedClient {
         } else {
           const body = await readBody(response);
           if (!bodyThrottled(body)) return body;
+          failure = "throttled";
           if (attempt === MAX_ATTEMPTS - 1)
             throw new RagError(
               "throttled",
@@ -251,18 +290,42 @@ export class PubmedClient {
             response.headers.get("Retry-After"),
             this.clock.now(),
             attempt,
+            this.random,
           );
         }
       } catch (error) {
+        failure =
+          error instanceof RagError
+            ? error.category
+            : controller.signal.aborted
+              ? "timeout"
+              : "network";
         if (error instanceof RagError) throw error;
         if (attempt === MAX_ATTEMPTS - 1)
           throw new RagError(
             controller.signal.aborted ? "timeout" : "network",
             "NCBI connection attempts failed.",
           );
-        delay = retryDelay(null, this.clock.now(), attempt);
+        delay = retryDelay(null, this.clock.now(), attempt, this.random);
       } finally {
         clearTimeout(timer);
+        const ended = this.clock.now();
+        this.diagnostics?.({
+          host: url.hostname,
+          operation: oai
+            ? url.searchParams.get("metadataPrefix") === "pmc_fm"
+              ? "pmc-front-matter"
+              : "pmc-full-text"
+            : url.pathname.endsWith("esearch.fcgi")
+              ? "pubmed-search"
+              : "pubmed-fetch",
+          attempt: attempt + 1,
+          startedAt: new Date(started).toISOString(),
+          endedAt: new Date(ended).toISOString(),
+          status,
+          category: failure,
+          elapsedMs: ended - started,
+        });
       }
       if (delay !== null) await this.clock.sleep(delay);
     }

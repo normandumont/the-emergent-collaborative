@@ -75,20 +75,20 @@ function initializeAsk() {
 
     const timeout = window.setTimeout(
       () => controller.abort(),
-      CLIENT_TIMEOUT_MS
+      CLIENT_TIMEOUT_MS,
     );
 
     try {
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ question: value }),
         credentials: "omit",
         cache: "no-store",
         redirect: "error",
-        signal: controller.signal
+        signal: controller.signal,
       });
 
       if (resetRequest) return;
@@ -113,15 +113,65 @@ function initializeAsk() {
         !Array.isArray(data.sources) ||
         typeof data.requestId !== "string"
       ) {
-        status.textContent =
-          "No readable answer was received. Please retry.";
+        status.textContent = "No readable answer was received. Please retry.";
         return;
       }
 
+      const retrieved = data.retrieval?.used === true;
+      const validSources =
+        data.sources.length <= 5 &&
+        new Set(data.sources.map((source) => source?.pmid)).size ===
+          data.sources.length &&
+        data.sources.every(
+          (source) =>
+            source &&
+            typeof source.pmid === "string" &&
+            /^[1-9]\d{0,8}$/.test(source.pmid) &&
+            typeof source.title === "string" &&
+            source.title.trim() &&
+            source.url === `https://pubmed.ncbi.nlm.nih.gov/${source.pmid}/` &&
+            (source.year === null || Number.isInteger(source.year)) &&
+            typeof source.evidenceType === "string",
+        );
+      if (
+        (retrieved &&
+          (!data.sources.length ||
+            !validSources ||
+            data.retrieval.sourceCount !== data.sources.length)) ||
+        (!retrieved &&
+          (data.sources.length ||
+            (data.retrieval !== undefined &&
+              (data.retrieval?.used !== false ||
+                data.retrieval.sourceCount !== 0))))
+      ) {
+        status.textContent = "No readable answer was received. Please retry.";
+        return;
+      }
       heading.hidden = false;
       answer.textContent = data.answer;
-      sources.textContent =
-        "No verified sources are attached to this prototype answer. Check research claims independently.";
+      if (retrieved && data.sources.length) {
+        const title = document.createElement("h3");
+        title.textContent = "Research sources";
+        const list = document.createElement("ul");
+        for (const source of data.sources) {
+          const item = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = source.url;
+          link.rel = "noopener noreferrer";
+          link.textContent = source.title;
+          item.append(
+            link,
+            document.createTextNode(
+              ` — PMID ${source.pmid}${source.year === null ? "" : ` (${source.year})`}; ${source.evidenceType}`,
+            ),
+          );
+          list.append(item);
+        }
+        sources.replaceChildren(title, list);
+      } else {
+        sources.textContent =
+          "No verified sources are attached to this prototype answer. Check research claims independently.";
+      }
       status.textContent = "Answer received.";
     } catch {
       if (resetRequest) return;

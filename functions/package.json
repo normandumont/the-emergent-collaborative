@@ -7,7 +7,13 @@
     "node": "22"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "npm --prefix ../rag run build:runtime && tsc",
+    "gcp-build": "tsc",
+    "test:rag:live": "npm run build && node scripts/test-rag.mjs --live",
+    "rag:manifest:check": "npm run build && node scripts/validate-manifest.mjs",
+    "test:rag:preview": "npm run build && node scripts/preview-rag.mjs",
+    "test:rag:grounding": "npm run build && node scripts/grounding-capture.mjs",
+    "test:grounding-capture": "npm run build && node --test tests/grounding-capture.test.mjs",
     "test": "npm run build && node --test tests/*.test.mjs",
     "emulator": "npm run build && node scripts/emulator.mjs",
     "test:emulator": "npm run build && node scripts/emulator.mjs --smoke"

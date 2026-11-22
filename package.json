@@ -22,10 +22,22 @@
     "release:check": "node scripts/release-check.mjs",
     "preview:check": "node scripts/release-check.mjs --preview",
     "rag:search": "npm --prefix rag run search --",
+    "rag:discover-all": "npm --prefix rag run discover-all --",
     "rag:ingest": "npm --prefix rag run ingest --",
     "rag:ingest-query": "npm --prefix rag run ingest-query --",
     "rag:status": "npm --prefix rag run status",
-    "rag:test": "npm --prefix rag test"
+    "rag:prepare": "npm --prefix rag run prepare",
+    "rag:repair": "npm --prefix rag run repair --",
+    "rag:test-pmc": "npm --prefix rag run test-pmc --",
+    "rag:corpus": "npm --prefix rag run corpus",
+    "rag:corpus-report": "npm --prefix rag run corpus-report",
+    "rag:test": "npm --prefix rag test",
+    "rag:vector:create": "npm --prefix rag run vector-create --",
+    "rag:vector:sync": "npm --prefix rag run vector-sync --",
+    "rag:vector:status": "npm --prefix rag run vector-status --",
+    "rag:vector:delete": "npm --prefix rag run vector-delete --",
+    "rag:search-vector": "npm --prefix rag run vector-search --",
+    "rag:eval": "npm --prefix rag run retrieval-eval --"
   },
   "dependencies": {
     "astro": "6.4.8"

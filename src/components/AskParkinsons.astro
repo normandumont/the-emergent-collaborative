@@ -47,7 +47,8 @@ const endpoint = "/api/ask";
   </form>
   <p class="prototype-note">
     This API prototype is not the founder's existing custom GPT. Answers can be
-    incorrect or out of date; no verified research library is connected.
+    incorrect or out of date. Research sources are shown only when retrieval is
+    available; otherwise sources have not been verified.
   </p>
   <div role="status" aria-live="polite" aria-atomic="true" id="ask-status">
   </div>
@@ -59,7 +60,7 @@ const endpoint = "/api/ask";
   >
     <h3 hidden id="ask-answer-heading">Answer</h3>
     <p id="ask-answer"></p>
-    <p id="ask-sources"></p>
+    <div id="ask-sources"></div>
   </div>
   <noscript>
     This research tool requires JavaScript to submit a question.

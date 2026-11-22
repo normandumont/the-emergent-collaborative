@@ -370,6 +370,8 @@ test("privacy preserves AI processing disclosures and updated contact destinatio
     "AI-assisted research questions",
     "Firebase Cloud Function",
     "OpenAI API",
+    "your question is also used to search the project's research library through OpenAI",
+    "Selected public research excerpts accompany the question",
     "does not intentionally save your question or the generated answer",
     "abuse monitoring",
     "provider security record",
@@ -383,7 +385,7 @@ test("privacy preserves AI processing disclosures and updated contact destinatio
     "We will ask separately before publicly quoting or crediting a message.",
     "without resending health records or other sensitive material.",
     "Effective: October 31, 2026",
-    "Last reviewed: October 31, 2026",
+    "Last reviewed: November 13, 2026",
   ])
     assert.ok(
       textOnly(privacy).includes(copy),

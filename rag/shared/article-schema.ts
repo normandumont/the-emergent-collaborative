@@ -1,6 +1,64 @@
 export type StudyType =
-  "rct" | "systematic-review" | "meta-analysis" | "clinical-trial" | "unknown";
+  | "rct"
+  | "systematic-review"
+  | "meta-analysis"
+  | "clinical-trial"
+  | "unknown"
+  | "randomized-controlled-trial"
+  | "cohort"
+  | "longitudinal"
+  | "case-control"
+  | "cross-sectional"
+  | "observational"
+  | "case-report"
+  | "basic-science"
+  | "animal"
+  | "in-vitro"
+  | "editorial"
+  | "commentary"
+  | "guideline";
 export type Population = "human" | "animal" | "unknown";
+
+export const CORPUS_STATES = [
+  "discovered",
+  "ingested",
+  "normalized",
+  "eligible",
+  "excluded",
+  "active",
+  "corrected",
+  "retracted",
+  "superseded",
+  "retrieval-disabled",
+  "error",
+] as const;
+export type CorpusState = (typeof CORPUS_STATES)[number];
+export interface RelatedArticle {
+  pmid: string | null;
+  type: string;
+  sourcePmid: string;
+  refSource: string | null;
+  note: string | null;
+}
+export interface PublicationStatus {
+  retracted: boolean;
+  expressionOfConcern: boolean;
+  corrected: boolean;
+  superseded: boolean;
+  updatedPublication: boolean;
+  duplicatePublication: boolean;
+  retractionNotice: boolean;
+  correctionNotice: boolean;
+  concernNotice: boolean;
+  relatedPmids: string[];
+  relationships: RelatedArticle[];
+}
+export interface PublicationMetadata {
+  keywords: string[];
+  meshQualifiers: string[];
+  pubmedPublicationStatus: string | null;
+  retractionHistory: boolean;
+}
 
 export interface Author {
   name: string;
@@ -42,6 +100,8 @@ export interface ArticleSection {
 
 export interface Article {
   schemaVersion: 1;
+  publicationStatus?: PublicationStatus;
+  publicationMetadata?: PublicationMetadata;
   identity: { pmid: string; pmcid: string | null; doi: string | null };
   citation: {
     title: string | null;
@@ -78,9 +138,15 @@ export interface CatalogEntry {
   topics: string[];
   firstDiscoveredAt: string;
   lastDiscoveredAt: string;
+  discoveredBy?: { queryId: string; topics: string[] }[];
   status: "discovered" | "normalized" | "error";
   lastIngestedAt: string | null;
   errorCategory: string | null;
+  corpus?: {
+    state: CorpusState;
+    decisionPath: string;
+    retrievalEnabled: boolean;
+  };
 }
 
 export interface Catalog {

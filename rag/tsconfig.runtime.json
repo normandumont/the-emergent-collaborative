@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../functions/runtime",
+    "declaration": true
+  },
+  "include": [
+    "retrieval/pipeline.ts",
+    "retrieval/runtime-manifest.ts",
+    "indexing/openai-client.ts"
+  ]
+}
