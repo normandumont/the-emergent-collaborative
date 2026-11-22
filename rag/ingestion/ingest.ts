@@ -7,6 +7,7 @@ import { runId, type LocalStore } from "../shared/storage.js";
 import { fetchPubmed } from "./fetch-pubmed.js";
 import { fetchPmc } from "./fetch-pmc.js";
 import { normalize } from "./normalize.js";
+import { disableManifest } from "../corpus/manifest.js";
 
 export interface IngestionSummary {
   runId: string;
@@ -74,11 +75,21 @@ export async function ingest(
       pmid,
       queryIds: entry?.queryIds ?? [],
       topics: entry?.topics ?? [],
+      ...(entry?.discoveredBy ? { discoveredBy: entry.discoveredBy } : {}),
       firstDiscoveredAt: entry?.firstDiscoveredAt ?? now,
       lastDiscoveredAt: entry?.lastDiscoveredAt ?? now,
       status: "error",
       lastIngestedAt: entry?.lastIngestedAt ?? null,
       errorCategory: category(failure),
+      ...(entry?.corpus
+        ? {
+            corpus: {
+              ...entry.corpus,
+              state: "error" as const,
+              retrievalEnabled: false,
+            },
+          }
+        : {}),
     };
     log({
       runId: summary.runId,
@@ -87,9 +98,22 @@ export async function ingest(
       category: category(failure),
     });
   }
+  if (pending.length) {
+    await disableManifest(store, "ingestion-update-requires-preparation");
+    for (const entry of Object.values(catalog.articles)) {
+      if (entry.corpus)
+        entry.corpus = {
+          ...entry.corpus,
+          state: "retrieval-disabled",
+          retrievalEnabled: false,
+        };
+    }
+    await store.saveCatalog(catalog);
+  }
   for (let offset = 0; offset < pending.length; offset += config.batchSize) {
     const batch = pending.slice(offset, offset + config.batchSize);
     let records;
+    const failures = new Map<string, unknown>();
     try {
       records = await fetchPubmed(
         client,
@@ -98,6 +122,7 @@ export async function ingest(
         `${summary.runId}-${offset}`,
         config.batchSize,
         refresh,
+        { failures },
       );
     } catch (failure) {
       for (const pmid of batch) error(pmid, failure);
@@ -106,6 +131,7 @@ export async function ingest(
     }
     for (const pmid of batch) {
       try {
+        if (failures.has(pmid)) throw failures.get(pmid);
         const pubmed = records.get(pmid);
         if (!pubmed)
           throw new RagError(
@@ -127,17 +153,27 @@ export async function ingest(
           entry?.topics ?? [],
           entry?.queryIds ?? [],
         );
-        await store.writeJson(`normalized/${pmid}.json`, article, true);
+        await store.versionedJson(`normalized/${pmid}.json`, article);
         const now = new Date().toISOString();
         catalog.articles[pmid] = {
           pmid,
           queryIds: article.source.queryIds,
           topics: article.classification.topics,
+          ...(entry?.discoveredBy ? { discoveredBy: entry.discoveredBy } : {}),
           firstDiscoveredAt: entry?.firstDiscoveredAt ?? now,
           lastDiscoveredAt: entry?.lastDiscoveredAt ?? now,
           lastIngestedAt: now,
           status: "normalized",
           errorCategory: null,
+          ...(entry?.corpus
+            ? {
+                corpus: {
+                  ...entry.corpus,
+                  state: "normalized" as const,
+                  retrievalEnabled: false,
+                },
+              }
+            : {}),
         };
         summary.normalizedWritten++;
         if (article.status.hasAbstract) summary.abstractsRetrieved++;

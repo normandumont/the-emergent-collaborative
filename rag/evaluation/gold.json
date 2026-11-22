@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "status": "draft-human-review",
+  "curation": "Agent-assisted draft assembled from a title census of the 516 locally retrieval-enabled papers and inspection of candidate abstracts, publication types, populations and governed metadata before any gold retrieval run. No current ranks or model relevance scores selected labels. This is not human-validated ground truth. Pools are corpus-bounded and not exhaustively adjudicated; unlisted papers are unjudged, although closed-pool metrics give them no credit. Human approval and broader pooling are required before authoritative use.",
+  "questions": [
+    {
+      "id": "gold-exercise-clinical-001",
+      "question": "What human evidence supports aerobic exercise for motor symptoms in Parkinson's disease?",
+      "intent": "clinical-evidence",
+      "topics": ["exercise"],
+      "preferredStudyTypes": ["randomized-controlled-trial", "systematic-review", "meta-analysis"],
+      "highlyRelevantPmids": ["41171380", "42170720"],
+      "relevantPmids": ["41171380", "42170720", "42789569", "42859236"],
+      "rationales": {
+        "41171380": "Randomized aerobic exercise/PBM/control study directly measures MDS-UPDRS and walking; exercise benefit but no additive PBM effect.",
+        "42170720": "Multicenter aerobic exercise RCT includes MDS-UPDRS III and finds no significant motor or primary MRI benefit; directly relevant negative evidence.",
+        "42789569": "Twenty-RCT exercise synthesis directly pools UPDRS-III, freezing and balance outcomes; broader exercise classes rather than aerobic-only evidence.",
+        "42859236": "Network synthesis of 173 exercise trials compares motor outcomes and exposure across modalities; low/very-low confidence and no universally best modality."
+      },
+      "notes": "Two directly aerobic RCTs plus broader comparative syntheses. Cardiopulmonary-only pilot 42928476 is not primary gold for a motor-symptom question. Symptomatic improvement must not imply neuroprotection."
+    },
+    {
+      "id": "gold-exercise-mechanism-001",
+      "question": "How might exercise influence mitophagy and neuroprotection in Parkinson's disease, and what has been shown in humans?",
+      "intent": "mechanism",
+      "topics": ["exercise", "mitochondria", "neuroprotection"],
+      "preferredStudyTypes": ["animal", "randomized-controlled-trial"],
+      "highlyRelevantPmids": ["42734454", "42342162", "42170720"],
+      "relevantPmids": ["42734454", "42342162", "42653440", "42170720"],
+      "rationales": {
+        "42734454": "Narrative review specifically connects aerobic exercise, nitric oxide and mitophagy and explicitly identifies gaps in direct neural-tissue/human evidence.",
+        "42342162": "Mouse treadmill and cultured microglia experiments test irisin-dependent PINK1/Parkin mitophagy and inflammatory responses, including receptor blockade.",
+        "42653440": "Mouse exercise study tests Nrf2-ARE signaling, mitochondrial ROS and microglial activation; relevant preclinical neuroprotection, not human treatment efficacy.",
+        "42170720": "Human randomized trial tests MRI progression markers after aerobic exercise; null primary R2* result constrains translation of preclinical neuroprotection."
+      },
+      "notes": "Mixed preclinical and clinical intent intentionally has no human-only filter. Automated population is unknown for 42342162 although its abstract specifies mice/cell experiments."
+    },
+    {
+      "id": "gold-sleep-treatment-001",
+      "question": "What trial evidence exists for improving sleep quality and daytime sleepiness in Parkinson's disease?",
+      "intent": "treatment-evidence",
+      "topics": ["sleep"],
+      "preferredStudyTypes": ["meta-analysis", "randomized-controlled-trial"],
+      "highlyRelevantPmids": ["42782386", "42263875", "42558005"],
+      "relevantPmids": ["42782386", "42263875", "42558005"],
+      "rationales": {
+        "42782386": "Phenotype-stratified synthesis of 29 pharmacological RCTs directly evaluates sleep quality and EDS; low certainty and heterogeneous/non-significant EDS estimates.",
+        "42263875": "Randomized bright versus dim light crossover pilot measures PSQI, ESS and polysomnography; 33 PD participants.",
+        "42558005": "Randomized blue-light glasses versus red-light placebo pilot measures sleep quality and daytime sleepiness in 30 people with PD."
+      },
+      "notes": "Covers drug synthesis and nonpharmacological pilots, not an exhaustive treatment inventory. Isolated RBD phenoconversion studies do not answer this intervention question."
+    },
+    {
+      "id": "gold-freezing-synthesis-001",
+      "question": "What evidence supports exercise or brain stimulation for freezing of gait in Parkinson's disease?",
+      "intent": "synthesis",
+      "topics": ["gait", "exercise", "deep-brain-stimulation"],
+      "preferredStudyTypes": ["meta-analysis", "systematic-review"],
+      "highlyRelevantPmids": ["42789569", "42909654"],
+      "relevantPmids": ["42789569", "42909654", "42615931"],
+      "rationales": {
+        "42789569": "Exercise RCT meta-analysis explicitly pools Freezing of Gait Questionnaire outcomes and reports low-certainty evidence.",
+        "42909654": "Direct STN-SNr versus STN-only synthesis evaluates freezing; no consistent additional benefit with very-low-certainty evidence.",
+        "42615931": "FOG prevention review discusses modifiable risk factors, exercise and management limitations; proposal-level prevention rather than demonstrated efficacy."
+      },
+      "notes": "A general gait outcome is not automatically a freezing outcome. Prevention review is relevant context but below endpoint-specific syntheses."
+    },
+    {
+      "id": "gold-tremor-treatment-001",
+      "question": "What clinical evidence evaluates treatments specifically for Parkinsonian tremor?",
+      "intent": "treatment-evidence",
+      "topics": ["tremor"],
+      "preferredStudyTypes": ["randomized-controlled-trial"],
+      "highlyRelevantPmids": ["42178793", "42709169"],
+      "relevantPmids": ["42178793", "42709169", "41396751"],
+      "rationales": {
+        "42178793": "Randomized PSA versus STN DBS crossover trial uses a tremor subscore as its primary outcome; attrition and small sample limit certainty.",
+        "42709169": "Apomorphine trial-data reanalysis directly evaluates tremor in a small tremor-dominant subgroup; post-hoc hypothesis-generating evidence.",
+        "41396751": "Haptic-resistance training study includes seven PD participants with tremor outcomes; tiny task-specific pilot, not established general tremor treatment."
+      },
+      "notes": "Prioritize direct tremor endpoints. Gold relevance is not endorsement; the post-hoc subgroup and haptic pilot have substantial limitations."
+    },
+    {
+      "id": "gold-levodopa-comparison-001",
+      "question": "What are the clinical benefits and risks of extended-release oral or continuous subcutaneous levodopa for Parkinson's motor fluctuations?",
+      "intent": "intervention-comparison",
+      "topics": ["medication"],
+      "preferredStudyTypes": ["systematic-review", "clinical-trial"],
+      "highlyRelevantPmids": ["42685769", "41984314"],
+      "relevantPmids": ["42685769", "41984314"],
+      "rationales": {
+        "42685769": "Systematic review of three IPX203 versus immediate-release trials directly evaluates good ON-time, OFF-time, motor scores and adverse events.",
+        "41984314": "Post-hoc analysis of a 52-week open-label subcutaneous foslevodopa/foscarbidopa trial reports ON/OFF outcomes and safety with/without prior DBS."
+      },
+      "notes": "Thin comparison pool: these are different formulations/routes and not a head-to-head oral-versus-infusion trial. Do not infer comparative superiority across studies."
+    },
+    {
+      "id": "gold-dbs-comparison-001",
+      "question": "How do different deep brain stimulation strategies compare for gait and motor outcomes in Parkinson's disease?",
+      "intent": "intervention-comparison",
+      "topics": ["deep-brain-stimulation", "gait"],
+      "preferredStudyTypes": ["randomized-controlled-trial", "meta-analysis"],
+      "highlyRelevantPmids": ["42167724", "42909654", "42297980"],
+      "relevantPmids": ["42167724", "42909654", "42297980", "42586498"],
+      "rationales": {
+        "42167724": "Randomized frequency comparison evaluates axial, appendicular, balance and gait outcomes under high, low and asymmetric STN stimulation.",
+        "42909654": "Meta-analysis directly compares STN-SNr co-stimulation with STN-only motor and freezing outcomes and separates baseline from incremental effects.",
+        "42297980": "Randomized feasibility crossover compares gait-synchronized adaptive versus continuous DBS; only five enrolled and three in multi-day phase.",
+        "42586498": "Direct nigral frequency crossover includes standard STN comparator and gait measures; chronic phase is a small nonrandomized feasibility cohort."
+      },
+      "notes": "Programming and adaptive-strategy question, not universal DBS efficacy. Acute, feasibility and chronic evidence must remain distinguishable."
+    },
+    {
+      "id": "gold-ultrasound-clinical-001",
+      "question": "What motor benefits and adverse effects have been reported after focused ultrasound ablation for Parkinson's disease?",
+      "intent": "clinical-evidence",
+      "topics": ["focused-ultrasound"],
+      "preferredStudyTypes": ["clinical-trial", "randomized-controlled-trial"],
+      "highlyRelevantPmids": ["42309086", "42759119"],
+      "relevantPmids": ["42309086", "42759119"],
+      "rationales": {
+        "42309086": "Prospective single-arm staged bilateral pallidothalamic tractotomy study reports motor change and persistent speech/gait/balance harms, including severe anarthria.",
+        "42759119": "Retrospective dyskinesia subgroup analysis of a subthalamotomy RCT relates adverse effects to motor and patient-reported outcomes through 30 months."
+      },
+      "notes": "Weak/narrow coverage: two different ablative targets, one uncontrolled trial and one secondary analysis. Low-intensity ultrasound reviews 42547356/42608260 concern a distinct nonablative modality and are not primary gold."
+    },
+    {
+      "id": "gold-glp1-synthesis-001",
+      "question": "What do randomized-trial syntheses show about motor benefit and tolerability of GLP-1 receptor agonists in Parkinson's disease?",
+      "intent": "synthesis",
+      "topics": ["glp1", "disease-modification"],
+      "preferredStudyTypes": ["systematic-review", "meta-analysis"],
+      "highlyRelevantPmids": ["41995965", "42105060", "42098470"],
+      "relevantPmids": ["39642803", "40067438", "40760123", "40835782", "41077616", "41995965", "42098470", "42105060"],
+      "rationales": {
+        "39642803": "Earlier RCT meta-analysis reports ON/OFF motor and cognition outcomes; relevant contrasting synthesis, not proof of disease modification.",
+        "40067438": "Four-RCT synthesis evaluates ON/OFF motor function, quality of life and excess gastrointestinal events/weight loss.",
+        "40760123": "Six-study synthesis finds no significant overall motor effect but short-acting subgroup benefit, relevant to conflicting clinical conclusions.",
+        "40835782": "Placebo-controlled trial synthesis separates ON/OFF effects and follow-up times, with gastrointestinal adverse events and insufficient routine-use support.",
+        "41077616": "Six-study clinical meta-analysis reports no significant overall motor effect; distinguishes clinical results from animal neuroprotection.",
+        "41995965": "Five-trial pairwise/network synthesis compares dose-specific motor findings, overall uncertainty and gastrointestinal harms.",
+        "42098470": "RCT synthesis includes PD-specific outcomes, clinically important difference thresholds and tolerability; mixed AD/PD populations must not be conflated.",
+        "42105060": "Clinical-trial meta-analysis jointly assesses motor/nonmotor endpoints and safety, finding inconsistent benefits and increased gastrointestinal events."
+      },
+      "notes": "Eight relevant syntheses retained rather than dropping direct papers to meet a 2-5 target. Overlapping primary trials are not independent replications. Different cutoffs and ON/OFF analyses explain why contradictory findings remain relevant."
+    },
+    {
+      "id": "gold-stem-emerging-001",
+      "question": "What has human research shown about the safety and limitations of stem-cell-derived dopamine cell transplantation for Parkinson's disease?",
+      "intent": "emerging-research",
+      "topics": ["stem-cell"],
+      "preferredStudyTypes": ["clinical-trial", "meta-analysis"],
+      "highlyRelevantPmids": ["42426223", "42497857"],
+      "relevantPmids": ["42426223", "42497857", "42076911", "42381498"],
+      "rationales": {
+        "42426223": "STEM-PD phase 1/2 open-label trial in eight participants directly reports safety and interim follow-up; immunosuppression and uncontrolled design constrain efficacy claims.",
+        "42497857": "Review directly analyzes divergent stem-cell dopamine trial outcomes across products, patients, immune factors and graft sites.",
+        "42076911": "Human homogeneous-cell transplant trial synthesis supplies safety/efficacy context but includes non-stem-cell graft types and predominantly open-label data.",
+        "42381498": "Pluripotent-cell transplantation review covers clinical feasibility, graft-induced dyskinesia history and need for long-term safety and efficacy data."
+      },
+      "notes": "Early-phase human coverage; no established restorative-treatment claim. Mixed/unknown metadata on reviews does not turn them into animal-only evidence. No healthy index record is changed."
+    },
+    {
+      "id": "gold-synuclein-mechanism-001",
+      "question": "How do glial uptake and lysosomal clearance affect alpha-synuclein pathology in Parkinson's disease models?",
+      "intent": "mechanism",
+      "topics": ["alpha-synuclein", "neuroinflammation"],
+      "preferredStudyTypes": [],
+      "highlyRelevantPmids": ["42842725", "42127911", "42418556"],
+      "relevantPmids": ["42842725", "42127911", "42418556"],
+      "rationales": {
+        "42842725": "Human iPSC microglia-neuron coculture demonstrates GPNMB-dependent trogocytosis and lysosomal aggregate clearance, with CRISPRi and IL-10 modulation.",
+        "42127911": "iPSC microglial secreted GPNMB enhances neuronal fibril uptake/pathology, with antibody rescue and postmortem genotype associations; important counterpoint to protective clearance.",
+        "42418556": "Astrocytic CH25H/p62 experiments in cells and mice directly test autophagic alpha-synuclein degradation and motor/neuron outcomes."
+      },
+      "notes": "Mechanistic primary studies are highly relevant here. Human-derived cells and postmortem associations are not clinical treatment trials; retain the opposing context-dependent GPNMB effects."
+    },
+    {
+      "id": "gold-digital-biomarker-001",
+      "question": "How well do wearable measures assess gait and tremor, and what evidence supports monitoring Parkinson's motor progression over time?",
+      "intent": "biomarker",
+      "topics": ["wearable", "digital-biomarker", "gait", "tremor"],
+      "preferredStudyTypes": ["longitudinal", "meta-analysis"],
+      "highlyRelevantPmids": ["42124381", "42944474", "41732803"],
+      "relevantPmids": ["42124381", "42944474", "41732803", "42788867"],
+      "rationales": {
+        "42124381": "Two-year daily-life wrist-sensor study explicitly compares tremor progression sensitivity with clinical scores and distinguishes medication exposure.",
+        "42944474": "Small longitudinal study relates baseline wearable turning signatures to subsequent motor progression and explicitly lacks external/incremental validation.",
+        "41732803": "Digital insole validation against GAITRite reports strong agreement for some gait metrics but weaker temporal metrics in ON/OFF states.",
+        "42788867": "Real-world gait sensor synthesis directly evaluates validation, context heterogeneity and external-validity weaknesses; PD and stroke findings are separated."
+      },
+      "notes": "Cross-sectional analytical validation is not longitudinal prognostic validation. Automated unknown study types are retained; rationale identifies actual designs without relabeling corpus metadata."
+    },
+    {
+      "id": "gold-microbiome-clinical-001",
+      "question": "What human evidence supports fecal microbiota transplantation for motor or non-motor symptoms in Parkinson's disease?",
+      "intent": "clinical-evidence",
+      "topics": ["microbiome"],
+      "preferredStudyTypes": ["randomized-controlled-trial", "meta-analysis"],
+      "highlyRelevantPmids": ["41674471", "42533232"],
+      "relevantPmids": ["41674471", "42533232", "42611576"],
+      "rationales": {
+        "41674471": "Double-blind placebo-controlled 59-person FMT trial has no significant 12-month OFF motor benefit, with some nonmotor changes.",
+        "42533232": "Seven-RCT GRADE synthesis evaluates motor/nonmotor effects, durability and adverse events; no lasting overall motor benefit.",
+        "42611576": "Six-patient retrospective FMT cohort describes longitudinal microbial/clinical associations; preliminary uncontrolled evidence, not causal efficacy."
+      },
+      "notes": "Keep negative efficacy findings and distinguish associations from treatment effects. Rodent probiotic studies are not primary gold for this human FMT question."
+    },
+    {
+      "id": "gold-disease-modification-001",
+      "question": "What distinguishes symptom improvement from evidence of disease modification in Parkinson's treatment research?",
+      "intent": "emerging-research",
+      "topics": ["disease-modification", "neuroprotection"],
+      "preferredStudyTypes": ["systematic-review", "meta-analysis", "randomized-controlled-trial"],
+      "highlyRelevantPmids": ["42862400", "40275845", "42170720"],
+      "relevantPmids": ["42862400", "40275845", "42170720", "42105060"],
+      "acceptablePmids": ["39169806"],
+      "rationales": {
+        "42862400": "Review explicitly separates symptomatic management from emerging disease-modifying strategies and identifies preclinical/early-phase and endpoint limitations.",
+        "40275845": "Clinical review contrasts symptom treatment with unproven disease modification and summarizes investigated mechanisms without a proven progression-altering treatment.",
+        "42170720": "Human exercise trial measures MRI progression markers alongside symptoms and medication, showing why one outcome cannot substitute for neuroprotection.",
+        "42105060": "GLP-1 RCT synthesis explicitly finds no consistent benefit or support as disease-modifying treatment; a concrete clinical counterexample.",
+        "39169806": "Supporting DAT imaging analysis explains biomarker interpretation and confounding by region/duration, but does not directly test clinical disease modification."
+      },
+      "notes": "Cross-topic conceptual pool, not an exhaustive pipeline inventory. Supporting DAT biomarker paper is acceptable context only and earns no primary relevance credit."
+    },
+    {
+      "id": "gold-mitochondria-mechanism-001",
+      "question": "How do mitochondrial dysfunction and inflammatory responses interact with alpha-synuclein pathology in experimental Parkinson's models?",
+      "intent": "mechanism",
+      "topics": ["mitochondria", "neuroinflammation", "alpha-synuclein"],
+      "preferredStudyTypes": ["animal"],
+      "highlyRelevantPmids": ["42814602", "42811169", "42628329"],
+      "relevantPmids": ["42814602", "42811169", "42628329", "42342162"],
+      "rationales": {
+        "42814602": "Yeast mitochondrial-state experiments manipulate respiration and HAP4 to test context-dependent alpha-synuclein toxicity.",
+        "42811169": "C. elegans lipidomic and perturbation experiments link alpha-synuclein condensation, triglycerides, mitochondrial abnormalities and toxicity; human plasma context is secondary.",
+        "42628329": "Rotenone rat study jointly measures synuclein, inflammasome/inflammatory, oxidative and apoptotic pathways over time; correlations do not prove every causal link.",
+        "42342162": "Mouse/cell exercise study tests microglial mitophagy and inflammatory responses to synuclein with irisin-pathway blockade."
+      },
+      "notes": "Question deliberately permits complementary models addressing different links; no requirement that each paper prove the whole cascade. Yeast/worm/mouse/rat results cannot establish human treatment efficacy."
+    }
+  ]
+}

@@ -7,13 +7,41 @@ import {
   UPSTREAM_TIMEOUT_MS,
 } from "./config.js";
 import { createThrottle } from "./throttle.js";
+import {
+  RagBudgetError,
+  RagCancellationError,
+  type AnswerOptions,
+  type AnswerResult,
+  type RagTelemetry,
+} from "./ragAnswer.js";
 
+type RequestCategory =
+  | "origin"
+  | "preflight"
+  | "method"
+  | "throttle"
+  | "content_type"
+  | "body_size"
+  | "json"
+  | "question"
+  | "configuration"
+  | "success"
+  | "empty_answer"
+  | "timeout"
+  | "upstream"
+  | "cancelled";
 export interface RequestLog {
   requestId: string;
   timestamp: string;
   status: number;
-  latencyMs: number;
-  category: string;
+  totalLatencyMs: number;
+  category: RequestCategory;
+  ragUsed?: boolean;
+  ragSourceCount?: number;
+  ragLatencyMs?: number;
+  ragFallback?: boolean;
+  generationLatencyMs?: number;
+  ragFallbackCategory?: RagTelemetry["ragFallbackCategory"];
 }
 
 interface Dependencies {
@@ -25,15 +53,42 @@ interface Dependencies {
     signal: AbortSignal,
   ) => Promise<string>;
   log: (record: RequestLog) => void;
+  answer?: (
+    question: string,
+    key: string,
+    signal: AbortSignal,
+    options?: AnswerOptions,
+  ) => Promise<AnswerResult>;
   timeoutMs?: number;
 }
 
 type RawRequest = Request & { rawBody?: Buffer };
 
+function isFounderReviewOrigin(origin: string): boolean {
+  let url: URL;
+  try {
+    url = new URL(origin);
+  } catch {
+    return false;
+  }
+  return (
+    url.protocol === "https:" &&
+    url.port === "" &&
+    url.origin === origin.toLowerCase() &&
+    /^meridian-station-preview--founder-review-[a-z0-9-]+\.web\.app$/i.test(
+      url.hostname,
+    )
+  );
+}
+
 export function createAskHandler(deps: Dependencies) {
   const allowRequest = createThrottle();
   return async (req: RawRequest, res: Response): Promise<void> => {
     const start = Date.now();
+    const deadlineAt = start + (deps.timeoutMs ?? UPSTREAM_TIMEOUT_MS);
+    let latestTelemetry: RagTelemetry | undefined;
+    let legacyGenerationStart: number | undefined;
+    let disconnected = false;
     const requestId = randomUUID();
     res.set("Cache-Control", "no-store");
     res.set("X-Content-Type-Options", "nosniff");
@@ -41,31 +96,61 @@ export function createAskHandler(deps: Dependencies) {
 
     // Never log request/response bodies, prompts, SDK errors or IP addresses.
     // Platform access logs and provider retention require separate review.
-    const finish = (status: number, category: string, body?: object) => {
-      res.status(status);
-      if (body) res.json(body);
-      else res.end();
+    const finish = (
+      status: number,
+      category: RequestCategory,
+      body?: object,
+      telemetry?: RagTelemetry,
+    ) => {
+      const metrics = telemetry ??
+        latestTelemetry ?? {
+          ragUsed: false,
+          ragSourceCount: 0,
+          ragLatencyMs: 0,
+          ragFallback: false,
+          generationLatencyMs:
+            legacyGenerationStart === undefined
+              ? 0
+              : Date.now() - legacyGenerationStart,
+        };
+      if (!disconnected) {
+        res.status(status);
+        if (body) res.json(body);
+        else res.end();
+      }
       deps.log({
         requestId,
         timestamp: new Date().toISOString(),
         status,
-        latencyMs: Date.now() - start,
+        totalLatencyMs: Date.now() - start,
         category,
+        ragUsed: metrics.ragUsed,
+        ragSourceCount: metrics.ragSourceCount,
+        ragLatencyMs: metrics.ragLatencyMs,
+        ragFallback: metrics.ragFallback,
+        generationLatencyMs: metrics.generationLatencyMs,
+        ...(metrics.ragFallbackCategory
+          ? { ragFallbackCategory: metrics.ragFallbackCategory }
+          : {}),
       });
     };
-    const error = (status: number, category: string, message: string) =>
-      finish(status, category, { error: message });
+    const error = (
+      status: number,
+      category: RequestCategory,
+      message: string,
+    ) => finish(status, category, { error: message });
 
     const origin = req.get("Origin");
     const preview = deps.previewOrigin();
-    // Preview is an exact HTTPS Firebase channel origin, not a suffix wildcard.
+    // Keep explicitly configured previews alongside the controlled channel rule.
     const validPreview = /^https:\/\/[a-z0-9-]+--[a-z0-9-]+\.web\.app$/.test(
       preview,
     );
     if (
       !origin ||
       (!LOCAL_ORIGINS.some((allowed) => allowed === origin) &&
-        !(validPreview && origin === preview))
+        !(validPreview && origin === preview) &&
+        !isFounderReviewOrigin(origin))
     ) {
       error(403, "origin", "This origin is not allowed.");
       return;
@@ -156,32 +241,96 @@ export function createAskHandler(deps: Dependencies) {
       return;
     }
     const controller = new AbortController();
+    const disconnect = () => {
+      if (!res.writableEnded) {
+        disconnected = true;
+        controller.abort(new RagCancellationError("Client disconnected."));
+      }
+    };
+    res.once("close", disconnect);
     let timer: ReturnType<typeof setTimeout> | undefined;
+    let rejectOnAbort: (() => void) | undefined;
     const timeout = new Promise<never>((_, reject) => {
-      timer = setTimeout(() => {
-        controller.abort();
-        reject(new Error("timeout"));
-      }, deps.timeoutMs ?? UPSTREAM_TIMEOUT_MS);
+      rejectOnAbort = () => reject(controller.signal.reason);
+      controller.signal.addEventListener("abort", rejectOnAbort, {
+        once: true,
+      });
+      timer = setTimeout(
+        () => {
+          controller.abort();
+        },
+        Math.max(0, deadlineAt - Date.now()),
+      );
     });
     try {
-      const answer = await Promise.race([
-        deps.generate(question.trim(), key, controller.signal),
+      if (Date.now() >= deadlineAt)
+        throw new RagBudgetError("Request budget exhausted.");
+      legacyGenerationStart = deps.answer ? undefined : Date.now();
+      const result = await Promise.race([
+        deps.answer
+          ? deps.answer(question.trim(), key, controller.signal, {
+              deadlineAt,
+              onTelemetry: (telemetry) => {
+                latestTelemetry = telemetry;
+              },
+            })
+          : deps.generate(question.trim(), key, controller.signal),
         timeout,
       ]);
+      const answer = typeof result === "string" ? result : result.answer;
       if (!answer.trim()) {
         error(502, "empty_answer", "No answer was available. Please retry.");
         return;
       }
-      // No retrieval is configured. Never manufacture a verified sources list.
-      finish(200, "success", { answer, sources: [], requestId });
-    } catch {
-      error(
-        controller.signal.aborted ? 504 : 502,
-        controller.signal.aborted ? "timeout" : "upstream",
-        "The research tool could not answer. Please retry later.",
+      finish(
+        200,
+        "success",
+        {
+          answer,
+          sources: typeof result === "string" ? [] : result.sources,
+          requestId,
+          retrieval:
+            typeof result === "string"
+              ? { used: false, sourceCount: 0 }
+              : result.retrieval,
+        },
+        typeof result === "string"
+          ? {
+              ragUsed: false,
+              ragSourceCount: 0,
+              ragLatencyMs: 0,
+              ragFallback: true,
+              ragFallbackCategory: "rag-disabled",
+              generationLatencyMs:
+                Date.now() - (legacyGenerationStart ?? Date.now()),
+            }
+          : result.telemetry,
+      );
+    } catch (failure) {
+      const timedOut =
+        controller.signal.aborted || failure instanceof RagBudgetError;
+      finish(
+        disconnected ? 499 : timedOut ? 504 : 502,
+        disconnected ? "cancelled" : timedOut ? "timeout" : "upstream",
+        { error: "The research tool could not answer. Please retry later." },
+        latestTelemetry ??
+          (legacyGenerationStart === undefined
+            ? undefined
+            : {
+                ragUsed: false,
+                ragSourceCount: 0,
+                ragLatencyMs: 0,
+                ragFallback: true,
+                ragFallbackCategory: "rag-disabled",
+                generationLatencyMs: Date.now() - legacyGenerationStart,
+              }),
       );
     } finally {
       clearTimeout(timer);
+      if (rejectOnAbort)
+        controller.signal.removeEventListener("abort", rejectOnAbort);
+      res.off("close", disconnect);
+      controller.abort();
     }
   };
 }

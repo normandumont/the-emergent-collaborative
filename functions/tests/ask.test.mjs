@@ -4,6 +4,7 @@ import OpenAI from "openai";
 import { createAskHandler } from "../lib/askHandler.js";
 import { requestAnswer } from "../lib/openaiAnswer.js";
 import { createThrottle } from "../lib/throttle.js";
+import { FALLBACK_CATEGORIES } from "../lib/ragAnswer.js";
 import {
   MAX_BODY_BYTES,
   MAX_OUTPUT_TOKENS,
@@ -13,7 +14,7 @@ import {
 import { parkinsonsInstructions } from "../lib/parkinsonsInstructions.js";
 import express from "express";
 import { createServer } from "node:http";
-import { once } from "node:events";
+import { once, EventEmitter } from "node:events";
 import {
   UPSTREAM_TIMEOUT_MS,
   PER_IP_REQUESTS,
@@ -29,14 +30,30 @@ function metadataOnly(records) {
   for (const record of records) {
     assert.deepEqual(Object.keys(record).sort(), [
       "category",
-      "latencyMs",
+      "generationLatencyMs",
+      "ragFallback",
+      ...(record.ragFallbackCategory ? ["ragFallbackCategory"] : []),
+      "ragLatencyMs",
+      "ragSourceCount",
+      "ragUsed",
       "requestId",
       "status",
       "timestamp",
+      "totalLatencyMs",
     ]);
     assert.match(record.requestId, /^[a-f0-9-]{36}$/);
     assert.ok(Number.isFinite(Date.parse(record.timestamp)));
-    assert.ok(Number.isFinite(record.latencyMs) && record.latencyMs >= 0);
+    for (const field of [
+      "totalLatencyMs",
+      "generationLatencyMs",
+      "ragLatencyMs",
+    ])
+      assert.ok(Number.isFinite(record[field]) && record[field] >= 0);
+    assert.equal(typeof record.ragFallback, "boolean");
+    assert.equal(typeof record.ragUsed, "boolean");
+    assert.ok(record.ragSourceCount >= 0 && record.ragSourceCount <= 5);
+    if (record.ragFallbackCategory)
+      assert.ok(FALLBACK_CATEGORIES.includes(record.ragFallbackCategory));
     assert.equal(typeof record.status, "number");
     assert.equal(typeof record.category, "string");
     assert.ok(
@@ -54,6 +71,7 @@ function metadataOnly(records) {
         "empty_answer",
         "timeout",
         "upstream",
+        "cancelled",
       ].includes(record.category),
       "Log category must remain coarse",
     );
@@ -93,6 +111,7 @@ function sdkResponse(status = "completed", text = "Research explanation") {
 function fixture(overrides = {}) {
   const logs = [];
   const calls = [];
+  const lifecycle = new EventEmitter();
   const handler = createAskHandler({
     getKey: () => fakeKey,
     previewOrigin: () => previewOrigin,
@@ -122,6 +141,9 @@ function fixture(overrides = {}) {
     };
     const result = { headers: {}, status: 200, body: undefined };
     const res = {
+      once: (...args) => lifecycle.once(...args),
+      off: (...args) => lifecycle.off(...args),
+      writableEnded: false,
       set: (name, value) => {
         result.headers[name] = value;
         return res;
@@ -132,18 +154,22 @@ function fixture(overrides = {}) {
         return res;
       },
       json: (value) => {
+        res.writableEnded = true;
         result.body = value;
         return res;
       },
-      end: () => res,
+      end: () => {
+        res.writableEnded = true;
+        return res;
+      },
     };
     await handler(req, res);
     return result;
   }
-  return { invoke, logs, calls, handler };
+  return { invoke, logs, calls, handler, lifecycle };
 }
 
-test("valid POST maps only the answer, empty sources and a generated request ID", async () => {
+test("valid POST maps the answer, empty sources, retrieval status and a generated request ID", async () => {
   const f = fixture();
   const res = await f.invoke({
     raw: JSON.stringify({ question: "  Exercise research?  " }),
@@ -155,14 +181,94 @@ test("valid POST maps only the answer, empty sources and a generated request ID"
   assert.deepEqual(Object.keys(res.body).sort(), [
     "answer",
     "requestId",
+    "retrieval",
     "sources",
   ]);
+  assert.deepEqual(res.body.retrieval, { used: false, sourceCount: 0 });
   assert.equal(f.calls[0][0], "Exercise research?");
   assert.equal(res.headers["Cache-Control"], "no-store");
   assert.equal(
     res.headers["Access-Control-Allow-Origin"],
     "http://127.0.0.1:4323",
   );
+});
+
+test("founder-review generated origins work for POST and preflight without an exact configured URL", async () => {
+  for (const origin of [
+    "https://meridian-station-preview--founder-review-xzxrxxhj.web.app",
+    "https://meridian-station-preview--founder-review-next-build-123.web.app",
+    "https://MERIDIAN-STATION-PREVIEW--FOUNDER-REVIEW-ABC.web.app",
+  ]) {
+    for (const method of ["POST", "OPTIONS"]) {
+      const f = fixture({ previewOrigin: () => "" });
+      const result = await f.invoke({
+        method,
+        headers: {
+          origin,
+          "access-control-request-method": "POST",
+          "access-control-request-headers": "content-type",
+        },
+      });
+      assert.equal(result.status, method === "POST" ? 200 : 204, origin);
+      assert.equal(result.headers["Access-Control-Allow-Origin"], origin);
+      assert.notEqual(result.headers["Access-Control-Allow-Origin"], "*");
+      assert.equal(f.calls.length, method === "POST" ? 1 : 0);
+      if (method === "OPTIONS") {
+        assert.equal(result.headers["Access-Control-Allow-Methods"], "POST");
+        assert.equal(
+          result.headers["Access-Control-Allow-Headers"],
+          "Content-Type",
+        );
+      }
+      metadataOnly(f.logs);
+    }
+  }
+});
+
+test("founder-review origin rule rejects other hosts, channels, protocols and non-origin URLs", async () => {
+  for (const origin of [
+    "https://evil.example.com",
+    "https://another-project--founder-review-abc.web.app",
+    "https://meridian-station-preview--some-other-channel-abc.web.app",
+    "http://meridian-station-preview--founder-review-abc.web.app",
+    "https://meridian-station-preview--founder-review-abc.web.app.evil.com",
+    "https://meridian-station-preview--founder-review-.web.app",
+    "https://meridian-station-preview--founder-review-abc.web.app:8443",
+    "https://user@meridian-station-preview--founder-review-abc.web.app",
+    "https://meridian-station-preview--founder-review-abc.web.app/api/ask",
+    "https://meridian-station-preview--founder-review-abc.web.app?query=1",
+    "https://meridian-station-preview--founder-review-abc.web.app#fragment",
+  ]) {
+    for (const method of ["POST", "OPTIONS"]) {
+      const f = fixture();
+      const result = await f.invoke({
+        method,
+        headers: {
+          origin,
+          "access-control-request-method": "POST",
+          "access-control-request-headers": "content-type",
+        },
+      });
+      safeError(result, 403, "This origin is not allowed.");
+      assert.equal(
+        result.headers["Access-Control-Allow-Origin"],
+        undefined,
+        origin,
+      );
+      assert.equal(f.calls.length, 0);
+      metadataOnly(f.logs);
+    }
+  }
+});
+
+test("existing localhost development origins remain allowed without preview configuration", async () => {
+  for (const origin of ["http://127.0.0.1:4323", "http://localhost:4323"]) {
+    const result = await fixture({ previewOrigin: () => "" }).invoke({
+      headers: { origin },
+    });
+    assert.equal(result.status, 200);
+    assert.equal(result.headers["Access-Control-Allow-Origin"], origin);
+  }
 });
 
 test("rejects missing, non-string, empty and oversized questions", async () => {
@@ -288,7 +394,7 @@ test("missing/throwing key, upstream failures and empty output return generic JS
 test("configured OpenAI deadline aborts safely and a later retry can succeed", async ({
   mock,
 }) => {
-  mock.timers.enable({ apis: ["setTimeout"] });
+  mock.timers.enable({ apis: ["setTimeout", "Date"] });
   let signal;
   let calls = 0;
   const f = fixture({
@@ -322,13 +428,7 @@ test("logging has only metadata, not prompt, question, answer, key, IP or raw er
       extra: "body-sentinel",
     }),
   });
-  assert.deepEqual(Object.keys(f.logs[0]).sort(), [
-    "category",
-    "latencyMs",
-    "requestId",
-    "status",
-    "timestamp",
-  ]);
+  metadataOnly(f.logs);
   assert.doesNotMatch(
     JSON.stringify(f.logs),
     /private question|Research explanation|test-placeholder|127\.0\.0\.1/,
@@ -351,6 +451,74 @@ test("logging has only metadata, not prompt, question, answer, key, IP or raw er
     JSON.stringify(fail.logs),
     /educational|Parkinson|instructions/,
   );
+});
+
+test("completed requests clear deadline handles and abort their provider signal", async ({
+  mock,
+}) => {
+  mock.timers.enable({ apis: ["setTimeout", "Date"] });
+  const cleared = mock.method(globalThis, "clearTimeout");
+  let signal;
+  const f = fixture({
+    generate: async (_q, _k, value) => {
+      signal = value;
+      return "Complete";
+    },
+  });
+  assert.equal((await f.invoke()).status, 200);
+  assert.equal(signal.aborted, true);
+  assert.ok(cleared.mock.callCount() > 0);
+  mock.timers.tick(UPSTREAM_TIMEOUT_MS + 1);
+  assert.equal(f.logs.length, 1);
+  assert.equal(f.logs[0].status, 200);
+});
+
+test("late provider rejection after timeout is handled without another response or raw logging", async ({
+  mock,
+}) => {
+  mock.timers.enable({ apis: ["setTimeout", "Date"] });
+  let rejectProvider;
+  const f = fixture({
+    generate: () =>
+      new Promise((_resolve, reject) => {
+        rejectProvider = reject;
+      }),
+  });
+  const pending = f.invoke();
+  mock.timers.tick(UPSTREAM_TIMEOUT_MS);
+  assert.equal((await pending).status, 504);
+  rejectProvider(new Error("sdk-sentinel: late raw provider content"));
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(f.logs.length, 1);
+  metadataOnly(f.logs);
+});
+
+test("client disconnect cancels provider work and removes response/deadline listeners", async () => {
+  let aborted = false;
+  const f = fixture({
+    generate: (_q, _key, signal) =>
+      new Promise((_resolve, reject) => {
+        signal.addEventListener(
+          "abort",
+          () => {
+            aborted = true;
+            reject(signal.reason);
+          },
+          { once: true },
+        );
+      }),
+  });
+  const pending = f.invoke();
+  assert.equal(f.lifecycle.listenerCount("close"), 1);
+  f.lifecycle.emit("close");
+  const result = await pending;
+  assert.equal(aborted, true);
+  assert.equal(result.body, undefined);
+  assert.equal(f.logs.length, 1);
+  assert.equal(f.logs[0].status, 499);
+  assert.equal(f.logs[0].category, "cancelled");
+  assert.equal(f.lifecycle.listenerCount("close"), 0);
+  metadataOnly(f.logs);
 });
 
 test("throttle limits IPs and total requests and expires counts", async () => {

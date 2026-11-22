@@ -1,0 +1,61 @@
+{
+  "policyVersion": 1,
+  "referenceDate": "2026-11-04",
+  "includedPublicationTypes": [
+    "Journal Article",
+    "Review",
+    "Systematic Review",
+    "Meta-Analysis",
+    "Randomized Controlled Trial",
+    "Clinical Trial",
+    "Clinical Trial, Phase I",
+    "Clinical Trial, Phase II",
+    "Clinical Trial, Phase III",
+    "Clinical Trial, Phase IV",
+    "Observational Study",
+    "Comparative Study",
+    "Evaluation Study",
+    "Case Reports",
+    "Practice Guideline",
+    "Guideline"
+  ],
+  "excludedPublicationTypes": [
+    "Retracted Publication",
+    "Retraction of Publication",
+    "Published Erratum",
+    "Expression of Concern",
+    "Duplicate Publication",
+    "Editorial",
+    "Comment",
+    "Letter",
+    "News",
+    "Preprint"
+  ],
+  "allowedPopulations": ["human", "animal", "unknown"],
+  "minYear": 1900,
+  "maxYear": null,
+  "requirePublicationDate": false,
+  "requireTitle": true,
+  "requireAbstract": false,
+  "requireReusableFullText": false,
+  "blockedStates": [
+    "retracted",
+    "expressionOfConcern",
+    "superseded",
+    "duplicatePublication"
+  ],
+  "retrievalDisabledPmids": [],
+  "topicMeshTerms": ["Parkinson Disease", "Parkinsonian Disorders"],
+  "topicKeywords": ["parkinson", "parkinson's", "parkinson’s", "parkinsonism"],
+  "allowedEvidenceCategories": [
+    "human-synthesis",
+    "human-interventional",
+    "human-observational",
+    "human-mechanistic",
+    "animal",
+    "cellular",
+    "guidance",
+    "opinion",
+    "unknown"
+  ]
+}

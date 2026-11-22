@@ -1,5 +1,5 @@
 import type { ArticleSection, Provenance } from "../shared/article-schema.js";
-import { RagError } from "../shared/logging.js";
+import { RagError, StorageError } from "../shared/logging.js";
 import { type LocalStore } from "../shared/storage.js";
 import {
   child,
@@ -148,6 +148,7 @@ export async function fetchPmc(
   id: string | null,
   articleId: string,
   refresh: boolean,
+  cacheOnly = false,
 ): Promise<FetchedPmc> {
   if (!id)
     return {
@@ -162,6 +163,12 @@ export async function fetchPmc(
   const metadataPath = `raw/pmc/${id}.metadata.xml`;
   const metadataUrl = client.oaiUrl(id, "pmc_fm");
   const cached = refresh ? null : await store.read(metadataPath);
+  if (cacheOnly && cached === null)
+    throw new StorageError(
+      "raw-source-missing",
+      metadataPath,
+      "PMC front matter has not been cached; a separate acquisition retry is required.",
+    );
   const raw = cached ?? (await client.oai(id, "pmc_fm"));
   const provenance = [
     await store.raw(
@@ -189,6 +196,12 @@ export async function fetchPmc(
   const fullPath = `raw/pmc/${id}.xml`;
   const fullUrl = client.oaiUrl(id, "pmc");
   const cachedFull = refresh ? null : await store.read(fullPath);
+  if (cacheOnly && cachedFull === null)
+    throw new StorageError(
+      "raw-source-missing",
+      fullPath,
+      "Permitted PMC full text has not been cached; a separate acquisition retry is required.",
+    );
   const full = cachedFull ?? (await client.oai(id, "pmc"));
   const fullRecord = parsePmc(full, id, articleId);
   if (!fullRecord.article)

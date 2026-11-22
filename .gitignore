@@ -15,5 +15,9 @@ playwright/.cache/
 test-results/
 *.[zZ][iI][pP]
 functions/lib/
+functions/runtime/
+functions/runtime-manifest.json
+functions/runtime-manifest.sha256
 functions/.secret.local
 functions/.runtimeconfig.json
+functions/data/grounding-review/

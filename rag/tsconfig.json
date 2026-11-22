@@ -15,7 +15,11 @@
     "discovery/**/*.ts",
     "ingestion/**/*.ts",
     "shared/**/*.ts",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    "corpus/**/*.ts",
+    "indexing/**/*.ts",
+    "retrieval/**/*.ts",
+    "evaluation/**/*.ts"
   ],
   "exclude": ["lib", "node_modules", "data", "tests"]
 }

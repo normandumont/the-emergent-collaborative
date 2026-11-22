@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { createServer } from "node:http";
 import {
   PubmedClient,
   RateLimiter,
@@ -45,7 +46,15 @@ test("E-utilities credentials stay in POST body; OAI uses current endpoint, comp
     "oai:pubmedcentral.nih.gov:20001",
   );
   assert.equal(oai.searchParams.get("metadataPrefix"), "pmc_fm");
-  assert.equal(calls[1].init.headers["Accept-Encoding"], "gzip, deflate");
+  assert.equal(
+    new Headers(calls[1].init.headers).get("Accept-Encoding"),
+    "gzip, deflate",
+  );
+  for (const call of calls)
+    assert.equal(
+      new Headers(call.init.headers).get("User-Agent"),
+      "meridian-station-rag-prototype",
+    );
   assert.ok(!JSON.stringify(calls[1]).includes("fixture-secret"));
 });
 
@@ -151,7 +160,8 @@ test("429 and NCBI HTTP-200 throttling respect Retry-After and exhaust with cate
     time,
   );
   assert.equal(await client.eutils("efetch.fcgi", {}), "ok");
-  assert.deepEqual(time.delays, [2000, 2000]);
+  assert.equal(time.delays[0], 2000);
+  assert.ok(time.delays[1] >= 2000 && time.delays[1] < 2500);
   const exhausted = new PubmedClient(
     await config(),
     async () => new Response('{"error":"API rate limit exceeded"}'),
@@ -252,4 +262,174 @@ test("PMC >100 request policy is enforced during Eastern weekday peak, not weeke
     category: "policy-limit",
   });
   assert.equal(calls, 100);
+});
+
+test("timeout retry uses a fresh signal and clears the successful attempt's timer", async (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const signals = [],
+    diagnostics = [];
+  const client = new PubmedClient(
+    await config(),
+    async (_url, init) => {
+      signals.push(init.signal);
+      assert.equal(init.signal.aborted, false);
+      if (signals.length === 1)
+        return new Promise((_resolve, reject) =>
+          init.signal.addEventListener(
+            "abort",
+            () => reject(new Error("private provider failure")),
+            { once: true },
+          ),
+        );
+      return new Response("ok");
+    },
+    clock(),
+    () => 0,
+    (event) => diagnostics.push(event),
+  );
+  const request = client.oai("PMC20001", "pmc");
+  while (signals.length < 1)
+    await new Promise((resolve) => setImmediate(resolve));
+  t.mock.timers.tick(REQUEST_TIMEOUT_MS);
+  assert.equal(await request, "ok");
+  assert.equal(signals.length, 2);
+  assert.notEqual(signals[0], signals[1]);
+  assert.equal(signals[0].aborted, true);
+  t.mock.timers.tick(REQUEST_TIMEOUT_MS * 2);
+  assert.equal(signals[1].aborted, false);
+  assert.deepEqual(
+    diagnostics.map(({ attempt, category, status }) => ({
+      attempt,
+      category,
+      status,
+    })),
+    [
+      { attempt: 1, category: "timeout", status: null },
+      { attempt: 2, category: null, status: 200 },
+    ],
+  );
+  assert.ok(
+    diagnostics.every(
+      (event) =>
+        event.host === "pmc.ncbi.nlm.nih.gov" &&
+        event.operation === "pmc-full-text",
+    ),
+  );
+  assert.ok(!JSON.stringify(diagnostics).includes("private provider failure"));
+});
+
+test("exhausted timeouts release the serialized queue for the next request", async (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const signals = [];
+  const client = new PubmedClient(
+    await config(),
+    async (_url, init) => {
+      signals.push(init.signal);
+      assert.equal(init.signal.aborted, false);
+      if (signals.length <= 3)
+        return new Promise((_resolve, reject) =>
+          init.signal.addEventListener(
+            "abort",
+            () => reject(new Error("timeout fixture")),
+            { once: true },
+          ),
+        );
+      return new Response("next request");
+    },
+    clock(),
+  );
+  const rejected = assert.rejects(client.oai("PMC20001", "pmc"), {
+    category: "timeout",
+  });
+  const next = client.oai("PMC20002", "pmc_fm");
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    while (signals.length < attempt)
+      await new Promise((resolve) => setImmediate(resolve));
+    t.mock.timers.tick(REQUEST_TIMEOUT_MS);
+    await new Promise((resolve) => setImmediate(resolve));
+  }
+  await rejected;
+  assert.equal(await next, "next request");
+  assert.equal(signals.length, 4);
+  assert.equal(new Set(signals).size, 4);
+  t.mock.timers.tick(REQUEST_TIMEOUT_MS * 2);
+  assert.equal(signals[3].aborted, false);
+});
+
+test("non-deadline aborts are network failures and leave no stale timeout handles", async (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const signals = [];
+  const client = new PubmedClient(
+    await config(),
+    async (_url, init) => {
+      signals.push(init.signal);
+      throw new DOMException("unrelated transport abort", "AbortError");
+    },
+    clock(),
+  );
+  await assert.rejects(client.oai("PMC20001", "pmc"), { category: "network" });
+  t.mock.timers.tick(REQUEST_TIMEOUT_MS * 2);
+  assert.equal(signals.length, 3);
+  assert.ok(signals.every((signal) => !signal.aborted));
+});
+
+test("rate limiter releases a failed wait rather than poisoning its queue", async () => {
+  let now = 0,
+    sleeps = 0;
+  const limiter = new RateLimiter(3, {
+    now: () => now,
+    sleep: async (delay) => {
+      if (++sleeps === 1) throw new Error("clock fixture failure");
+      now += delay;
+    },
+  });
+  await limiter.wait();
+  await assert.rejects(limiter.wait(), /clock fixture failure/);
+  await limiter.wait();
+  assert.equal(sleeps, 2);
+  assert.equal(now, 334);
+});
+
+test("wrapper matches native fetch body handling on a local HTTP server and identifies the project", async (t) => {
+  const received = [];
+  const server = createServer((request, response) => {
+    received.push(request.headers["user-agent"]);
+    response.writeHead(200, {
+      "Content-Type": "application/xml; charset=utf-8",
+    });
+    response.write("<fixture>evidence ");
+    response.end("\u00e9</fixture>");
+  });
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  t.after(
+    () =>
+      new Promise((resolve, reject) => {
+        server.closeAllConnections();
+        server.close((error) => (error ? reject(error) : resolve()));
+      }),
+  );
+  const url = `http://127.0.0.1:${server.address().port}/fixture`;
+  const cfg = await config();
+  const native = await (
+    await fetch(url, { headers: { "User-Agent": cfg.tool } })
+  ).text();
+  let calls = 0;
+  const diagnostics = [];
+  const client = new PubmedClient(
+    cfg,
+    (remote, init) => {
+      calls++;
+      assert.equal(remote.hostname, "pmc.ncbi.nlm.nih.gov");
+      assert.equal(new Headers(init.headers).get("User-Agent"), cfg.tool);
+      return fetch(url, init);
+    },
+    undefined,
+    undefined,
+    (event) => diagnostics.push(event),
+  );
+  assert.equal(await client.oai("PMC20001", "pmc"), native);
+  assert.equal(calls, 1, "Successful 2xx must not be retried");
+  assert.deepEqual(received, [cfg.tool, cfg.tool]);
+  assert.equal(diagnostics[0].status, 200);
+  assert.equal(diagnostics[0].category, null);
 });

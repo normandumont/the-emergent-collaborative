@@ -8,15 +8,30 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "build:runtime": "tsc -p tsconfig.runtime.json",
+    "runtime-manifest": "npm run build && node lib/scripts/runtime-manifest.js",
     "search": "npm run build && node lib/scripts/run-discovery.js",
+    "discover-all": "npm run build && node lib/scripts/discover-all.js",
     "ingest": "npm run build && node lib/scripts/ingest-pmids.js",
     "ingest-query": "npm run build && node lib/scripts/ingest-query.js",
     "status": "npm run build && node lib/scripts/status.js",
-    "test": "npm run build && node --test tests/*.test.mjs"
+    "prepare": "npm run build && node lib/scripts/prepare-corpus.js",
+    "repair": "npm run build && node lib/scripts/repair-corpus.js",
+    "test-pmc": "npm run build && node lib/scripts/test-pmc.js",
+    "corpus": "npm run build && node lib/scripts/corpus.js",
+    "corpus-report": "npm run build && node lib/scripts/corpus-report.js",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "vector-create": "npm run build && node lib/scripts/vector-create.js",
+    "vector-sync": "npm run build && node lib/scripts/vector-sync.js",
+    "vector-search": "npm run build && node lib/scripts/vector-search.js",
+    "vector-status": "npm run build && node lib/scripts/vector-status.js",
+    "vector-delete": "npm run build && node lib/scripts/vector-delete.js",
+    "retrieval-eval": "npm run build && node lib/scripts/retrieval-eval.js"
   },
   "dependencies": {
     "fast-xml-parser": "^5.12.0",
-    "fast-xml-validator": "^1.4.2"
+    "fast-xml-validator": "^1.4.2",
+    "openai": "^6.49.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

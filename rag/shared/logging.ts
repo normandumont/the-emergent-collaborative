@@ -20,6 +20,30 @@ export class RagError extends Error {
   }
 }
 
+export type StorageFailure =
+  | "normalized-record-missing"
+  | "normalized-path-invalid"
+  | "raw-source-missing"
+  | "provenance-file-missing"
+  | "hash-mismatch"
+  | "catalog-schema-mismatch"
+  | "version-record-missing"
+  | "retrieval-path-error"
+  | "JSON-read-error"
+  | "unsupported-record-version"
+  | "relationship-inventory-incomplete"
+  | "record-schema-mismatch";
+
+export class StorageError extends RagError {
+  constructor(
+    public readonly failureCode: StorageFailure,
+    public readonly reference: string,
+    description: string,
+  ) {
+    super("storage", description);
+  }
+}
+
 export interface LogRecord {
   runId?: string;
   queryId?: string;
@@ -28,6 +52,9 @@ export interface LogRecord {
   count?: number;
   latencyMs?: number;
   category?: ErrorCategory;
+  failureCode?: StorageFailure;
+  reference?: string;
+  description?: string;
 }
 
 // Only project metadata is logged. Never attach content, request parameters,
@@ -41,6 +68,9 @@ export function log(record: LogRecord): void {
     count: record.count,
     latencyMs: record.latencyMs,
     category: record.category,
+    failureCode: record.failureCode,
+    reference: record.reference,
+    description: record.description,
   };
   console.log(JSON.stringify(safe));
 }

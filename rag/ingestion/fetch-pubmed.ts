@@ -1,8 +1,15 @@
-import type { Author, Provenance } from "../shared/article-schema.js";
+import type {
+  Author,
+  Provenance,
+  PublicationStatus,
+  PublicationMetadata,
+  RelatedArticle,
+} from "../shared/article-schema.js";
+import { publicationStatus } from "../corpus/publication-status.js";
 import { object } from "../shared/config.js";
 import { EUTILS_BASE } from "../shared/constants.js";
-import { RagError } from "../shared/logging.js";
-import { hash, type LocalStore } from "../shared/storage.js";
+import { RagError, StorageError, category } from "../shared/logging.js";
+import { hash, portablePath, type LocalStore } from "../shared/storage.js";
 import {
   child,
   children,
@@ -27,6 +34,8 @@ export interface PubmedRecord {
   articleTypes: string[];
   meshTerms: string[];
   abstract: string | null;
+  publicationStatus: PublicationStatus;
+  publicationMetadata: PublicationMetadata;
 }
 export interface FetchedPubmed {
   record: PubmedRecord;
@@ -84,7 +93,10 @@ function parseRecord(node: XmlNode): PubmedRecord {
       "malformed-source",
       "PubMed article identity or structure is missing.",
     );
-  const ids = descendants(child(node, "PubmedData"), "ArticleId");
+  const ids = children(
+    child(child(node, "PubmedData"), "ArticleIdList"),
+    "ArticleId",
+  );
   const pmc = value(
     ids.find(
       (item) =>
@@ -122,6 +134,38 @@ function parseRecord(node: XmlNode): PubmedRecord {
       return body ? (label ? `${label}: ${body}` : body) : "";
     })
     .filter(Boolean);
+  const articleTypes = [
+    ...new Set(
+      children(child(article, "PublicationTypeList"), "PublicationType")
+        .map(value)
+        .filter((item): item is string => item !== null),
+    ),
+  ];
+  const relationships = children(
+    child(citation, "CommentsCorrectionsList"),
+    "CommentsCorrections",
+  ).map((item): RelatedArticle => {
+    const target = value(child(item, "PMID"));
+    const type = item.attributes["RefType"];
+    if (!type)
+      throw new RagError(
+        "malformed-source",
+        "PubMed relationship type is missing.",
+      );
+    return {
+      pmid: target ? pmid(target) : null,
+      type,
+      sourcePmid: pmid(id),
+      refSource: value(child(item, "RefSource")),
+      note: value(child(item, "Note")),
+    };
+  });
+  const historyRetracted =
+    descendants(child(node, "PubmedData"), "PubMedPubDate").some(
+      (item) => item.attributes["PubStatus"] === "retracted",
+    ) ||
+    value(child(child(node, "PubmedData"), "PublicationStatus")) ===
+      "retracted";
   return {
     pmid: pmid(id),
     pmcid: pmc ? pmcid(pmc) : null,
@@ -134,13 +178,32 @@ function parseRecord(node: XmlNode): PubmedRecord {
     ),
     authors,
     abstract: abstracts.length ? abstracts.join("\n\n") : null,
-    articleTypes: [
-      ...new Set(
-        children(child(article, "PublicationTypeList"), "PublicationType")
-          .map(value)
-          .filter((item): item is string => item !== null),
+    publicationStatus: publicationStatus(
+      articleTypes,
+      relationships,
+      historyRetracted,
+    ),
+    publicationMetadata: {
+      keywords: [
+        ...new Set(
+          descendants(citation, "Keyword")
+            .map(value)
+            .filter((item): item is string => item !== null),
+        ),
+      ],
+      meshQualifiers: [
+        ...new Set(
+          descendants(child(citation, "MeshHeadingList"), "QualifierName")
+            .map(value)
+            .filter((item): item is string => item !== null),
+        ),
+      ],
+      pubmedPublicationStatus: value(
+        child(child(node, "PubmedData"), "PublicationStatus"),
       ),
-    ],
+      retractionHistory: historyRetracted,
+    },
+    articleTypes,
     meshTerms: [
       ...new Set(
         descendants(child(citation, "MeshHeadingList"), "DescriptorName")
@@ -151,7 +214,10 @@ function parseRecord(node: XmlNode): PubmedRecord {
   };
 }
 
-export function parsePubmed(xml: string): Map<string, PubmedRecord> {
+export function parsePubmedBatch(xml: string): {
+  records: Map<string, PubmedRecord>;
+  failures: Map<string, unknown>;
+} {
   const root = parseXml(xml);
   if (
     root.name !== "PubmedArticleSet" ||
@@ -163,16 +229,30 @@ export function parsePubmed(xml: string): Map<string, PubmedRecord> {
     );
   }
   const records = new Map<string, PubmedRecord>();
+  const failures = new Map<string, unknown>();
+  const seen = new Set<string>();
   for (const node of children(root, "PubmedArticle")) {
-    const record = parseRecord(node);
-    if (records.has(record.pmid))
+    const id = pmid(value(child(child(node, "MedlineCitation"), "PMID")) ?? "");
+    if (seen.has(id))
       throw new RagError(
         "malformed-source",
         "Duplicate PubMed records in a source response.",
       );
-    records.set(record.pmid, record);
+    seen.add(id);
+    try {
+      records.set(id, parseRecord(node));
+    } catch (error) {
+      if (!(error instanceof RagError)) throw error;
+      failures.set(id, error);
+    }
   }
-  return records;
+  return { records, failures };
+}
+
+export function parsePubmed(xml: string): Map<string, PubmedRecord> {
+  const result = parsePubmedBatch(xml);
+  if (result.failures.size) throw result.failures.values().next().value;
+  return result.records;
 }
 
 export async function fetchPubmed(
@@ -182,15 +262,22 @@ export async function fetchPubmed(
   id: string,
   batchSize: number,
   refresh: boolean,
+  options: { cacheOnly?: boolean; failures?: Map<string, unknown> } = {},
 ): Promise<Map<string, FetchedPubmed>> {
   const result = new Map<string, FetchedPubmed>();
   const pending: string[] = [];
-  const cache = new Map<string, Map<string, PubmedRecord>>();
+  const cache = new Map<string, ReturnType<typeof parsePubmedBatch>>();
   for (const articleId of deduplicate(requested)) {
     const manifest = refresh
       ? null
       : await store.json(`raw/pubmed/${articleId}.json`);
     if (manifest === null) {
+      if (options.cacheOnly)
+        throw new StorageError(
+          "provenance-file-missing",
+          `raw/pubmed/${articleId}.json`,
+          "Cached PubMed source reference is missing; no network is permitted.",
+        );
       pending.push(articleId);
       continue;
     }
@@ -198,54 +285,109 @@ export async function fetchPubmed(
       !object(manifest) ||
       manifest["api"] !== "pubmed-efetch" ||
       typeof manifest["rawPath"] !== "string" ||
-      !/^raw\/pubmed\/batches\/[a-zA-Z0-9-]+\.xml$/.test(manifest["rawPath"]) ||
+      !/^raw\/pubmed\/batches\/[a-zA-Z0-9-]+\.xml$/.test(
+        portablePath(manifest["rawPath"]),
+      ) ||
       typeof manifest["sha256"] !== "string" ||
       typeof manifest["retrievedAt"] !== "string" ||
       !Number.isFinite(Date.parse(manifest["retrievedAt"])) ||
       typeof manifest["url"] !== "string" ||
       !manifest["url"].startsWith(`${EUTILS_BASE}efetch.fcgi?db=pubmed&`)
     ) {
-      throw new RagError("storage", "Invalid cached PubMed source manifest.");
+      throw new StorageError(
+        "record-schema-mismatch",
+        `raw/pubmed/${articleId}.json`,
+        "Invalid cached PubMed source manifest.",
+      );
     }
     const raw = await store.read(manifest["rawPath"]);
-    if (raw === null || hash(raw) !== manifest["sha256"])
-      throw new RagError(
-        "storage",
-        "Cached PubMed source is missing or changed.",
+    if (raw === null)
+      throw new StorageError(
+        "raw-source-missing",
+        portablePath(manifest["rawPath"]),
+        "Cached PubMed source is missing.",
+      );
+    if (hash(raw) !== manifest["sha256"])
+      throw new StorageError(
+        "hash-mismatch",
+        portablePath(manifest["rawPath"]),
+        "Cached PubMed source hash does not match its provenance.",
       );
     let records = cache.get(manifest["rawPath"]);
     if (!records) {
-      records = parsePubmed(raw);
+      records = parsePubmedBatch(raw);
       cache.set(manifest["rawPath"], records);
     }
-    const record = records.get(articleId);
+    const failure = records.failures.get(articleId);
+    if (failure) {
+      if (!options.failures) throw failure;
+      options.failures.set(articleId, failure);
+      continue;
+    }
+    const record = records.records.get(articleId);
     if (!record)
-      throw new RagError("storage", "Cached batch lacks its indexed PMID.");
+      throw new StorageError(
+        "record-schema-mismatch",
+        portablePath(manifest["rawPath"]),
+        "Cached batch lacks its indexed PMID.",
+      );
     result.set(articleId, {
       record,
       provenance: {
         api: "pubmed-efetch",
         url: manifest["url"],
-        rawPath: manifest["rawPath"],
+        rawPath: portablePath(manifest["rawPath"]),
         sha256: manifest["sha256"],
         retrievedAt: manifest["retrievedAt"],
       },
     });
   }
-  for (let offset = 0; offset < pending.length; offset += batchSize) {
-    const ids = pending.slice(offset, offset + batchSize);
+  async function acquire(
+    ids: string[],
+    suffix: string,
+    retried = false,
+  ): Promise<void> {
     const parameters = { db: "pubmed", id: ids.join(","), retmode: "xml" };
-    const raw = await client.eutils("efetch.fcgi", parameters);
+    let raw: string;
+    try {
+      raw = await client.eutils("efetch.fcgi", parameters);
+    } catch (error) {
+      if (
+        !options.failures ||
+        !["network", "timeout", "throttled", "http"].includes(category(error))
+      )
+        throw error;
+      for (const articleId of ids) options.failures.set(articleId, error);
+      return;
+    }
     const url = `${EUTILS_BASE}efetch.fcgi?${new URLSearchParams(parameters)}`;
     const provenance = await store.raw(
-      `raw/pubmed/batches/${id}-${offset}.xml`,
+      `raw/pubmed/batches/${id}-${suffix}.xml`,
       raw,
       "pubmed-efetch",
       url,
       false,
     );
-    const records = parsePubmed(raw);
-    if ([...records.keys()].some((key) => !ids.includes(key)))
+    let parsed: ReturnType<typeof parsePubmedBatch>;
+    try {
+      parsed = parsePubmedBatch(raw);
+    } catch (error) {
+      if (!options.failures || category(error) !== "malformed-source")
+        throw error;
+      if (!retried) return acquire(ids, `${suffix}-retry`, true);
+      if (ids.length > 1) {
+        const middle = Math.ceil(ids.length / 2);
+        await acquire(ids.slice(0, middle), `${suffix}-left`);
+        await acquire(ids.slice(middle), `${suffix}-right`);
+      } else options.failures.set(ids[0]!, error);
+      return;
+    }
+    const records = parsed.records;
+    if (
+      [...records.keys(), ...parsed.failures.keys()].some(
+        (key) => !ids.includes(key),
+      )
+    )
       throw new RagError(
         "malformed-source",
         "PubMed returned an unexpected PMID.",
@@ -253,6 +395,7 @@ export async function fetchPubmed(
     for (const articleId of ids) {
       const record = records.get(articleId);
       if (!record) continue;
+      if (refresh) await store.archive(`raw/pubmed/${articleId}.json`);
       await store.writeJson(
         `raw/pubmed/${articleId}.json`,
         provenance,
@@ -260,6 +403,22 @@ export async function fetchPubmed(
       );
       result.set(articleId, { record, provenance });
     }
+    if (parsed.failures.size) {
+      if (!options.failures) throw parsed.failures.values().next().value;
+      const failedIds = [...parsed.failures.keys()];
+      if (!retried && (failedIds.length < ids.length || ids.length === 1))
+        await acquire(failedIds, `${suffix}-isolated`, true);
+      else if (failedIds.length > 1) {
+        const middle = Math.ceil(failedIds.length / 2);
+        await acquire(failedIds.slice(0, middle), `${suffix}-left`, true);
+        await acquire(failedIds.slice(middle), `${suffix}-right`, true);
+      } else
+        for (const [articleId, error] of parsed.failures)
+          options.failures.set(articleId, error);
+    }
+  }
+  for (let offset = 0; offset < pending.length; offset += batchSize) {
+    await acquire(pending.slice(offset, offset + batchSize), String(offset));
   }
   return result;
 }

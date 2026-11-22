@@ -33,6 +33,8 @@ export function normalize(
   const record = pubmed.record;
   return {
     schemaVersion: 1,
+    publicationStatus: record.publicationStatus,
+    publicationMetadata: record.publicationMetadata,
     identity: { pmid: record.pmid, pmcid: record.pmcid, doi: record.doi },
     citation: {
       title: record.title,
